@@ -94,7 +94,16 @@ function ConstitutionExplorer({ constitution, selectedSection, onSelectSection, 
             <button
               key={chapter.id}
               role="listitem"
-              onClick={() => { toggleChapter(chapter.id); document.getElementById(`chapter-${chapter.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }) }}
+              onClick={() => {
+                toggleChapter(chapter.id);
+                // Standard scrollIntoView now works perfectly with scroll-mt-24 in CSS
+                setTimeout(() => {
+                  document.getElementById(`chapter-${chapter.id}`)?.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                  });
+                }, 100);
+              }}
               className="flex-shrink-0 flex flex-col items-center gap-2 group transition-all duration-300"
               style={{ 
                 opacity: isActive || !expandedChapter ? 1 : 0.6,
@@ -132,7 +141,7 @@ function ConstitutionExplorer({ constitution, selectedSection, onSelectSection, 
             <div
               key={chapter.id}
               id={`chapter-${chapter.id}`}
-              className={`animate-fade-up transition-all duration-500 rounded-xl ${isOpen ? 'bg-surface-2 ring-1 ring-subtle/30 shadow-2xl py-2' : ''}`}
+              className={`animate-fade-up scroll-mt-24 transition-all duration-500 rounded-xl ${isOpen ? 'bg-surface-2 ring-1 ring-subtle/30 shadow-2xl py-2' : ''}`}
               style={{ animationDelay: `${idx * 60}ms` }}
             >
               {/* Chapter header */}
