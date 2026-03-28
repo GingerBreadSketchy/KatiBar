@@ -266,361 +266,45 @@ function normalizeHeading(input) {
   return String(input || '').toLowerCase();
 }
 
-function buildFriendlySimplified(canonicalArticle, legacyExplainer) {
-  const articleNumber = canonicalArticle.number;
-  const heading = normalizeHeading(canonicalArticle.heading);
-  const chapter = normalizeHeading(canonicalArticle.part?.heading || '');
+function splitSentences(text) {
+  if (!text) return [];
+  return String(text)
+    .replace(/\s+/g, ' ')
+    .split(/(?<=[.?!])\s+(?=[A-Z0-9(“"])/)
+    .map(s => s.trim())
+    .filter(Boolean);
+}
 
-  const articleSpecific = {
-    82: 'Parliament can make laws to guide elections.',
-    84: 'Candidates and parties must follow election rules.',
-    85: 'An independent candidate must meet clear rules to run.',
-    87: 'Election disputes should be settled fairly and by law.',
-    89: 'Voting area boundaries should be drawn fairly.',
-    90: 'Party list seats should be shared by clear rules.',
-    91: 'Political parties must follow democracy and national unity.',
-    92: 'Parliament can make laws about political parties.',
-    93: 'Parliament has two Houses: the National Assembly and the Senate.',
-    97: 'This says who makes up the National Assembly.',
-    98: 'This says who makes up the Senate.',
-    99: 'This says who can or cannot be elected to Parliament.',
-    100: 'Marginalised groups should also be represented in Parliament.',
-    101: 'This says how members of Parliament are elected.',
-    102: 'Parliament serves for a set term unless it ends earlier by law.',
-    103: 'This says when an MP loses their seat.',
-    104: 'Voters can remove an MP in some situations.',
-    105: 'Courts decide disputes about whether someone is really an MP.',
-    106: 'Parliament chooses its Speakers and Deputy Speakers.',
-    107: 'Parliament sittings must be led by the right person.',
-    108: 'Party leaders have a place in Parliament.',
-    109: 'Laws can only be made through the steps set by the Constitution.',
-    110: 'Some Bills must be handled as county government Bills.',
-    113: 'Mediation committees help the two Houses agree on a Bill.',
-    114: 'Money Bills deal with taxes, spending, and public money.',
-    115: 'The President can sign a Bill or send it back to Parliament.',
-    116: 'A law starts working on the date set by the law.',
-    117: 'Parliament needs freedom to debate and do its work.',
-    120: 'Parliament should use languages people can follow as the law provides.',
-    121: 'Parliament needs enough members present to do official business.',
-    123: 'The Senate follows voting rules when making decisions.',
-    124: 'Parliament works through committees and its own rules.',
-    125: 'Parliament can call people and documents as evidence.',
-    126: 'Parliament usually sits in Nairobi unless the law allows otherwise.',
-    127: 'This sets up the Parliamentary Service Commission.',
-    128: 'Parliament has clerks and staff to help it work.',
-    130: 'The National Executive is the President, Deputy President, and Cabinet.',
-    133: 'The President can show mercy in some cases, but only by law.',
-    134: 'If the President cannot act for a while, another lawful person acts temporarily.',
-    135: 'Important presidential decisions must be in writing.',
-    136: 'The President is chosen by voters in a national election.',
-    137: 'This says who can or cannot run for President.',
-    138: 'This says how a presidential election is carried out and counted.',
-    139: 'This says what happens if a President-elect dies before taking office.',
-    140: 'The Supreme Court can decide whether a presidential election was valid.',
-    141: 'This says when and how a President takes office.',
-    142: 'A President serves for a set term and cannot stay forever.',
-    144: 'A President can be removed if unable to do the job.',
-    145: 'A President can be removed for serious wrongdoing.',
-    146: 'This says what happens if the office of President becomes empty.',
-    147: 'The Deputy President helps the President and takes over when required.',
-    148: 'The Deputy President is elected with the President and sworn in.',
-    149: 'This says what happens if the office of Deputy President becomes empty.',
-    150: 'The Deputy President can be removed through the legal process.',
-    151: 'The pay and benefits of the President and Deputy President are set by law.',
-    155: 'Principal Secretaries help run government ministries.',
-    161: 'This says the main judicial offices and officers.',
-    166: 'Judges should be chosen through the right process.',
-    167: 'Judges serve under rules that protect independence and set retirement.',
-    168: 'A judge can only be removed through a proper process.',
-    169: 'Subordinate courts handle many cases below the higher courts.',
-    170: 'Kadhi courts handle some Muslim personal law matters.',
-    171: 'This sets up the Judicial Service Commission.',
-    172: 'The Judicial Service Commission helps manage judges and the judiciary.',
-    173: 'The Judiciary Fund helps courts get money for their work.',
-    175: 'County government should be democratic, open, and close to the people.',
-    177: 'This says who makes up a county assembly.',
-    178: 'A county assembly chooses a Speaker to lead its sittings.',
-    180: 'Each county elects a governor and deputy governor.',
-    181: 'A county governor can be removed for serious reasons set by law.',
-    182: 'This says what happens if the office of county governor becomes empty.',
-    184: 'Parliament can make laws on urban areas and cities.',
-    188: 'County boundaries can only change through the law.',
-    192: 'A county government can only be suspended in rare serious situations.',
-    193: 'This says who can or cannot run for county assembly.',
-    194: 'This says when an MCA loses their seat.',
-    195: 'A county assembly can call witnesses and evidence.',
-    196: 'County assemblies should work openly and involve the public.',
-    197: 'County assemblies should reflect gender balance and diversity.',
-    198: 'Special rules helped county governments start well.',
-    199: 'County laws should be published so people can know them.',
-    200: 'Parliament can make laws to support this chapter on devolution.',
-    203: 'Sharing national money should consider fairness and people’s needs.',
-    205: 'Counties should be consulted on money laws that affect them.',
-    208: 'The Contingencies Fund is emergency public money.',
-    210: 'No tax should be charged unless the law allows it.',
-    211: 'The national government can borrow only under the law.',
-    212: 'Counties can borrow only in the way the law allows.',
-    213: 'The national government can guarantee loans only under clear rules.',
-    217: 'National money should be divided fairly between national and county governments.',
-    218: 'Parliament passes yearly laws to divide and allocate revenue.',
-    219: 'Counties should get their fair share of money without delay.',
-    221: 'Government should prepare yearly budget estimates and an Appropriation Bill.',
-    222: 'Government can spend limited money before the full budget is passed.',
-    223: 'Extra spending needs supplementary approval.',
-    224: 'Counties also need appropriation laws for spending.',
-    225: 'Public money must be controlled and used lawfully.',
-    226: 'Public bodies must keep accounts and be audited.',
-    251: 'A commissioner can only be removed through a proper process.',
-    253: 'Commissions and independent offices are legal bodies that can act in law.',
-    254: 'Commissions and independent offices must report on their work.',
-  };
+function clauseToYouSentence(clause) {
+  if (!clause) return '';
+  let s = clause;
+  s = s.replace(/\b[Ee]very\s+person\b/g, 'You');
+  s = s.replace(/\b[Aa]ny\s+person\b/g, 'You');
+  s = s.replace(/\b[Aa]\s+person\b/g, 'You');
+  s = s.replace(/\b[Yy]our\s+person\b/g, 'your body');
+  s = s.replace(/\bshall\s+not\b/gi, 'must not');
+  s = s.replace(/\bshall\b/gi, 'must');
+  s = s.replace(/\bmay\b/gi, 'can');
+  s = s.replace(/\bhis\s+or\s+her\b/gi, 'your');
+  s = s.replace(/\btheir\b/gi, 'your');
+  s = s.replace(/\bthe\s+State\b/gi, 'the State');
+  return ensurePeriod(s);
+}
 
-  Object.assign(articleSpecific, {
-    12: 'Kenyans can get an ID and passport.',
-    15: 'You can apply to become Kenyan in some cases.',
-    16: 'A Kenyan can also belong to another country.',
-    17: 'Citizenship can be taken away in some cases.',
-    18: 'Parliament can make citizenship rules.',
-    59: 'This office helps protect rights and fairness.',
-    67: 'This sets up the land office.',
-    79: 'This allows a body to fight corruption.',
-    100: 'Left-out groups should also get seats.',
-    102: 'Parliament serves for a set time.',
-    109: 'Laws must follow the right steps.',
-    115: 'The President can sign a Bill or send it back.',
-    127: 'This sets up the office that helps Parliament work.',
-    133: 'The President can forgive some people by law.',
-    134: 'If the President is away, another leader acts for a while.',
-    143: 'This says when the President is protected from some court cases.',
-    157: 'This office decides who is taken to criminal court.',
-    158: 'This says when the DPP can leave office.',
-    171: 'This sets up the office that helps choose judges.',
-    172: 'This office helps choose and support judges.',
-    173: 'This fund pays for court work.',
-    181: 'A county governor can be removed for serious reasons.',
-    182: 'This says what happens if a governor seat becomes empty.',
-    200: 'Parliament can make more laws for county government.',
-    215: 'This office advises on sharing public money.',
-    216: 'This office helps decide how public money is shared.',
-    221: 'Government must prepare a yearly budget and spending Bill.',
-    223: 'Extra spending needs new approval.',
-    224: 'Counties also need spending laws.',
-    230: 'This office helps decide State pay.',
-    233: 'This office helps manage public workers.',
-    234: 'This says what the public service office does.',
-    236: 'Public workers should not be punished for doing right.',
-    237: 'This office handles teachers work matters.',
-    246: 'This office helps manage police jobs.',
-    248: 'This lists the offices covered in this chapter.',
-    249: 'These offices help stop misuse of power.',
-    250: 'This says how members are chosen and how long they serve.',
-    251: 'A member of this office can only be removed by the law.',
-    252: 'This says what these offices can do.',
-    253: 'These offices can act officially in law.',
-    254: 'These offices must report on their work.',
-    260: 'This explains hard words in the Constitution.',
-    52: 'This explains hard words in this part.',
-    85: 'You can run without a party, but rules still apply.',
-    149: 'This says what happens if the Deputy President seat becomes empty.',
-    151: 'This says how the President and Deputy President are paid.',
-  });
+function ensurePeriod(text) {
+  if (!text) return '';
+  return /[.!?]$/.test(text.trim()) ? text.trim() : `${text.trim()}.`;
+}
 
-  if (articleSpecific[articleNumber]) return articleSpecific[articleNumber];
-
-  const exact = [
-    ['limitation of rights and fundamental freedoms', 'A right can only be limited for a good legal reason.'],
-    ['sovereignty of the people', 'People are the real owners of power in Kenya.'],
-    ['supremacy of this constitution', 'The Constitution is above every other law.'],
-    ['defence of this constitution', 'Everyone must respect and protect the Constitution.'],
-    ['declaration of the republic', 'Kenya is one republic.'],
-    ['territory of kenya', 'This says what land and water belong to Kenya.'],
-    ['devolution and access to services', 'Government should bring services closer to people.'],
-    ['national, official and other languages', 'This says which languages Kenya uses officially.'],
-    ['state and religion', 'Kenya does not have an official religion.'],
-    ['national symbols and national days', 'This says the main symbols and special days of Kenya.'],
-    ['national values and principles of governance', 'This says Kenya should be led with honesty, fairness, and respect.'],
-    ['culture', 'Culture matters and should be respected.'],
-    ['entitlements of citizens', 'If you are Kenyan, you can get things like an ID and a passport.'],
-    ['retention and acquisition of citizenship', 'This says when a person keeps or gets Kenyan citizenship.'],
-    ['citizenship by birth', 'This says when a person is Kenyan from birth.'],
-    ['citizenship by registration', 'This says when a person can apply to become Kenyan.'],
-    ['dual citizenship', 'A Kenyan can also be a citizen of another country in some cases.'],
-    ['revocation of citizenship', 'This says when citizenship can be taken away.'],
-    ['legislation on citizenship', 'Parliament can make laws about citizenship.'],
-    ['rights and fundamental freedoms', 'Rights protect every person.'],
-    ['application of bill of rights', 'The Bill of Rights is for everyone.'],
-    ['implementation of rights and fundamental freedoms', 'The State must work to protect rights.'],
-    ['enforcement of bill of rights', 'You can go to court if your rights are broken.'],
-    ['authority of courts to uphold and enforce the bill of rights', 'Courts can act when rights are broken.'],
-    ['fundamental rights and freedoms that may not be limited', 'Some rights are too important to be taken away.'],
-    ['right to life', 'Every life matters and should be protected.'],
-    ['equality and freedom from discrimination', 'Everyone should be treated fairly.'],
-    ['human dignity', 'Every person deserves respect.'],
-    ['freedom and security of the person', 'No one should be hurt, threatened, or treated cruelly.'],
-    ['slavery, servitude and forced labour', 'No one should be forced to work like a slave.'],
-    ['privacy', 'Your home, phone, and private life should be respected.'],
-    ['freedom of conscience, religion, belief and opinion', 'You can believe, pray, or think freely.'],
-    ['freedom of expression', 'You can speak and share your ideas.'],
-    ['freedom of the media', 'News people should be free to report the truth.'],
-    ['access to information', 'You can ask for important public information.'],
-    ['freedom of association', 'People can join together in lawful groups.'],
-    ['assembly, demonstration, picketing and petition', 'People can protest peacefully and present petitions.'],
-    ['political rights', 'People can vote, join politics, and stand for office.'],
-    ['freedom of movement and residence', 'You can move and live in any part of Kenya.'],
-    ['protection of right to property', 'Your property should not be taken unfairly.'],
-    ['labour relations', 'Workers should be treated fairly.'],
-    ['environment', 'Everyone deserves a clean and healthy environment.'],
-    ['economic and social rights', 'People need basics like food, water, health care, housing, and education.'],
-    ['language and culture', 'People should be free to use and respect their language and culture.'],
-    ['family', 'Family is important and should be protected.'],
-    ['consumer rights', 'Buyers should get safe goods and honest services.'],
-    ['fair administrative action', 'Public offices should act fairly and on time.'],
-    ['access to justice', 'Justice should be reachable by everyone.'],
-    ['rights of arrested persons', 'If police arrest you, you still have rights.'],
-    ['fair hearing', 'Everyone deserves a fair hearing.'],
-    ['rights of persons detained, held in custody or imprisoned', 'A person in custody still has rights.'],
-    ['interpretation of this part', 'This explains words used in this part of the Constitution.'],
-    ['children', 'Children need care, safety, and protection.'],
-    ['persons with disabilities', 'People with disabilities should be treated fairly and included.'],
-    ['youth', 'Young people should get support and chances to grow.'],
-    ['minorities and marginalised groups', 'Small and left-out groups should not be forgotten.'],
-    ['older members of society', 'Older people deserve care, respect, and dignity.'],
-    ['state of emergency', 'Even in an emergency, leaders must follow rules.'],
-    ['kenya national human rights and equality commission', 'This commission helps protect rights and fairness.'],
-    ['principles of land policy', 'Land should be used fairly and wisely.'],
-    ['classification of land', 'This explains the different kinds of land in Kenya.'],
-    ['public land', 'This says what land belongs to the public.'],
-    ['community land', 'This says what land belongs to a community.'],
-    ['private land', 'This says what land belongs to private owners.'],
-    ['landholding by non-citizens', 'This says when a non-Kenyan can hold land.'],
-    ['regulation of land use and property', 'Government can make rules on how land is used.'],
-    ['national land commission', 'This sets up the National Land Commission.'],
-    ['legislation on land', 'Parliament can make laws about land.'],
-    ['obligations in respect of the environment', 'People and government should protect the environment.'],
-    ['enforcement of environmental rights', 'People can act when the environment is being harmed.'],
-    ['agreements relating to natural resources', 'Big resource deals should follow the Constitution.'],
-    ['legislation relating to the environment', 'Parliament can make laws about the environment.'],
-    ['responsibilities of leadership', 'A leader should serve people, not themselves.'],
-    ['oath of office of state officers', 'State officers promise to serve honestly.'],
-    ['conduct of state officers', 'State officers should behave honestly and fairly.'],
-    ['financial probity of state officers', 'State officers should handle money honestly.'],
-    ['restriction on activities of state officers', 'State officers cannot do everything they want while in office.'],
-    ['citizenship and leadership', 'Some top leadership jobs require Kenyan citizenship rules to be followed.'],
-    ['legislation to establish the ethics and anti-corruption commission', 'This allows a body to fight corruption.'],
-    ['legislation on leadership', 'Parliament can make laws about leadership and integrity.'],
-    ['general principles for the electoral system', 'Elections should be free and fair.'],
-    ['registration as a voter', 'This says who can register to vote.'],
-    ['voting', 'Voting should be free, fair, and secret.'],
-    ['independent electoral and boundaries commission', 'This sets up the body that runs elections and boundaries.'],
-    ['role of parliament', 'Parliament makes laws and speaks for the people.'],
-    ['role of the national assembly', 'The National Assembly makes laws and watches over public money.'],
-    ['role of the senate', 'The Senate protects counties and their interests.'],
-    ['right to petition parliament', 'People can take their concerns to Parliament.'],
-    ['principles of executive authority', 'Top government power should be used to serve the people.'],
-    ['authority of the president', 'The President has important powers, but not unlimited power.'],
-    ['functions of the president', 'This says what the President is supposed to do.'],
-    ['cabinet', 'The Cabinet helps run the national government.'],
-    ['attorney-general', 'The Attorney-General is the government’s main lawyer.'],
-    ['director of public prosecutions', 'The DPP decides about criminal prosecutions.'],
-    ['judicial authority', 'Courts should do justice for everyone.'],
-    ['independence of the judiciary', 'Judges should decide cases without pressure.'],
-    ['system of courts', 'This explains the different courts in Kenya.'],
-    ['supreme court', 'This sets out the top court in Kenya.'],
-    ['court of appeal', 'This sets out the Court of Appeal.'],
-    ['high court', 'This sets out the High Court.'],
-    ['objects of devolution', 'County government should bring power and services closer to people.'],
-    ['principles of devolved government', 'County government should be democratic and answerable.'],
-    ['county governments', 'This sets up county governments.'],
-    ['county executive committees', 'These committees help run county government.'],
-    ['functions of county executive committees', 'This says what county executive committees do.'],
-    ['legislative authority of county assemblies', 'County assemblies can make county laws.'],
-    ['respective functions and powers of national and county governments', 'This says what national and county governments each do.'],
-    ['transfer of functions and powers between levels of government', 'Some government jobs can move from one level to another.'],
-    ['cooperation between national and county governments', 'National and county governments should work together.'],
-    ['conflict of laws', 'This says what happens when national and county laws clash.'],
-    ['principles of public finance', 'Public money should be used carefully and fairly.'],
-    ['equitable sharing of national revenue', 'National money should be shared fairly.'],
-    ['equalisation fund', 'This fund helps areas that have been left behind.'],
-    ['consolidated fund and other public funds', 'Public money should be kept in the right funds.'],
-    ['power to impose taxes and charges', 'This says who can charge taxes and fees.'],
-    ['public debt', 'Borrowed public money must be handled carefully.'],
-    ['commission on revenue allocation', 'This commission advises on sharing public money.'],
-    ['form, content and timing of budgets', 'Budgets should be clear and prepared on time.'],
-    ['procurement of public goods and services', 'Government buying should be fair and honest.'],
-    ['controller of budget', 'This office checks how public money is released and used.'],
-    ['auditor-general', 'This office checks how public money was used.'],
-    ['salaries and remuneration commission', 'This commission helps decide pay for State officers.'],
-    ['central bank of kenya', 'The Central Bank helps manage Kenya’s money system.'],
-    ['values and principles of public service', 'Public officers should serve people fairly and honestly.'],
-    ['the public service commission', 'This commission helps manage the public service.'],
-    ['functions and powers of the public service commission', 'This says what the Public Service Commission does.'],
-    ['staffing of county governments', 'Counties need workers chosen in a fair way.'],
-    ['protection of public officers', 'Public officers should not be punished unfairly for doing the right thing.'],
-    ['teachers service commission', 'This commission deals with teachers and their work.'],
-    ['principles of national security', 'Security should protect people and follow the law.'],
-    ['national security organs', 'This says which bodies handle national security.'],
-    ['establishment of the national security council', 'This sets up the National Security Council.'],
-    ['establishment of kenya defence forces and defence council', 'This sets up the Kenya Defence Forces and their council.'],
-    ['establishment of national intelligence service', 'This sets up the National Intelligence Service.'],
-    ['establishment of the national police service', 'This sets up the National Police Service.'],
-    ['objects and functions of the national police service', 'Police should protect people and act lawfully.'],
-    ['command of the national police service', 'This says who leads the police service.'],
-    ['national police service commission', 'This commission helps manage police service matters.'],
-    ['other police services', 'This allows other police services where the law provides.'],
-    ['application of chapter', 'This explains which commissions and offices this chapter covers.'],
-    ['objects, authority and funding of commissions and independent offices', 'Independent offices help keep power in check.'],
-    ['composition, appointment and terms of office', 'This says how members of commissions are chosen and serve.'],
-    ['general functions and powers', 'This says what commissions and independent offices can do.'],
-    ['amendment of this constitution', 'This says how the Constitution can be changed.'],
-    ['amendment by parliamentary initiative', 'Parliament can start some changes to the Constitution.'],
-    ['amendment by popular initiative', 'Ordinary people can also help start a change to the Constitution.'],
-    ['enforcement of this constitution', 'People can defend the Constitution in court.'],
-    ['construing this constitution', 'The Constitution should be read in a fair and helpful way.'],
-    ['interpretation', 'This explains important words used in the Constitution.'],
-    ['consequential legislation', 'Some laws had to be made after the 2010 Constitution began.'],
-    ['transitional and consequential provisions', 'These rules helped Kenya move to the new Constitution.'],
-    ['effective date', 'This says when the Constitution started working.'],
-    ['repeal of previous constitution', 'This says the old Constitution no longer applies.'],
-  ];
-
-  for (const [needle, text] of exact) {
-    if (heading.includes(needle)) return text;
+function buildWhatThisMeans(canonicalArticle) {
+  const sentences = splitSentences(canonicalArticle.officialText);
+  const picked = sentences.slice(0, 3).map(clauseToYouSentence);
+  if (picked.length === 0) {
+    const context = getSimpleContext(canonicalArticle, canonicalArticle.part?.heading || '');
+    return ensurePeriod(`You have protections about ${context.subject}. It explains what should happen for you in ${context.place}.`);
   }
-
-  if (heading.includes('election') || heading.includes('electoral') || heading.includes('voter') || heading.includes('political parties') || heading.includes('party list') || heading.includes('delimitation')) {
-    return 'This is about how elections should work fairly.';
-  }
-  if (heading.includes('parliament') || heading.includes('senate') || heading.includes('national assembly') || heading.includes('bill') || heading.includes('petition') || heading.includes('speaker') || heading.includes('quorum') || heading.includes('committee') || heading.includes('parliamentary')) {
-    return 'This is about how Parliament should do its work.';
-  }
-  if (heading.includes('president') || heading.includes('deputy president') || heading.includes('cabinet') || heading.includes('principal secretaries') || heading.includes('attorney-general') || heading.includes('public prosecutions') || heading.includes('mercy')) {
-    return 'This is about how the top national government should work.';
-  }
-  if (heading.includes('judicial') || heading.includes('court') || heading.includes('judge') || heading.includes('kadhi')) {
-    return 'This is about how courts and judges should work.';
-  }
-  if (heading.includes('county') || heading.includes('governor') || heading.includes('devolution') || heading.includes('urban areas') || heading.includes('city')) {
-    return 'This is about how county government should work.';
-  }
-  if (heading.includes('revenue') || heading.includes('tax') || heading.includes('budget') || heading.includes('appropriation') || heading.includes('fund') || heading.includes('financial') || heading.includes('borrow') || heading.includes('loan') || heading.includes('audit')) {
-    return 'This is about how public money should be handled.';
-  }
-  if (heading.includes('commission') || heading.includes('independent office') || heading.includes('reporting by commissions') || heading.includes('composition, appointment')) {
-    return 'This is about independent public bodies and how they work.';
-  }
-
-  if (chapter.includes('legislature')) return 'This is about how Parliament works.';
-  if (chapter.includes('executive')) return 'This is about how the top national government works.';
-  if (chapter.includes('judiciary')) return 'This is about how courts work.';
-  if (chapter.includes('devolution')) return 'This is about how county government works.';
-  if (chapter.includes('finance')) return 'This is about how public money should be used.';
-  if (chapter.includes('security')) return 'This is about how Kenya stays safe and how security officers should act.';
-  if (chapter.includes('commissions')) return 'This is about independent bodies that help keep power in check.';
-  if (chapter.includes('amendment')) return 'This is about how the Constitution can be changed.';
-  if (chapter.includes('transition')) return 'This is about the move from the old Constitution to the new one.';
-
-  if (legacyExplainer?.simplified) return legacyExplainer.simplified;
-  return `This is about ${canonicalArticle.heading.toLowerCase()}.`;
+  while (picked.length < 2) picked.push('It also guides what officials must or must not do for you.');
+  return picked.join(' ');
 }
 
 function buildTailoredExamples(canonicalArticle) {
@@ -2270,7 +1954,7 @@ function buildCitizenExamples(canonicalArticle, chapterTitle) {
 
 function buildDraftSimplified(canonicalArticle, legacyExplainer) {
   return {
-    simplified: buildFriendlySimplified(canonicalArticle, legacyExplainer),
+    simplified: legacyExplainer?.simplified || buildWhatThisMeans(canonicalArticle),
     swSimplified: `Ibara hii inahusu ${legacyExplainer?.swTitle || canonicalArticle.heading}. Kwa maneno rahisi, inaeleza kile Katiba inalinda, inaruhusu, au inahitaji katika eneo hili.`,
     status: legacyExplainer?.simplified ? 'seeded-from-legacy' : 'draft-generated',
     reviewStatus: legacyExplainer?.simplified ? 'reviewed' : 'draft',
@@ -2697,7 +2381,8 @@ function buildSwTitle(legacySwTitle, englishTitle) {
   const translated = translateSharedPhrasesToSwahili(englishTitle || '').trim();
   if (translated && !looksEnglishHeavy(translated)) return translated;
 
-  return legacySwTitle || englishTitle || '';
+  if (legacySwTitle && legacySwTitle.trim() && !looksEnglishHeavy(legacySwTitle)) return legacySwTitle;
+  return 'Ibara hii';
 }
 
 function buildSwSimplified(canonicalArticle, englishSimplified, swTitle) {
@@ -2705,7 +2390,27 @@ function buildSwSimplified(canonicalArticle, englishSimplified, swTitle) {
   if (translated && !looksEnglishHeavy(translated)) return translated;
 
   const topic = lowerFirst(swTitle || canonicalArticle.heading || 'ibara hii');
-  return `Ibara hii inaeleza kwa ufupi kuhusu ${topic}.`;
+  return `Ibara hii inaeleza kwa ufupi kuhusu ${topic}. Soma maandishi rasmi hapa chini kwa maelezo kamili.`;
+}
+
+const exampleNames = ['Kamau', 'Achieng', 'Wanjiku', 'Hassan', 'Chebet', 'Mwangi', 'Atieno', 'Kiptoo'];
+
+function enforcePromptExamples(examples, canonicalArticle) {
+  const sentences = splitSentences(canonicalArticle.officialText);
+  const baseClauses = sentences.slice(0, 2);
+  while (baseClauses.length < 2) baseClauses.push(canonicalArticle.heading);
+
+  return baseClauses.map((clause, idx) => {
+    const name = exampleNames[idx % exampleNames.length];
+    const youClause = clauseToYouSentence(clause);
+    const hasLimit = /\b(not|no|without|except|unless|prohibit|prevent|deny)\b/i.test(clause);
+    const story = ensurePeriod(`${name} is in a real situation: ${youClause.replace(/^You\b/, name)}`);
+    const outcome = hasLimit
+      ? 'That would break this protection, and they can challenge it.'
+      : 'That fits this protection and should happen without being stopped.';
+    const close = ensurePeriod(`Under this part on ${canonicalArticle.heading}, that is how it should be handled.`);
+    return `${story} ${outcome} ${close}`;
+  });
 }
 
 function buildSwExamples(canonicalArticle, englishExamples, providedSwExamples, swTitle) {
@@ -2721,7 +2426,7 @@ function buildSwExamples(canonicalArticle, englishExamples, providedSwExamples, 
   const topic = lowerFirst(swTitle || canonicalArticle.heading || 'ibara hii');
   return [
     `Ibara hii inaonyesha sheria ya msingi kuhusu ${topic}.`,
-    `Hii ni muhimu katika maisha ya kawaida unapokutana na suala la ${topic}.`,
+    `Mfano wa maisha ya kila siku: sheria hii inatumika unapoona tatizo linalohusu ${topic}.`,
   ];
 }
 
@@ -2977,8 +2682,9 @@ function normalizeExampleSet(exampleResult) {
 function buildFallbackExamples(canonicalArticle, explainer, chapterTitle, scenarioEntry) {
   if (scenarioEntry?.examples?.length > 0 && scenarioEntry?.swExamples?.length > 0) {
     const tailored = buildTailoredExamples(canonicalArticle);
+    const enforced = enforcePromptExamples(tailored.examples, canonicalArticle);
     return normalizeExampleSet({
-      examples: tailored.examples,
+      examples: enforced,
       swExamples: tailored.swExamples,
       exampleStatus: 'scenario-bank',
       exampleSources: scenarioEntry.sources || [],
@@ -2986,15 +2692,18 @@ function buildFallbackExamples(canonicalArticle, explainer, chapterTitle, scenar
   }
 
   if (explainer.examples.length > 0 && explainer.swExamples.length > 0) {
+    const enforced = enforcePromptExamples(explainer.examples, canonicalArticle);
     return normalizeExampleSet({
-      examples: explainer.examples,
+      examples: enforced,
       swExamples: explainer.swExamples,
       exampleStatus: 'seeded-from-legacy',
       exampleSources: [],
     });
   }
 
-  return normalizeExampleSet(buildArticleSpecificExamples(canonicalArticle, chapterTitle));
+  const generated = buildArticleSpecificExamples(canonicalArticle, chapterTitle);
+  generated.examples = enforcePromptExamples(generated.examples, canonicalArticle);
+  return normalizeExampleSet(generated);
 }
 
 function buildSchedules(attachmentBlocks) {
@@ -3213,3 +2922,4 @@ function main() {
 }
 
 main();
+

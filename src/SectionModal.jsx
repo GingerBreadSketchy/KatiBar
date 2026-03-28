@@ -1,7 +1,17 @@
 import { useEffect, useRef } from 'react'
-import { X, ExternalLink, ShieldAlert, BookOpen, AlertCircle, PhoneCall, ChevronDown } from 'lucide-react'
+import {
+  X,
+  ExternalLink,
+  ShieldAlert,
+  BookOpen,
+  PhoneCall,
+  ChevronDown,
+  MapPinned,
+  Sparkles,
+  WandSparkles,
+} from 'lucide-react'
 
-function SectionModal({ section, onClose, isSwahili }) {
+function SectionModal({ section, onClose, isSwahili, isLoadingDetails = false }) {
   const panelRef = useRef(null)
 
   // Trap focus & handle escape
@@ -21,11 +31,37 @@ function SectionModal({ section, onClose, isSwahili }) {
 
   const accentMap = {
     green: { color: '#3ecfa0', bar: '#006A4E', chip: 'chip-forest' },
+    gold:  { color: '#facc15', bar: '#a16207', chip: 'chip-gold' },
     red:   { color: '#f47285', bar: '#C8102E', chip: 'chip-crimson' },
     blue:  { color: '#7db8ff', bar: '#3b82f6', chip: 'chip-blue'   },
+    purple:{ color: '#c084fc', bar: '#7e22ce', chip: 'chip-purple' },
+    teal:  { color: '#2dd4bf', bar: '#0f766e', chip: 'chip-teal' },
+    orange:{ color: '#fb923c', bar: '#c2410c', chip: 'chip-orange' },
     black: { color: '#888',    bar: '#555',    chip: 'chip-neutral' },
   }
   const accent = accentMap[section.chapterColor] || accentMap.green
+  const exampleStyles = [
+    {
+      icon: MapPinned,
+      label: isSwahili ? 'Mfano wa 1' : 'Example 1',
+      badgeBg: 'linear-gradient(135deg, rgba(200,16,46,0.22) 0%, rgba(249,115,22,0.16) 100%)',
+      badgeBorder: 'rgba(244,114,133,0.35)',
+      badgeColor: '#fca5a5',
+      cardBg: 'linear-gradient(135deg, rgba(200,16,46,0.16) 0%, rgba(200,16,46,0.05) 100%)',
+      cardBorder: 'rgba(200,16,46,0.22)',
+      glow: '0 18px 40px rgba(200,16,46,0.12)',
+    },
+    {
+      icon: Sparkles,
+      label: isSwahili ? 'Mfano wa 2' : 'Example 2',
+      badgeBg: 'linear-gradient(135deg, rgba(0,106,78,0.24) 0%, rgba(34,197,94,0.12) 100%)',
+      badgeBorder: 'rgba(62,207,160,0.32)',
+      badgeColor: '#86efac',
+      cardBg: 'linear-gradient(135deg, rgba(0,106,78,0.16) 0%, rgba(0,106,78,0.05) 100%)',
+      cardBorder: 'rgba(0,106,78,0.24)',
+      glow: '0 18px 40px rgba(0,106,78,0.12)',
+    },
+  ]
 
   return (
     <div
@@ -54,7 +90,7 @@ function SectionModal({ section, onClose, isSwahili }) {
               </span>
               <span className={accent.chip}>{isSwahili ? (section.swChapterTitle || section.chapterTitle || 'Katiba ya Kenya') : (section.chapterTitle || 'Constitution of Kenya')}</span>
             </div>
-            <h2 id="modal-title" className="headline text-fluid-2xl text-ink-1 text-2xl md:text-3xl font-semibold leading-tight">
+            <h2 id="modal-title" className="ui-heading text-fluid-2xl text-ink-1 text-2xl md:text-3xl font-semibold leading-tight">
               {isSwahili ? (section.swTitle || section.title) : section.title}
             </h2>
           </div>
@@ -71,19 +107,33 @@ function SectionModal({ section, onClose, isSwahili }) {
 
         <div className="p-6 space-y-6">
           {/* Original text — collapsible */}
-          {section.originalText && (
+          {section.originalText ? (
             <details className="group border border-transparent hover:border-faint rounded-xl transition-colors">
               <summary className="flex items-center gap-2 text-ink-4 text-sm hover:text-ink-2 transition-colors cursor-pointer select-none p-2">
                 <ChevronDown className="w-4 h-4 transition-transform group-open:rotate-180" />
                 <span className="label text-xs">{isSwahili ? 'Angalia maandishi asilia ya kikatiba' : 'View original constitutional text'}</span>
               </summary>
               <div className="mt-2 pl-4 border-l-2 border-subtle ml-3 mb-2">
-                <p className="headline text-ink-3 text-sm leading-relaxed italic bg-surface-2 p-3 rounded-lg border border-faint shadow-inner">
+                <p className="text-ink-3 text-sm leading-relaxed italic bg-surface-2 p-3 rounded-lg border border-faint shadow-inner">
                   {section.originalText}
                 </p>
               </div>
             </details>
-          )}
+          ) : isLoadingDetails ? (
+            <div className="rounded-xl border border-faint bg-surface-2/70 p-3">
+              <div className="flex items-center gap-3 text-ink-4 text-sm">
+                <span
+                  className="w-4 h-4 rounded-full border-2 animate-spin"
+                  style={{
+                    borderColor: 'rgba(0, 106, 78, 0.18)',
+                    borderTopColor: '#3ecfa0',
+                  }}
+                  aria-hidden="true"
+                />
+                <span>{isSwahili ? 'Tunapakia maandishi rasmi ya Katiba…' : 'Loading the official constitutional text…'}</span>
+              </div>
+            </div>
+          ) : null}
 
           {/* Simplified — hero block */}
           <div className="panel-forest p-5 rounded-xl border-l-4" style={{ borderLeftColor: '#006A4E' }}>
@@ -106,25 +156,75 @@ function SectionModal({ section, onClose, isSwahili }) {
           {/* Real-life examples */}
           {((isSwahili && section.swExamples) || section.examples) && (
             <div>
-              <div className="flex items-center gap-2 mb-3">
-                <AlertCircle className="w-5 h-5 text-crimson-bright" />
-                <span className="label text-crimson-bright">{isSwahili ? 'Mifano ya maisha halisi' : 'Real-life examples'}</span>
+              <div className="flex items-center gap-3 mb-3">
+                <span
+                  className="w-10 h-10 rounded-2xl flex items-center justify-center shadow-sm"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(249,115,22,0.18) 0%, rgba(200,16,46,0.14) 100%)',
+                    border: '1px solid rgba(251,146,60,0.28)',
+                    color: '#fdba74',
+                    boxShadow: '0 10px 30px rgba(249,115,22,0.12)',
+                  }}
+                >
+                  <WandSparkles className="w-5 h-5" />
+                </span>
+                <span className="label examples-heading text-orange-300">
+                  {isSwahili ? 'Mifano ya maisha halisi' : 'Real-life examples'}
+                </span>
               </div>
               <ul className="space-y-2">
                 {(isSwahili ? (section.swExamples || section.examples) : section.examples).map((example, idx) => (
-                  <li key={idx} className="flex items-start gap-3 glass-card p-3 border border-transparent hover:border-subtle/50 transition-colors">
-                    <span className="mt-0.5 flex-shrink-0 text-forest-bright text-lg leading-none" aria-hidden="true">→</span>
-                    <span className="text-ink-2 text-sm leading-relaxed">{example}</span>
+                  <li
+                    key={idx}
+                    className="relative overflow-hidden p-4 rounded-2xl transition-all duration-300 hover:-translate-y-0.5"
+                    style={{
+                      background: exampleStyles[idx % exampleStyles.length].cardBg,
+                      border: `1px solid ${exampleStyles[idx % exampleStyles.length].cardBorder}`,
+                      boxShadow: exampleStyles[idx % exampleStyles.length].glow,
+                    }}
+                  >
+                    <div
+                      className="absolute inset-y-0 left-0 w-1.5 rounded-l-2xl"
+                      style={{ background: exampleStyles[idx % exampleStyles.length].badgeBorder }}
+                      aria-hidden="true"
+                    />
+                    <div className="flex items-start gap-3">
+                      <span
+                        className="flex-shrink-0 w-11 h-11 rounded-2xl flex items-center justify-center shadow-sm"
+                        style={{
+                          background: exampleStyles[idx % exampleStyles.length].badgeBg,
+                          border: `1px solid ${exampleStyles[idx % exampleStyles.length].badgeBorder}`,
+                          color: exampleStyles[idx % exampleStyles.length].badgeColor,
+                        }}
+                        aria-hidden="true"
+                      >
+                        {(() => {
+                          const ExampleIcon = exampleStyles[idx % exampleStyles.length].icon
+                          return <ExampleIcon className="w-5 h-5" />
+                        })()}
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-2 mb-1.5">
+                          <span
+                            className="text-[11px] font-semibold uppercase tracking-[0.16em]"
+                            style={{ color: exampleStyles[idx % exampleStyles.length].badgeColor }}
+                          >
+                            {exampleStyles[idx % exampleStyles.length].label}
+                          </span>
+                        </div>
+                        <span className="text-ink-2 text-sm leading-relaxed block">{example}</span>
+                      </div>
+                    </div>
                   </li>
                 ))}
               </ul>
-              {section.exampleSources?.length > 0 && (
-                <div className="mt-3 text-xs text-ink-4 leading-relaxed">
-                  <p>
-                    {isSwahili
-                      ? 'Mifano hii imeandikwa kwa lugha rahisi kutokana na matatizo halisi yaliyoripotiwa au maelezo ya taasisi za Kenya.'
-                      : 'These examples are written in simple English from real Kenyan complaint patterns and public rights guidance.'}
-                  </p>
+              <div className="mt-3 text-xs text-ink-4 leading-relaxed">
+                <p>
+                  {isSwahili
+                    ? 'Mifano hii imeandikwa kwa lugha rahisi kutokana na matatizo halisi yaliyoripotiwa au maelezo ya taasisi za Kenya.'
+                    : 'These examples are written in simple English from real Kenyan complaint patterns and public rights guidance.'}
+                </p>
+                {section.exampleSources?.length > 0 && (
                   <div className="flex flex-wrap gap-2 mt-2">
                     {section.exampleSources.map((source) => (
                       <a
@@ -139,8 +239,8 @@ function SectionModal({ section, onClose, isSwahili }) {
                       </a>
                     ))}
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           )}
 

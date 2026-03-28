@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { BookOpen, Search, Layout, Target, Menu, X, ShieldCheck, GitMerge, Languages, Download } from 'lucide-react'
+import { BookOpen, Search, Layout, Target, Menu, X, ShieldCheck, GitMerge, Download } from 'lucide-react'
 import './Header.css'
 
 // Redesigned Professional Logo - Modern Abstract Shield + Scales of Justice + K
@@ -47,7 +47,7 @@ const NAV_ICONS = {
   '/downloads': Download
 }
 
-function Header({ isSwahili, onToggleLanguage }) {
+function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
@@ -60,12 +60,12 @@ function Header({ isSwahili, onToggleLanguage }) {
   }, [])
 
   const navLinks = [
-    { id: '/',      label: isSwahili ? 'Gundua' : 'Explore' },
-    { id: '/find',  label: isSwahili ? 'Pata Haki' : 'Find Rights' },
-    { id: '/cards', label: isSwahili ? 'Kadi za Haraka' : 'Quick Cards' },
-    { id: '/map',   label: isSwahili ? 'Ramania' : 'Flow Map' },
-    { id: '/quiz',  label: isSwahili ? 'Jaribio' : 'Quiz' },
-    { id: '/downloads', label: isSwahili ? 'Nyaraka' : 'Downloads' },
+    { id: '/', label: 'Explore' },
+    { id: '/find', label: 'Find Rights' },
+    { id: '/cards', label: 'Quick Cards' },
+    { id: '/map', label: 'Flow Map' },
+    { id: '/quiz', label: 'Quiz' },
+    { id: '/downloads', label: 'Downloads' },
   ]
 
   return (
@@ -89,7 +89,7 @@ function Header({ isSwahili, onToggleLanguage }) {
                 }}
               >
                 <ShieldCheck className="w-3.5 h-3.5" style={{ filter: 'drop-shadow(0 0 3px rgba(62, 207, 160, 0.4))' }} />
-                {isSwahili ? 'Jua Haki Zako' : 'Know Your Rights'}
+                Know Your Rights
               </span>
             </div>
           </Link>
@@ -114,21 +114,10 @@ function Header({ isSwahili, onToggleLanguage }) {
 
           {/* Right side actions */}
           <div className="flex items-center gap-2">
-            
-            {/* Language Toggle */}
-            <button 
-              onClick={onToggleLanguage}
-              className="px-3 py-1.5 rounded-full flex items-center gap-1.5 text-xs font-semibold bg-surface-3 hover:bg-surface-4 text-ink-2 transition-colors border border-faint"
-              aria-label="Toggle language between English and Swahili"
-            >
-              <Languages className="w-3.5 h-3.5 text-blue-400" />
-              {isSwahili ? 'SW' : 'EN'}
-            </button>
-
             {/* Disclaimer chip */}
             <span className="chip-neutral hidden xl:inline-flex items-center gap-1 border-opacity-30 border-blue-500 text-blue-400 bg-blue-500 bg-opacity-10">
               <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
-              {isSwahili ? 'Elimu Tu' : 'Educational Only'}
+              Educational Only
             </span>
 
             {/* Mobile menu toggle */}

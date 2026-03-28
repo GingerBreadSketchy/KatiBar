@@ -1,6 +1,4 @@
 import { ShieldAlert, HeartPulse, Home, Briefcase, Baby, Megaphone, Scale, PhoneCall, Building2, ChevronRight, Phone, Gavel, Accessibility, ShieldCheck, Map, Download } from 'lucide-react'
-import { jsPDF } from 'jspdf'
-import html2canvas from 'html2canvas'
 import { sectionMatchesTopic } from './constitutionTopics'
 
 const TOPICS = [
@@ -45,6 +43,11 @@ function QuickCards({ constitution, onTopicClick, isSwahili }) {
     const element = document.getElementById('emergency-card')
     if (!element) return
     try {
+      const [{ jsPDF }, html2canvasModule] = await Promise.all([
+        import('jspdf'),
+        import('html2canvas'),
+      ])
+      const html2canvas = html2canvasModule.default
       const canvas = await html2canvas(element, { scale: 2, backgroundColor: '#000000' })
       const imgData = canvas.toDataURL('image/png')
       const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [canvas.width, canvas.height] })
@@ -99,7 +102,7 @@ function QuickCards({ constitution, onTopicClick, isSwahili }) {
                   <span className={`${topic.chipClass} mb-1.5 inline-flex`}>
                     {matches.length} {isSwahili ? 'Ibara' : 'article'}{matches.length !== 1 ? (isSwahili ? '' : 's') : ''}
                   </span>
-                  <h3 className="headline text-ink-1 text-base font-semibold leading-snug group-hover:text-white transition-colors">
+                  <h3 className="ui-heading text-ink-1 text-base font-semibold leading-snug group-hover:text-white transition-colors">
                     {isSwahili ? topic.swTitle : topic.title}
                   </h3>
                 </div>

@@ -1,18 +1,21 @@
 import { useRef } from 'react'
 
-function SearchBar({ value, onSearch, onClear, placeholder }) {
+function SearchBar({ value, onSearch, onClear, placeholder, disabled = false }) {
   const inputRef = useRef(null)
 
   const handleChange = (e) => {
+    if (disabled) return
     onSearch(e.target.value)
   }
 
   const handleClear = () => {
+    if (disabled) return
     onClear()
     inputRef.current?.focus()
   }
 
   const handleKeyDown = (e) => {
+    if (disabled) return
     if (e.key === 'Escape') handleClear()
   }
 
@@ -35,7 +38,7 @@ function SearchBar({ value, onSearch, onClear, placeholder }) {
         ref={inputRef}
         id="rights-search"
         type="search"
-        className="search-input"
+        className={`search-input ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`}
         value={value}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
@@ -43,6 +46,7 @@ function SearchBar({ value, onSearch, onClear, placeholder }) {
         aria-label="Search the constitution"
         autoComplete="off"
         spellCheck="false"
+        disabled={disabled}
       />
 
       {/* Clear button */}

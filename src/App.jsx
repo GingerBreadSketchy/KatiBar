@@ -1,18 +1,70 @@
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import { Suspense, lazy, startTransition, useRef, useState, useEffect, useCallback, useMemo } from 'react'
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
-import { Target } from 'lucide-react'
-import constitutionData from './data/constitution.app.json'
+import { AlertTriangle, RefreshCcw, Target } from 'lucide-react'
+import {
+  emptyConstitutionData,
+  hydrateChapterDetails,
+  hydrateSectionWithChapterDetails,
+  loadChapterDetails,
+  loadConstitutionData,
+  loadSearchIndex,
+} from './constitutionData'
 import Header from './Header'
 import SearchBar from './SearchBar'
 import ConstitutionExplorer from './ConstitutionExplorer'
-import RightsFinder from './RightsFinder'
-import QuickCards from './QuickCards'
-import Quiz from './Quiz'
-import RightsMap from './RightsMap'
 import SectionModal from './SectionModal'
-import Downloads from './Downloads'
 import './App.css'
 import './index.css'
+
+const RightsFinder = lazy(() => import('./RightsFinder'))
+const QuickCards = lazy(() => import('./QuickCards'))
+const Quiz = lazy(() => import('./Quiz'))
+const RightsMap = lazy(() => import('./RightsMap'))
+const Downloads = lazy(() => import('./Downloads'))
+
+function FeatureFallback({ isSwahili }) {
+  return (
+    <div className="glass-card p-8 md:p-10 text-center animate-fade-up">
+      <div className="w-10 h-10 rounded-full border-2 border-crimson/40 border-t-crimson mx-auto animate-spin mb-4" aria-hidden="true" />
+      <p className="ui-heading text-ink-1 text-lg mb-2">
+        {isSwahili ? 'Tunapakia sehemu hii' : 'Loading this section'}
+      </p>
+      <p className="text-ink-4 text-sm">
+        {isSwahili ? 'Tafadhali subiri sekunde chache.' : 'Please wait a moment.'}
+      </p>
+    </div>
+  )
+}
+
+function ConstitutionLoadState({ isLoading, error, onRetry }) {
+  if (isLoading) {
+    return (
+      <div className="glass-card p-8 md:p-10 text-center animate-fade-up max-w-3xl mx-auto">
+        <div className="w-10 h-10 rounded-full border-2 border-crimson/40 border-t-crimson mx-auto animate-spin mb-4" aria-hidden="true" />
+        <p className="ui-heading text-ink-1 text-lg mb-2">Loading the Constitution</p>
+        <p className="text-ink-4 text-sm max-w-md mx-auto">
+          We are preparing the chapter list, article summaries, and search data for you.
+        </p>
+      </div>
+    )
+  }
+
+  return (
+    <div className="glass-card p-8 md:p-10 text-center animate-fade-up max-w-3xl mx-auto border border-crimson/20">
+      <div className="w-14 h-14 rounded-2xl mx-auto mb-4 flex items-center justify-center bg-crimson/10 border border-crimson/20">
+        <AlertTriangle className="w-7 h-7 text-crimson-bright" />
+      </div>
+      <p className="ui-heading text-ink-1 text-lg mb-2">We could not load the Constitution data</p>
+      <p className="text-ink-3 text-sm max-w-lg mx-auto leading-relaxed mb-6">
+        {error || 'A network or cache problem stopped the app from loading the chapter data. Please try again.'}
+      </p>
+      <button onClick={onRetry} className="btn-primary justify-center">
+        <RefreshCcw className="w-4 h-4" />
+        Retry loading
+      </button>
+    </div>
+  )
+}
 
 function dedupeConstitution(constitution) {
   return {
@@ -43,43 +95,52 @@ function computeStats(constitution) {
 }
 
 // ── Search logic ──────────────────────────────────────────────────────────────
-function searchConstitution(constitution, query) {
+function searchConstitution(searchIndex, query) {
   const keywords = query.toLowerCase().trim().split(/\s+/).filter(k => k.length > 1)
   if (keywords.length === 0) return []
-  
-  const results = []
-  constitution.chapters.forEach(chapter => {
-    chapter.sections.forEach(section => {
-      const titleL = section.title.toLowerCase()
-      const swTitleL = (section.swTitle || "").toLowerCase()
-      const articleL = section.article.toLowerCase()
-      const swArticleL = (section.swArticle || "").toLowerCase()
-      const simpleL = section.simplified.toLowerCase()
-      const swSimpleL = (section.swSimplified || "").toLowerCase()
-      const originalL = (section.originalText || "").toLowerCase()
-      const tagsL = section.tags.join(' ').toLowerCase()
-      
-      const isMatch = keywords.some(k => 
-        titleL.includes(k) ||
-        swTitleL.includes(k) ||
-        articleL.includes(k) ||
-        swArticleL.includes(k) ||
-        simpleL.includes(k) ||
-        swSimpleL.includes(k) ||
-        originalL.includes(k) ||
-        tagsL.includes(k)
-      )
 
-      if (isMatch) results.push({ 
-        ...section, 
-        chapterTitle: chapter.title, 
-        swChapterTitle: chapter.swTitle || chapter.title,
-        chapterId: chapter.id, 
-        chapterColor: chapter.color 
-      })
+  return searchIndex
+    .map((entry) => {
+      const titleL = entry.title.toLowerCase()
+      const articleL = entry.article.toLowerCase()
+      const simpleL = entry.simplified.toLowerCase()
+      const tagsL = entry.tags.join(' ').toLowerCase()
+      const chapterL = entry.chapterTitle.toLowerCase()
+      const bodyL = entry.searchBody || ''
+
+      let score = 0
+
+      for (const keyword of keywords) {
+        if (titleL.includes(keyword)) score += 6
+        if (articleL.includes(keyword)) score += 5
+        if (simpleL.includes(keyword)) score += 4
+        if (tagsL.includes(keyword)) score += 4
+        if (chapterL.includes(keyword)) score += 2
+        if (bodyL.includes(keyword)) score += 2
+      }
+
+      return score > 0 ? { ...entry, score } : null
     })
-  })
-  return results
+    .filter(Boolean)
+    .sort((left, right) => {
+      if (right.score !== left.score) {
+        return right.score - left.score
+      }
+
+      return left.articleNumber - right.articleNumber
+    })
+    .map((entry) => ({
+      chapterId: entry.chapterId,
+      chapterTitle: entry.chapterTitle,
+      chapterColor: entry.chapterColor,
+      articleNumber: entry.articleNumber,
+      article: entry.article,
+      title: entry.title,
+      simplified: entry.simplified,
+      tags: entry.tags,
+      examples: entry.examples,
+      officialUrl: entry.officialUrl,
+    }))
 }
 
 // ── Hero Section ──────────────────────────────────────────────────────────────
@@ -181,7 +242,7 @@ function Hero({ stats, onTabChange, isSwahili }) {
 }
 
 // ── Search Results Panel ──────────────────────────────────────────────────────
-function SearchResults({ results, query, onSelect, onClear, isSwahili }) {
+function SearchResults({ results, query, onSelect, onClear, isLoading, isSwahili }) {
   return (
     <div className="ds-container pb-8 animate-fade-up">
       <div className="flex items-center justify-between mb-4">
@@ -196,7 +257,13 @@ function SearchResults({ results, query, onSelect, onClear, isSwahili }) {
         </button>
       </div>
 
-      {results.length > 0 ? (
+      {isLoading ? (
+        <div className="glass-card p-10 text-center animate-fade-up">
+          <div className="w-10 h-10 rounded-full border-2 border-crimson/40 border-t-crimson mx-auto animate-spin mb-4" aria-hidden="true" />
+          <p className="text-ink-2">{isSwahili ? `Tunatafuta "${query}"...` : `Searching for "${query}"...`}</p>
+          <p className="text-ink-4 text-sm mt-1">{isSwahili ? 'Tunapakia faharasa ya utafutaji kwa mara ya kwanza.' : 'Loading the search index for the first time.'}</p>
+        </div>
+      ) : results.length > 0 ? (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {results.map((r, idx) => (
             <article
@@ -212,7 +279,7 @@ function SearchResults({ results, query, onSelect, onClear, isSwahili }) {
                 <span className="chip-forest">{isSwahili ? (r.swArticle || r.article) : r.article}</span>
                 <span className="chip-neutral text-xs">{isSwahili ? (r.swChapterTitle || r.chapterTitle) : r.chapterTitle}</span>
               </div>
-              <h3 className="headline text-ink-1 text-base font-semibold mb-2 group-hover:text-white transition-colors">
+              <h3 className="ui-heading text-ink-1 text-base font-semibold mb-2 group-hover:text-white transition-colors">
                 {isSwahili ? (r.swTitle || r.title) : r.title}
               </h3>
               <p className="text-ink-4 text-sm leading-relaxed line-clamp-2">
@@ -237,67 +304,190 @@ function SearchResults({ results, query, onSelect, onClear, isSwahili }) {
 
 // ── App Root ──────────────────────────────────────────────────────────────────
 function App() {
-  const [constitution] = useState(() => dedupeConstitution(constitutionData))
-  const [isSwahili, setIsSwahili] = useState(false)
+  const [constitution, setConstitution] = useState(emptyConstitutionData)
+  const isSwahili = false
+  const [isBootLoading, setIsBootLoading] = useState(true)
+  const [bootstrapError, setBootstrapError] = useState('')
   
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [isSearching, setIsSearching] = useState(false)
+  const [isSearchLoading, setIsSearchLoading] = useState(false)
   const [selectedSection, setSelectedSection] = useState(null)
+  const [isSectionDetailsLoading, setIsSectionDetailsLoading] = useState(false)
+  const searchRequestRef = useRef(0)
 
   const navigate = useNavigate()
   const location = useLocation()
   const isExploreTab = location.pathname === '/'
+  const isConstitutionReady = constitution.chapters.length > 0
 
   const stats = useMemo(() => computeStats(constitution), [constitution])
 
+  const bootstrapConstitution = useCallback(async () => {
+    setIsBootLoading(true)
+    setBootstrapError('')
+
+    try {
+      const data = await loadConstitutionData()
+      startTransition(() => {
+        setConstitution(dedupeConstitution(data))
+      })
+    } catch (error) {
+      console.error('Failed to load constitution data', error)
+      startTransition(() => {
+        setConstitution(emptyConstitutionData)
+        setBootstrapError('The chapter list or search data could not be loaded. Check your connection and try again.')
+      })
+    } finally {
+      setIsBootLoading(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    void bootstrapConstitution()
+  }, [bootstrapConstitution])
+
+  const ensureChapterDetails = useCallback(async (chapterId) => {
+    if (!chapterId) {
+      return null
+    }
+
+    const chapterDetails = await loadChapterDetails(chapterId)
+
+    startTransition(() => {
+      setConstitution((current) => dedupeConstitution(hydrateChapterDetails(current, chapterId, chapterDetails)))
+    })
+
+    return chapterDetails
+  }, [])
+
+  const openSection = useCallback(async (section) => {
+    setSelectedSection(section)
+
+    if (!section?.chapterId || section.originalText) {
+      setIsSectionDetailsLoading(false)
+      return
+    }
+
+    setIsSectionDetailsLoading(true)
+
+    try {
+      const chapterDetails = await ensureChapterDetails(section.chapterId)
+      const hydratedSection = hydrateSectionWithChapterDetails(section, chapterDetails)
+
+      startTransition(() => {
+        setSelectedSection((current) => {
+          if (!current) {
+            return current
+          }
+
+          if (
+            current.chapterId !== section.chapterId ||
+            current.articleNumber !== section.articleNumber
+          ) {
+            return current
+          }
+
+          return hydratedSection
+        })
+      })
+    } catch (error) {
+      console.error(`Failed to load chapter details for ${section.chapterId}`, error)
+    } finally {
+      setIsSectionDetailsLoading(false)
+    }
+  }, [ensureChapterDetails])
+
   // Search
   const handleSearch = useCallback((input) => {
+    if (!isConstitutionReady) {
+      return
+    }
+
     if (typeof input === 'object' && input !== null) {
       const topicQuery = String(input.query || '').trim()
       setSearchQuery(topicQuery)
-      setSearchResults(Array.isArray(input.results) ? input.results : [])
-      setIsSearching(Boolean(topicQuery))
+      startTransition(() => {
+        setSearchResults(Array.isArray(input.results) ? input.results : [])
+        setIsSearching(Boolean(topicQuery))
+        setIsSearchLoading(false)
+      })
       return
     }
 
     const query = String(input || '')
     setSearchQuery(query)
     if (query.trim()) {
-      setIsSearching(true)
-      setSearchResults(searchConstitution(constitution, query))
+      const requestId = searchRequestRef.current + 1
+      searchRequestRef.current = requestId
+
+      startTransition(() => {
+        setIsSearching(true)
+        setIsSearchLoading(true)
+      })
+
+      void loadSearchIndex()
+        .then((searchIndex) => {
+          if (searchRequestRef.current !== requestId) {
+            return
+          }
+
+          const results = searchConstitution(searchIndex, query)
+
+          startTransition(() => {
+            setSearchResults(results)
+            setIsSearchLoading(false)
+          })
+        })
+        .catch((error) => {
+          console.error('Failed to load constitution search index', error)
+
+          if (searchRequestRef.current !== requestId) {
+            return
+          }
+
+          startTransition(() => {
+            setSearchResults([])
+            setIsSearchLoading(false)
+          })
+        })
     } else {
-      setIsSearching(false)
-      setSearchResults([])
+      searchRequestRef.current += 1
+      startTransition(() => {
+        setIsSearching(false)
+        setIsSearchLoading(false)
+        setSearchResults([])
+      })
     }
-  }, [constitution])
+  }, [isConstitutionReady])
 
   const handleClearSearch = useCallback(() => {
+    searchRequestRef.current += 1
     setSearchQuery('')
     setSearchResults([])
     setIsSearching(false)
+    setIsSearchLoading(false)
   }, [])
 
   const handleSectionSelect = useCallback((section) => {
-    setSelectedSection(section)
-  }, [])
+    void openSection(section)
+  }, [openSection])
 
   const handleCardClick = useCallback((section) => {
-    setSelectedSection(section)
     setIsSearching(false)
     setSearchQuery('')
     setSearchResults([])
-  }, [])
-
-  const handleToggleLang = () => setIsSwahili(!isSwahili)
+    void openSection(section)
+  }, [openSection])
 
   return (
     <div className="bg-amoled min-h-screen text-ink-1">
       {/* Navigation */}
-      <Header isSwahili={isSwahili} onToggleLanguage={handleToggleLang} />
+      <Header />
 
       {/* ── Hero ─────────────────────────────────────── */}
-      {isExploreTab && !isSearching && (
+      {isExploreTab && !isSearching && isConstitutionReady && (
         <Hero stats={stats} onTabChange={(path) => navigate(path === 'explore' ? '/' : `/${path}`)} isSwahili={isSwahili} />
       )}
 
@@ -310,7 +500,12 @@ function App() {
           value={searchQuery}
           onSearch={handleSearch}
           onClear={handleClearSearch}
-          placeholder={isSwahili ? "Tafuta haki zako... (mfano 'ardhi', 'afya', 'polisi')" : "Search your rights… (e.g. 'land', 'healthcare', 'police', 'water')"}
+          placeholder={
+            isConstitutionReady
+              ? (isSwahili ? "Tafuta haki zako... (mfano 'ardhi', 'afya', 'polisi')" : "Search your rights… (e.g. 'land', 'healthcare', 'police', 'water')")
+              : 'Search will be ready once the Constitution data loads'
+          }
+          disabled={!isConstitutionReady || isBootLoading}
         />
       </div>
 
@@ -323,6 +518,7 @@ function App() {
           query={searchQuery}
           onSelect={handleSectionSelect}
           onClear={handleClearSearch}
+          isLoading={isSearchLoading}
           isSwahili={isSwahili}
         />
       )}
@@ -330,33 +526,59 @@ function App() {
       {/* ── Tab content ─────────────────────────────── */}
       {!isSearching && (
         <main className="ds-container pb-20" id="main-content">
-          <Routes>
-            <Route path="/" element={
-              <ConstitutionExplorer
-                constitution={constitution}
-                selectedSection={selectedSection}
-                onSelectSection={setSelectedSection}
-                isSwahili={isSwahili}
-              />
-            } />
-            <Route path="/find" element={
-              <RightsFinder
-                constitution={constitution}
-                onSectionSelect={handleCardClick}
-                isSwahili={isSwahili}
-              />
-            } />
-            <Route path="/cards" element={
-              <QuickCards
-                constitution={constitution}
-                onTopicClick={handleSearch}
-                isSwahili={isSwahili}
-              />
-            } />
-            <Route path="/map" element={<RightsMap isSwahili={isSwahili} />} />
-            <Route path="/quiz" element={<Quiz constitution={constitution} isSwahili={isSwahili} />} />
-            <Route path="/downloads" element={<Downloads isSwahili={isSwahili} />} />
-          </Routes>
+          <Suspense fallback={<FeatureFallback isSwahili={isSwahili} />}>
+            <Routes>
+              <Route path="/" element={
+                isConstitutionReady ? (
+                  <ConstitutionExplorer
+                    constitution={constitution}
+                    onSelectSection={handleSectionSelect}
+                    onExpandChapter={ensureChapterDetails}
+                    isSwahili={isSwahili}
+                  />
+                ) : (
+                  <ConstitutionLoadState
+                    isLoading={isBootLoading}
+                    error={bootstrapError}
+                    onRetry={bootstrapConstitution}
+                  />
+                )
+              } />
+              <Route path="/find" element={
+                isConstitutionReady ? (
+                  <RightsFinder
+                    constitution={constitution}
+                    onSectionSelect={handleCardClick}
+                    isSwahili={isSwahili}
+                  />
+                ) : (
+                  <ConstitutionLoadState
+                    isLoading={isBootLoading}
+                    error={bootstrapError}
+                    onRetry={bootstrapConstitution}
+                  />
+                )
+              } />
+              <Route path="/cards" element={
+                isConstitutionReady ? (
+                  <QuickCards
+                    constitution={constitution}
+                    onTopicClick={handleSearch}
+                    isSwahili={isSwahili}
+                  />
+                ) : (
+                  <ConstitutionLoadState
+                    isLoading={isBootLoading}
+                    error={bootstrapError}
+                    onRetry={bootstrapConstitution}
+                  />
+                )
+              } />
+              <Route path="/map" element={<RightsMap isSwahili={isSwahili} />} />
+              <Route path="/quiz" element={<Quiz constitution={constitution} isSwahili={isSwahili} />} />
+              <Route path="/downloads" element={<Downloads isSwahili={isSwahili} />} />
+            </Routes>
+          </Suspense>
         </main>
       )}
 
@@ -366,8 +588,12 @@ function App() {
       {selectedSection && (
         <SectionModal
           section={selectedSection}
-          onClose={() => setSelectedSection(null)}
+          onClose={() => {
+            setSelectedSection(null)
+            setIsSectionDetailsLoading(false)
+          }}
           isSwahili={isSwahili}
+          isLoadingDetails={isSectionDetailsLoading}
         />
       )}
 

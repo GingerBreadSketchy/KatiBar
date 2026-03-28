@@ -1,5 +1,19 @@
-import { useState } from 'react'
-import { CheckCircle2, XCircle, Trophy, Star, BookOpen, Sprout, ArrowRight, PlayCircle, RotateCcw } from 'lucide-react'
+import { useMemo, useState } from 'react'
+import {
+  ArrowRight,
+  BookOpen,
+  CheckCircle2,
+  Lightbulb,
+  PlayCircle,
+  RotateCcw,
+  ShieldCheck,
+  Sparkles,
+  Sprout,
+  Star,
+  Target,
+  Trophy,
+  XCircle,
+} from 'lucide-react'
 
 // All quiz questions
 const QUESTIONS = [
@@ -249,43 +263,91 @@ const BADGES = [
   { threshold: 0, Icon: Sprout, label: 'Rights Learner', swLabel: 'Mwanafunzi wa Haki', desc: 'Every journey starts here. Review the explanations and try again.', swDesc: 'Kila safari huanzia hapa. Pitia maelezo na ujaribu tena.' },
 ]
 
+const QUIZ_THEMES = [
+  {
+    accent: '#D4A017',
+    strong: '#facc15',
+    soft: 'rgba(212,160,23,0.14)',
+    border: 'rgba(212,160,23,0.28)',
+    glow: 'rgba(212,160,23,0.18)',
+  },
+  {
+    accent: '#006A4E',
+    strong: '#3ecfa0',
+    soft: 'rgba(0,106,78,0.14)',
+    border: 'rgba(62,207,160,0.24)',
+    glow: 'rgba(0,106,78,0.18)',
+  },
+  {
+    accent: '#3b82f6',
+    strong: '#93c5fd',
+    soft: 'rgba(59,130,246,0.13)',
+    border: 'rgba(59,130,246,0.28)',
+    glow: 'rgba(59,130,246,0.16)',
+  },
+  {
+    accent: '#C8102E',
+    strong: '#f47285',
+    soft: 'rgba(200,16,46,0.13)',
+    border: 'rgba(244,114,133,0.26)',
+    glow: 'rgba(200,16,46,0.16)',
+  },
+]
+
 function Quiz({ isSwahili }) {
-  const [step, setStep] = useState(0)          // current question index
+  const [step, setStep] = useState(0)
   const [selected, setSelected] = useState(null)
   const [showFeedback, setShowFeedback] = useState(false)
   const [score, setScore] = useState(0)
   const [done, setDone] = useState(false)
-  const [history, setHistory] = useState([])   // { index, correct }
+  const [history, setHistory] = useState([])
 
   const q = QUESTIONS[step]
+  const theme = QUIZ_THEMES[step % QUIZ_THEMES.length]
   const progress = ((step + (showFeedback ? 1 : 0)) / QUESTIONS.length) * 100
+  const answeredCount = history.length
+  const accuracy = answeredCount > 0 ? Math.round((score / answeredCount) * 100) : 0
+  const streak = useMemo(() => {
+    let total = 0
+    for (let index = history.length - 1; index >= 0; index -= 1) {
+      if (!history[index].correct) break
+      total += 1
+    }
+    return total
+  }, [history])
 
   const pick = (idx) => {
     if (showFeedback) return
     const isCorrect = idx === q.correct
     setSelected(idx)
     setShowFeedback(true)
-    if (isCorrect) setScore(s => s + 1)
-    setHistory(h => [...h, { questionId: q.id, selectedIdx: idx, correct: isCorrect }])
+    if (isCorrect) setScore((current) => current + 1)
+    setHistory((current) => [...current, { questionId: q.id, selectedIdx: idx, correct: isCorrect }])
   }
 
   const next = () => {
     if (step < QUESTIONS.length - 1) {
-      setStep(s => s + 1)
+      setStep((current) => current + 1)
       setSelected(null)
       setShowFeedback(false)
-    } else {
-      setDone(true)
+      return
     }
+
+    setDone(true)
   }
 
   const restart = () => {
-    setStep(0); setSelected(null); setShowFeedback(false)
-    setScore(0); setDone(false); setHistory([])
+    setStep(0)
+    setSelected(null)
+    setShowFeedback(false)
+    setScore(0)
+    setDone(false)
+    setHistory([])
   }
 
-  const badge = BADGES.find(b => score >= b.threshold) || BADGES[3]
+  const badge = BADGES.find((entry) => score >= entry.threshold) || BADGES[3]
   const BadgeIcon = badge.Icon
+  const currentOptions = isSwahili ? q.swOptions : q.options
 
   // ── Completed Screen ──────────────────────────────────────────────────────
   if (done) {
@@ -365,55 +427,165 @@ function Quiz({ isSwahili }) {
     )
   }
 
-  const currentOptions = isSwahili ? q.swOptions : q.options
-
   // ── Quiz Screen ───────────────────────────────────────────────────────────
   return (
-    <section className="max-w-2xl mx-auto" aria-labelledby="quiz-heading">
-      {/* Header */}
+    <section className="max-w-5xl mx-auto" aria-labelledby="quiz-heading">
       <div className="mb-8 animate-fade-up">
         <span className="label text-ink-4 block mb-2 flex items-center gap-2">
           <PlayCircle className="w-4 h-4 text-forest-bright" />
-          {isSwahili ? 'Kujifunza kwa Kushiriki' : 'Interactive Learning'}
+          {isSwahili ? 'Kujifunza kwa kushiriki' : 'Interactive Learning'}
         </span>
         <h2 id="quiz-heading" className="headline text-fluid-2xl text-ink-1 font-semibold mb-2">
           {isSwahili ? 'Jaribio la Haki Zako' : 'Know Your Rights Quiz'}
         </h2>
         <p className="text-ink-3 max-w-xl">
-          {isSwahili 
-            ? 'Pima maarifa yako na matukio halisi ya maisha ya Kenya.' 
+          {isSwahili
+            ? 'Pima maarifa yako na matukio halisi ya maisha ya Kenya.'
             : 'Test your knowledge with real-life Kenyan scenarios.'}
         </p>
       </div>
 
-      {/* Progress */}
-      <div className="mb-6">
-        <div className="flex justify-between items-center text-xs text-ink-4 mb-2">
-          <span className="font-semibold text-ink-3">
-            {isSwahili ? `Swali la ${step + 1} kati ya ${QUESTIONS.length}` : `Question ${step + 1} of ${QUESTIONS.length}`}
-          </span>
-          <span className="bg-surface-3 px-2 py-1 rounded-md">
-            {isSwahili ? `${score} sahihi hadi sasa` : `${score} correct so far`}
-          </span>
+      <div className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr] mb-6">
+        <div className="glass-card p-5 overflow-hidden relative">
+          <div
+            className="absolute inset-x-0 top-0 h-20"
+            style={{ background: `linear-gradient(180deg, ${theme.soft} 0%, transparent 100%)` }}
+            aria-hidden="true"
+          />
+          <div className="relative z-10">
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+              <div>
+                <span className="label block mb-1" style={{ color: theme.strong }}>
+                  {isSwahili ? `Jalada la kesi ${step + 1}` : `Case file ${step + 1}`}
+                </span>
+                <p className="text-ink-2 text-sm">
+                  {isSwahili ? `Swali la ${step + 1} kati ya ${QUESTIONS.length}` : `Question ${step + 1} of ${QUESTIONS.length}`}
+                </p>
+              </div>
+              <div className="chip-neutral bg-surface-3">
+                {isSwahili ? `${score} sahihi hadi sasa` : `${score} correct so far`}
+              </div>
+            </div>
+
+            <div className="progress-bar mb-4 h-2.5 bg-surface-3">
+              <div
+                className="h-full rounded-full transition-all duration-700"
+                style={{
+                  width: `${progress}%`,
+                  background: `linear-gradient(90deg, ${theme.accent}, ${theme.strong})`,
+                }}
+              />
+            </div>
+
+            <div className="grid grid-cols-3 gap-3">
+              {[
+                { label: isSwahili ? 'Usahihi' : 'Accuracy', value: `${accuracy}%`, icon: Target },
+                { label: isSwahili ? 'Msururu' : 'Streak', value: String(streak), icon: Sparkles },
+                { label: isSwahili ? 'Imejibiwa' : 'Answered', value: `${answeredCount}/${QUESTIONS.length}`, icon: ShieldCheck },
+              ].map((stat) => {
+                const StatIcon = stat.icon
+                return (
+                  <div key={stat.label} className="rounded-xl border border-faint bg-surface-2 p-3">
+                    <div className="flex items-center gap-2 mb-2">
+                      <StatIcon className="w-4 h-4" style={{ color: theme.strong }} />
+                      <span className="text-ink-4 text-[11px] uppercase tracking-[0.16em]">{stat.label}</span>
+                    </div>
+                    <div className="ui-heading text-ink-1 text-lg">{stat.value}</div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
         </div>
-        <div className="progress-bar">
-          <div className="progress-fill" style={{ width: `${progress}%` }} />
+
+        <div className="glass-card p-5">
+          <div className="flex items-center gap-2 mb-4">
+            <Lightbulb className="w-4 h-4 text-gold" />
+            <span className="label text-gold">{isSwahili ? 'Njia ya maswali' : 'Question Path'}</span>
+          </div>
+          <div className="grid grid-cols-7 gap-2 mb-4">
+            {QUESTIONS.map((question, index) => {
+              const reviewEntry = history[index]
+              const isCurrent = index === step && !done
+
+              let styles = {
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                color: '#666',
+              }
+
+              if (reviewEntry?.correct) {
+                styles = {
+                  background: 'rgba(0,106,78,0.18)',
+                  border: '1px solid rgba(0,106,78,0.28)',
+                  color: '#3ecfa0',
+                }
+              } else if (reviewEntry && !reviewEntry.correct) {
+                styles = {
+                  background: 'rgba(200,16,46,0.15)',
+                  border: '1px solid rgba(200,16,46,0.26)',
+                  color: '#f47285',
+                }
+              } else if (isCurrent) {
+                styles = {
+                  background: theme.soft,
+                  border: `1px solid ${theme.border}`,
+                  color: theme.strong,
+                }
+              }
+
+              return (
+                <div
+                  key={question.id}
+                  className="h-10 rounded-xl flex items-center justify-center text-sm font-semibold"
+                  style={styles}
+                >
+                  {index + 1}
+                </div>
+              )
+            })}
+          </div>
+          <p className="text-ink-3 text-sm leading-relaxed">
+            {showFeedback
+              ? (isSwahili
+                  ? 'Umefungua maelezo ya swali hili. Soma sababu na hatua zinazofuata kabla ya kuendelea.'
+                  : 'You have unlocked the explanation for this question. Read the reason and the next steps before moving on.')
+              : (isSwahili
+                  ? 'Chagua jibu moja ili uone maelezo rahisi, hatua za kuchukua, na ibara zinazohusiana.'
+                  : 'Pick one answer to reveal a plain explanation, next steps, and related articles.')}
+          </p>
         </div>
       </div>
 
       {/* Question card */}
-      <div className="glass-card p-6 md:p-8 mb-4 animate-fade-up shadow-lg" key={step}>
-        {/* Scenario */}
+      <div className="glass-card p-6 md:p-8 mb-4 animate-fade-up shadow-lg relative overflow-hidden" key={step}>
+        <div
+          className="absolute -top-16 right-[-40px] w-48 h-48 rounded-full blur-3xl"
+          style={{ background: theme.glow }}
+          aria-hidden="true"
+        />
+
         <div
           className="p-5 rounded-xl mb-6 relative overflow-hidden"
-          style={{ background: 'rgba(212,160,23,0.08)', borderLeft: '4px solid #D4A017' }}
+          style={{
+            background: `linear-gradient(135deg, ${theme.soft} 0%, rgba(255,255,255,0.02) 100%)`,
+            borderLeft: `4px solid ${theme.accent}`,
+            border: `1px solid ${theme.border}`,
+          }}
         >
-          <div className="absolute top-0 right-0 -mt-2 -mr-2 text-6xl text-gold-muted opacity-20 pointer-events-none">&ldquo;</div>
-          <span className="label text-gold text-ink-4 block mb-2 tracking-widest" style={{ color: '#D4A017' }}>{isSwahili ? 'HALI' : 'SCENARIO'}</span>
+          <div className="absolute top-0 right-0 -mt-2 -mr-2 text-6xl opacity-20 pointer-events-none" style={{ color: theme.accent }}>&ldquo;</div>
+          <span className="label text-ink-4 block mb-2 tracking-widest" style={{ color: theme.strong }}>{isSwahili ? 'HALI' : 'SCENARIO'}</span>
           <p className="text-ink-1 text-base leading-relaxed italic relative z-10">{isSwahili ? q.swScenario : q.scenario}</p>
         </div>
 
-        {/* Question */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {q.relatedArticles.map((article) => (
+            <span key={article} className="tag-pill border border-faint bg-transparent">
+              {article}
+            </span>
+          ))}
+        </div>
+
         <h3 className="headline text-ink-1 text-xl font-semibold mb-6">{isSwahili ? q.swQuestion : q.question}</h3>
 
         {/* Options */}
@@ -423,21 +595,23 @@ function Quiz({ isSwahili }) {
             const isCorrect  = idx === q.correct
             let borderColor = 'rgba(255,255,255,0.07)'
             let bg = 'rgba(255,255,255,0.02)'
-            let textColor = '#aaa'
+            let textColor = '#c0c0c0'
             let opacityValue = 1
+            let shadow = 'none'
 
             if (showFeedback) {
               if (isCorrect) { 
-                borderColor = '#006A4E'; bg = 'rgba(0,106,78,0.15)'; textColor = '#3ecfa0' 
+                borderColor = '#006A4E'; bg = 'rgba(0,106,78,0.15)'; textColor = '#ecfdf5'; shadow = '0 12px 30px rgba(0,106,78,0.14)'
               } else if (isSelected) { 
-                borderColor = '#C8102E'; bg = 'rgba(200,16,46,0.12)'; textColor = '#f47285' 
+                borderColor = '#C8102E'; bg = 'rgba(200,16,46,0.12)'; textColor = '#ffe4e6'; shadow = '0 12px 30px rgba(200,16,46,0.12)'
               } else {
                 opacityValue = 0.5
               }
             } else if (isSelected) {
-              borderColor = '#C8102E'
-              bg = 'rgba(200,16,46,0.08)'
+              borderColor = theme.accent
+              bg = theme.soft
               textColor = '#f0f0f0'
+              shadow = `0 16px 34px ${theme.glow}`
             }
 
             return (
@@ -447,30 +621,40 @@ function Quiz({ isSwahili }) {
                 disabled={showFeedback}
                 role="radio"
                 aria-checked={isSelected}
-                className={`w-full text-left p-4 rounded-xl border transition-all duration-300 disabled:cursor-default 
-                  ${!showFeedback && 'hover:bg-surface-3 hover:border-subtle'}
+                className={`w-full text-left p-4 rounded-2xl border transition-all duration-300 disabled:cursor-default 
+                  ${!showFeedback && 'hover:bg-surface-3 hover:border-subtle hover:-translate-y-0.5'}
                 `}
                 style={{
                   background: bg,
                   borderColor: borderColor,
                   borderWidth: isSelected || (showFeedback && isCorrect) ? '2px' : '1px',
                   color: textColor,
-                  opacity: opacityValue
+                  opacity: opacityValue,
+                  boxShadow: shadow,
                 }}
               >
-                <div className="flex items-center gap-4">
+                <div className="flex items-start gap-4">
                   <span
-                    className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shadow-sm"
+                    className="flex-shrink-0 w-10 h-10 rounded-2xl flex items-center justify-center text-sm font-bold shadow-sm"
                     style={{
-                      background: showFeedback && isCorrect ? '#006A4E' : showFeedback && isSelected ? '#C8102E' : 'rgba(255,255,255,0.06)',
-                      color: showFeedback && (isCorrect || isSelected) ? '#fff' : '#888'
+                      background:
+                        showFeedback && isCorrect
+                          ? '#006A4E'
+                          : showFeedback && isSelected
+                            ? '#C8102E'
+                            : isSelected
+                              ? theme.accent
+                              : 'rgba(255,255,255,0.06)',
+                      color: showFeedback || isSelected ? '#fff' : '#888',
                     }}
                   >
                     {['A','B','C','D'][idx]}
                   </span>
-                  <span className={`flex-1 text-sm md:text-base leading-relaxed ${isSelected && !showFeedback ? 'font-medium' : ''}`}>{opt}</span>
-                  {showFeedback && isCorrect && <CheckCircle2 className="w-6 h-6 text-forest-bright" />}
-                  {showFeedback && isSelected && !isCorrect && <XCircle className="w-6 h-6 text-crimson-bright" />}
+                  <div className="flex-1 min-w-0">
+                    <span className={`block text-sm md:text-base leading-relaxed ${isSelected && !showFeedback ? 'font-medium' : ''}`}>{opt}</span>
+                  </div>
+                  {showFeedback && isCorrect && <CheckCircle2 className="w-6 h-6 text-forest-bright flex-shrink-0" />}
+                  {showFeedback && isSelected && !isCorrect && <XCircle className="w-6 h-6 text-crimson-bright flex-shrink-0" />}
                 </div>
               </button>
             )
@@ -493,8 +677,8 @@ function Quiz({ isSwahili }) {
               {selected === q.correct ? <CheckCircle2 className="w-6 h-6 text-forest-bright" /> : <XCircle className="w-6 h-6 text-crimson-bright" />}
               <span className="label text-sm tracking-wide" style={{ color: selected === q.correct ? '#3ecfa0' : '#f47285' }}>
                 {selected === q.correct 
-                  ? (isSwahili ? 'Ufahamu Sahihi!' : 'Correct Insight!') 
-                  : (isSwahili ? 'Sio kabisa — hii hapa ni sababu:' : 'Not quite — here\'s why:')}
+                  ? (isSwahili ? 'Umeelewa vizuri' : 'You read it correctly') 
+                  : (isSwahili ? 'Hapa ndipo haki ilikuwa' : 'Here is where the right really sits')}
               </span>
             </div>
             <p className="text-ink-1 text-base leading-relaxed">{isSwahili ? q.swExplanation : q.explanation}</p>
@@ -502,34 +686,30 @@ function Quiz({ isSwahili }) {
 
           {/* Action steps */}
           <div className="glass-card p-6">
-            <h4 className="label text-ink-4 mb-4" style={{ color: selected === q.correct ? '#3ecfa0' : '#f47285' }}>
-              {isSwahili ? 'Unachoweza kufanya' : 'What you can do'}
-            </h4>
+            <div className="flex items-center gap-2 mb-4">
+              <ShieldCheck className="w-5 h-5 text-blue-400" />
+              <h4 className="label text-blue-400">
+                {isSwahili ? 'Unachoweza kufanya' : 'What you can do next'}
+              </h4>
+            </div>
             <ol className="space-y-3">
               {(isSwahili ? q.swActionSteps : q.actionSteps).map((step, idx) => (
                 <li key={idx} className="flex items-start gap-4 text-sm text-ink-2">
                   <span
-                    className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold font-sans"
-                    style={{ background: 'rgba(255,255,255,0.08)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)' }}
+                    className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold font-sans"
+                    style={{
+                      background: `${theme.accent}22`,
+                      color: theme.strong,
+                      border: `1px solid ${theme.border}`,
+                    }}
                   >
                     {idx + 1}
                   </span>
-                  <span className="mt-0.5">{step}</span>
+                  <span className="mt-0.5 leading-relaxed">{step}</span>
                 </li>
               ))}
             </ol>
           </div>
-
-          {/* Related articles */}
-          {q.relatedArticles?.length > 0 && (
-            <div className="flex flex-wrap gap-2 items-center bg-surface-2 p-3 rounded-lg border border-subtle">
-              <BookOpen className="w-4 h-4 text-ink-4 mx-2" />
-              <span className="text-ink-4 text-sm font-medium mr-2">{isSwahili ? 'Soma pia:' : 'Also read:'}</span>
-              {q.relatedArticles.map(a => (
-                <span key={a} className="chip-neutral bg-surface-3">{a}</span>
-              ))}
-            </div>
-          )}
 
           {/* Next button */}
           <div className="text-center pt-6 pb-10">

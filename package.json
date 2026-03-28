@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "generate:constitution": "node scripts/generate-constitution-data.mjs"
+    "generate:constitution": "node scripts/generate-constitution-data.mjs && node scripts/build-constitution-assets.mjs"
   },
   "dependencies": {
     "html2canvas": "^1.4.1",

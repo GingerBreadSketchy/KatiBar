@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import SectionModal from './SectionModal'
+import { useEffect, useState } from 'react'
 import { 
   ShieldCheck, Scale, Landmark, Users, ArrowRight, BookOpen, HandHeart, Mountain, 
   IdCard, Gavel, Building2, Network, Wallet, Briefcase, ShieldAlert, CheckCircle2, History, PenTool, Globe
@@ -39,8 +38,20 @@ const SEMANTIC_CHAPTER_ICONS = {
   chapter18: History,     // Transitional
 }
 
-function ConstitutionExplorer({ constitution, selectedSection, onSelectSection, isSwahili }) {
+function ConstitutionExplorer({ constitution, onSelectSection, onExpandChapter, isSwahili }) {
   const [expandedChapter, setExpandedChapter] = useState(constitution.chapters[0]?.id || null)
+
+  useEffect(() => {
+    if (!expandedChapter && constitution.chapters[0]?.id) {
+      setExpandedChapter(constitution.chapters[0].id)
+    }
+  }, [constitution.chapters, expandedChapter])
+
+  useEffect(() => {
+    if (expandedChapter) {
+      void onExpandChapter?.(expandedChapter)
+    }
+  }, [expandedChapter, onExpandChapter])
 
   const toggleChapter = (id) => setExpandedChapter(expandedChapter === id ? null : id)
 
@@ -82,6 +93,7 @@ function ConstitutionExplorer({ constitution, selectedSection, onSelectSection, 
           const meta = CHAPTER_META[chapter.color] || CHAPTER_META.green
           const IconComponent = SEMANTIC_CHAPTER_ICONS[chapter.id] || meta.icon || BookOpen
           const isActive = expandedChapter === chapter.id
+          const quickLabel = isSwahili ? (chapter.swTitle || chapter.shortTitle || chapter.title) : (chapter.shortTitle || chapter.title)
           
           return (
             <button
@@ -115,8 +127,8 @@ function ConstitutionExplorer({ constitution, selectedSection, onSelectSection, 
               >
                 <IconComponent className="w-6 h-6 flex-shrink-0 drop-shadow-md" />
               </div>
-              <span className={`text-xs text-center leading-tight max-w-[90px] transition-colors ${isActive ? 'text-ink-1 font-bold' : 'text-ink-4 group-hover:text-ink-2'}`}>
-                {isSwahili ? (chapter.swTitle || chapter.title) : chapter.title}
+              <span className={`text-[11px] text-center leading-tight max-w-[110px] line-clamp-3 transition-colors ${isActive ? 'text-ink-1 font-bold' : 'text-ink-4 group-hover:text-ink-2'}`}>
+                {quickLabel}
               </span>
             </button>
           )
@@ -129,6 +141,12 @@ function ConstitutionExplorer({ constitution, selectedSection, onSelectSection, 
           const meta = CHAPTER_META[chapter.color] || CHAPTER_META.green
           const IconComponent = SEMANTIC_CHAPTER_ICONS[chapter.id] || meta.icon || BookOpen
           const isOpen = expandedChapter === chapter.id
+          const chapterBadgeStyle = {
+            background: `${meta.bar}22`,
+            color: meta.accent,
+            border: `1px solid ${meta.bar}44`,
+            boxShadow: `inset 0 1px 0 ${meta.bar}22`,
+          }
 
           return (
             <div
@@ -159,17 +177,24 @@ function ConstitutionExplorer({ constitution, selectedSection, onSelectSection, 
 
                   <div className="text-left">
                     <div className="flex flex-wrap items-center gap-2 mb-1">
-                      <span className={meta.chip}>{isSwahili ? (chapter.swNumber || chapter.number) : chapter.number}</span>
+                      <span
+                        className="chip"
+                        style={chapterBadgeStyle}
+                      >
+                        {isSwahili ? (chapter.swNumber || chapter.number) : chapter.number.toUpperCase()}
+                      </span>
                       <span className="text-ink-4 text-xs font-semibold px-2 py-0.5 rounded-md bg-surface-3 border border-faint">
                         {chapter.sections.length} {isSwahili ? 'Ibara' : 'Article'}{chapter.sections.length !== 1 ? (isSwahili ? '' : 's') : ''}
                       </span>
                     </div>
-                    <h3 className="headline text-ink-1 text-xl font-semibold leading-tight">
+                    <h3 className="ui-heading text-ink-1 text-xl md:text-[1.4rem] font-semibold leading-tight">
                       {isSwahili ? (chapter.swTitle || chapter.title) : chapter.title}
                     </h3>
-                    <p className="text-ink-4 text-sm mt-1">
-                      {isSwahili ? (chapter.swDescription || chapter.description) : chapter.description}
-                    </p>
+                    {chapter.description && (
+                      <p className="text-ink-4 text-sm mt-1">
+                        {isSwahili ? (chapter.swDescription || chapter.description) : chapter.description}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -214,7 +239,7 @@ function ConstitutionExplorer({ constitution, selectedSection, onSelectSection, 
                           <ArrowRight className="w-4 h-4 text-ink-5 group-hover:text-ink-2 group-hover:translate-x-1 transition-all" />
                         </div>
 
-                        <h4 className="headline text-ink-1 text-base font-semibold mb-2 leading-snug group-hover:text-white transition-colors">
+                        <h4 className="ui-heading text-ink-1 text-base font-semibold mb-2 leading-snug group-hover:text-white transition-colors">
                           {isSwahili ? (section.swTitle || section.title) : section.title}
                         </h4>
                         <p className="text-ink-4 text-sm leading-relaxed line-clamp-2 mb-4">
@@ -236,14 +261,6 @@ function ConstitutionExplorer({ constitution, selectedSection, onSelectSection, 
         })}
       </div>
 
-      {/* Section Detail Modal */}
-      {selectedSection && (
-        <SectionModal
-          section={selectedSection}
-          onClose={() => onSelectSection(null)}
-          isSwahili={isSwahili}
-        />
-      )}
     </section>
   )
 }
