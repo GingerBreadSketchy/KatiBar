@@ -1,559 +1,173 @@
 {
   "chapters": [
     {
-      "id": "chapter1",
-      "title": "Sovereignty of the People and Supremacy of this Constitution",
-      "swTitle": "Mamlaka ya Wananchi na Ukubwa wa Katiba hii",
-      "number": "Chapter 1",
-      "swNumber": "Sura ya 1",
-      "description": "The power belongs to the people of Kenya",
-      "swDescription": "Mamlaka ni ya wananchi wa Kenya",
-      "color": "green",
+      "id": "chapter1", "title": "Sovereignty & Supremacy", "swTitle": "Mamlaka & Ukubwa wa Katiba", "number": "Chapter 1", "swNumber": "Sura ya 1", "description": "The foundation of power", "swDescription": "Msingi wa mamlaka", "color": "green",
       "sections": [
-        {
-          "article": "Article 1",
-          "swArticle": "Ibara ya 1",
-          "title": "Sovereignty of the people",
-          "swTitle": "Mamlaka ya wananchi",
-          "originalText": "All sovereign power belongs to the people of Kenya and shall be exercised only in accordance with this Constitution.",
-          "simplified": "All power in Kenya belongs to you, the citizens. Leaders only hold power temporarily on your behalf.",
-          "swSimplified": "Mamlaka yote nchini Kenya ni yako, mwananchi. Viongozi wanashikilia mamlaka kwa niaba yako tu.",
-          "examples": ["Voting in elections is exercising your sovereign power", "Participating in public forums"],
-          "swExamples": ["Kupiga kura kwenye uchaguzi ni kutumia mamlaka yako", "Kushiriki katika mikutano ya umma"],
-          "whatToDoIfViolated": { "contact": "EACC or Judiciary", "steps": ["Vote", "Petition", "File public interest case"], "timeLimit": "Elections" },
-          "tags": ["power", "sovereignty", "people"]
-        },
-        {
-          "article": "Article 2",
-          "swArticle": "Ibara ya 2",
-          "title": "Supremacy of this Constitution",
-          "swTitle": "Ukubwa wa Katiba hii",
-          "originalText": "This Constitution is the supreme law of the Republic and binds all persons and all State organs at both levels of government.",
-          "simplified": "The Constitution is the highest law in the land. No other law, tradition, or person is above it.",
-          "swSimplified": "Katiba ndiyo sheria kuu ya nchi. Hakuna sheria nyingine, mila, au mtu aliye juu yake.",
-          "examples": ["If a county law contradicts the Constitution, the county law is invalid"],
-          "swExamples": ["Ikiwa sheria ya kaunti inapingana na Katiba, sheria hiyo ya kaunti inakuwa batili"],
-          "tags": ["supremacy", "law", "constitution"]
-        }
+        { "article": "Art 1", "swArticle": "Ib 1", "title": "Sovereignty", "swTitle": "Mamlaka", "simplified": "All power belongs to you, the citizens.", "swSimplified": "Mamlaka ni ya wananchi.", "tags": ["power"] },
+        { "article": "Art 2", "swArticle": "Ib 2", "title": "Supremacy", "swTitle": "Ukubwa", "simplified": "The Constitution is the highest law.", "swSimplified": "Katiba ni sheria kuu.", "tags": ["law"] },
+        { "article": "Art 3", "swArticle": "Ib 3", "title": "Defense", "swTitle": "Ulinzi", "simplified": "Every person has a duty to defend the Constitution.", "swSimplified": "Kulinda Katiba.", "tags": ["duty"] }
       ]
     },
     {
-      "id": "chapter2",
-      "title": "The Republic",
-      "swTitle": "Jamhuri",
-      "number": "Chapter 2",
-      "swNumber": "Sura ya 2",
-      "description": "Kenya as a sovereign state and its values",
-      "swDescription": "Kenya kama dola huru na maadili yake",
-      "color": "black",
+      "id": "chapter2", "title": "The Republic", "swTitle": "Jamhuri", "number": "Chapter 2", "swNumber": "Sura ya 2", "description": "National Identity", "swDescription": "Utambulisho wa Taifa", "color": "gold",
       "sections": [
-        {
-          "article": "Article 4",
-          "swArticle": "Ibara ya 4",
-          "title": "Declaration of the Republic",
-          "swTitle": "Tamko la Jamhuri",
-          "originalText": "Kenya is a sovereign Republic... based on democratic values... and multi-party democracy.",
-          "simplified": "Kenya is an independent, democratic country with multiple political parties.",
-          "swSimplified": "Kenya ni nchi huru, ya kidemokrasia yenye vyama vingi vya kisiasa.",
-          "examples": ["You have the right to form and join any political party"],
-          "swExamples": ["Una haki ya kuanzisha na kujiunga na chama chochote cha kisiasa"],
-          "tags": ["republic", "democracy", "multiparty"]
-        },
-        {
-          "article": "Article 10",
-          "swArticle": "Ibara ya 10",
-          "title": "National Values and Principles of Governance",
-          "swTitle": "Maadili ya Kitaifa na Kanuni za Utawala",
-          "originalText": "The national values and principles of governance... bind all State organs, State officers, public officers...",
-          "simplified": "Kenya is built on values: patriotism, national unity, sharing power, human rights, good governance, integrity, and equality. Government must follow these.",
-          "swSimplified": "Kenya imejengwa juu ya maadili: uzalendo, umoja wa kitaifa, kugawana mamlaka, haki za binadamu, utawala bora, uadilifu, na usawa. Serikali lazima ifuate haya.",
-          "examples": ["Leaders should serve all people evenly, not just their ethnic group"],
-          "swExamples": ["Viongozi wanapaswa kuwatumikia watu wote kwa usawa, si kwa kabila lao tu"],
-          "whatToDoIfViolated": {
-            "contact": "Ethics and Anti-Corruption Commission (EACC)",
-            "steps": ["Document the violation", "Report to EACC"],
-            "timeLimit": "Anytime"
-          },
-          "tags": ["values", "governance", "integrity"]
-        }
+        { "article": "Art 4", "swArticle": "Ib 4", "title": "The Republic", "swTitle": "Jamhuri", "simplified": "Kenya is a sovereign, democratic Republic.", "swSimplified": "Kenya ni Jamhuri.", "tags": ["sovereign"] },
+        { "article": "Art 6", "swArticle": "Ib 6", "title": "Devolution", "swTitle": "Ugatuzi", "simplified": "Government is decentralized into 47 counties.", "swSimplified": "Kaunti 47.", "tags": ["counties"] },
+        { "article": "Art 7", "swArticle": "Ib 7", "title": "Languages", "swTitle": "Lugha", "simplified": "National: Kiswahili. Official: Kiswahili & English.", "swSimplified": "Lugha rasmi.", "tags": ["culture"] },
+        { "article": "Art 8", "swArticle": "Ib 8", "title": "Religion", "swTitle": "Dini", "simplified": "There is no state religion in Kenya.", "swSimplified": "Hakuna dini ya taifa.", "tags": ["faith"] },
+        { "article": "Art 9", "swArticle": "Ib 9", "title": "Symbols", "swTitle": "Alama", "simplified": "Flag, Anthem, Emblem and Seal.", "swSimplified": "Bendera na Wimbo.", "tags": ["symbols"] },
+        { "article": "Art 10", "swArticle": "Ib 10", "title": "Values", "swTitle": "Maadili", "simplified": "The Rule of Law and Social Justice.", "swSimplified": "Haki za nchi.", "tags": ["values"] }
       ]
     },
     {
-      "id": "chapter3",
-      "title": "Citizenship",
-      "swTitle": "Uraia",
-      "number": "Chapter 3",
-      "swNumber": "Sura ya 3",
-      "description": "Who is a Kenyan citizen and what it means",
-      "swDescription": "Nani ni raia wa Kenya na maana yake",
-      "color": "red",
+      "id": "chapter3", "title": "Citizenship", "swTitle": "Uraia", "number": "Chapter 3", "swNumber": "Sura ya 3", "description": "National Rights", "swDescription": "Haki za Uraia", "color": "red",
       "sections": [
-        {
-          "article": "Article 13",
-          "swArticle": "Ibara ya 13",
-          "title": "Citizenship by Birth",
-          "swTitle": "Uraia kwa Kuzaliwa",
-          "originalText": "A person is a citizen by birth if at the time of birth, whether or not inside Kenya, either the mother or father of the person was a citizen.",
-          "simplified": "If either your mother or father was a Kenyan citizen when you were born, you are a Kenyan, anywhere in the world.",
-          "swSimplified": "Ikiwa mama au baba yako alikuwa raia wa Kenya ulipozaliwa, wewe ni Mkenya, popote duniani.",
-          "examples": ["Child born abroad to a Kenyan parent is Kenyan"],
-          "swExamples": ["Mtoto aliyezaliwa nje ya nchi na mzazi Mkenya ni Mkenya"],
-          "whatToDoIfViolated": {
-            "contact": "Department of Immigration Services",
-            "steps": ["Apply for Kenyan passport or ID", "Provide birth certificate and parents' citizenship documents"],
-            "timeLimit": "Anytime"
-          },
-          "tags": ["citizenship", "birth"]
-        },
-        {
-          "article": "Article 14",
-          "swArticle": "Ibara ya 14",
-          "title": "Citizenship by Registration",
-          "swTitle": "Uraia kwa Kusajiliwa",
-          "originalText": "A person who has been married to a citizen for a period of at least seven years is entitled on application to be registered as a citizen.",
-          "simplified": "If you have lived legally in Kenya for 7 years, or are married to a Kenyan for 7 years, you can apply for citizenship.",
-          "swSimplified": "Ikiwa umeishi kisheria nchini Kenya kwa miaka 7, au umeolewa/kuoa Mkenya kwa miaka 7, unaweza kuomba uraia.",
-          "examples": ["A foreigner married to a Kenyan for 7 years can become a citizen"],
-          "swExamples": ["Mgeni aliyeolewa/kuolewa na Mkenya kwa miaka 7 anaweza kuwa raia"],
-          "tags": ["citizenship", "marriage", "residency"]
-        },
-        {
-          "article": "Article 16",
-          "swArticle": "Ibara ya 16",
-          "title": "Dual Citizenship",
-          "swTitle": "Uraia wa Nchi Mbili",
-          "originalText": "A citizen by birth does not lose citizenship by acquiring the citizenship of another country.",
-          "simplified": "You can be a citizen of Kenya and another country at the same time without losing your Kenyan passport.",
-          "swSimplified": "Unaweza kuwa raia wa Kenya na nchi nyingine kwa wakati mmoja bila kupoteza pasipoti yako ya Kenya.",
-          "examples": ["You can hold a US passport and a Kenyan passport simultaneously"],
-          "swExamples": ["Unaweza kuwa na pasipoti ya Marekani na pasipoti ya Kenya kwa wakati mmoja"],
-          "tags": ["dual citizenship", "diaspora"]
-        }
+        { "article": "Art 12", "swArticle": "Ib 12", "title": "Entitlements", "swTitle": "Haki", "simplified": "Rights to Passport and ID.", "swSimplified": "ID na Pasipoti.", "tags": ["id"] },
+        { "article": "Art 13", "swArticle": "Ib 13", "title": "Birth", "swTitle": "Kuzaliwa", "simplified": "Citizen if a parent was Kenyan at birth.", "swSimplified": "Uraia kwa kuzaliwa.", "tags": ["birth"] },
+        { "article": "Art 14", "swArticle": "Ib 14", "title": "Registration", "swTitle": "Usajili", "simplified": "Applying for citizenship after marriage (7 yrs).", "swSimplified": "Uraia kwa usajili.", "tags": ["marriage"] },
+        { "article": "Art 16", "swArticle": "Ib 16", "title": "Dual", "swTitle": "Pacha", "simplified": "Dual citizenship for Kenyans by birth.", "swSimplified": "Uraia nchi mbili.", "tags": ["passport"] }
       ]
     },
     {
-      "id": "chapter4",
-      "title": "The Bill of Rights",
-      "swTitle": "Muswada wa Haki",
-      "number": "Chapter 4",
-      "swNumber": "Sura ya 4",
-      "description": "Your fundamental rights and freedoms",
-      "swDescription": "Haki zako za kimsingi na kutoingiliwa",
-      "color": "green",
+      "id": "chapter4", "title": "The Bill of Rights", "swTitle": "Muswada wa Haki", "number": "Chapter 4", "swNumber": "Sura ya 4", "description": "Individual Freedoms", "swDescription": "Haki Zako", "color": "purple",
       "sections": [
-        {
-          "article": "Article 26",
-          "swArticle": "Ibara ya 26",
-          "title": "Right to Life",
-          "swTitle": "Haki ya Kuishi",
-          "simplified": "Every person has the right to life. You cannot be deprived of life intentionally except as authorized by the Constitution.",
-          "swSimplified": "Kila mtu ana haki ya kuishi. Huwezi kuondolewa maisha kwa makusudi isipokuwa kama ilivyoidhinishwa na Katiba.",
-          "tags": ["life", "protection"]
-        },
-        {
-          "article": "Article 27",
-          "swArticle": "Ibara ya 27",
-          "title": "Equality and Discrimination",
-          "swTitle": "Usawa na Ubaguzi",
-          "simplified": "All Kenyans are equal. Nobody can treat you differently because of tribe, religion, gender, or disability.",
-          "swSimplified": "Wakenya wote ni sawa. Hakuna mtu anayeweza kukutendea tofauti kwa sababu ya kabila, dini, jinsia, au ulemavu.",
-          "examples": ["A woman cannot be paid less than a man for the same work"],
-          "swExamples": ["Mwanamke hawezi kulipwa kidogo kuliko mwanamume kwa kazi ile ile"],
-          "tags": ["equality", "discrimination"]
-        },
-        {
-          "article": "Article 29",
-          "swArticle": "Ibara ya 29",
-          "title": "Freedom and Security",
-          "swTitle": "Uhuru na Usalama",
-          "simplified": "You cannot be arrested arbitrarily. No one has the right to torture you or treat you cruelly.",
-          "swSimplified": "Huwezi kukamatwa kiholela. Hakuna mtu aliye na haki ya kukutesa au kukutendea kwa ukatili.",
-          "tags": ["freedom", "security", "arrest"]
-        },
-        {
-          "article": "Article 31",
-          "swArticle": "Ibara ya 31",
-          "title": "Privacy",
-          "swTitle": "Faragha",
-          "simplified": "Your home, phone, and property are private. Police need a court warrant to search them.",
-          "swSimplified": "Nyumba yako, simu, na mali yako ni ya faragha. Polisi wanahitaji kibali cha mahakama ili kuvipekua.",
-          "tags": ["privacy", "search"]
-        },
-        {
-          "article": "Article 33",
-          "swArticle": "Ibara ya 33",
-          "title": "Freedom of Expression",
-          "swTitle": "Uhuru wa Kujieleza",
-          "simplified": "You have the right to speak your mind, as long as it isn't hate speech or incitement to violence.",
-          "swSimplified": "Una haki ya kusema unachofikiria, mradi si hotuba ya chuki au uchochezi wa vuravu.",
-          "tags": ["expression", "speech"]
-        },
-        {
-          "article": "Article 37",
-          "swArticle": "Ibara ya 37",
-          "title": "Protest and Petition",
-          "swTitle": "Maandamano na Maombi",
-          "simplified": "You have the right to gather peacefully and protest. You must notify police to provide security.",
-          "swSimplified": "Una haki ya kukusanyika kwa amani na kuandamana. Lazima uwajulishe polisi ili watoe usalama.",
-          "tags": ["protest", "assembly"]
-        },
-        {
-          "article": "Article 41",
-          "swArticle": "Ibara ya 41",
-          "title": "Labour Relations",
-          "swTitle": "Uhusiano wa Kazi",
-          "simplified": "You have the right to fair pay, reasonable conditions, and to join a trade union.",
-          "swSimplified": "Una haki ya malipo ya haki, mazingira bora, na kujiunga na chama cha wafanyakazi.",
-          "tags": ["employment", "labour"]
-        },
-        {
-          "article": "Article 43",
-          "swArticle": "Ibara ya 43",
-          "title": "Social Rights",
-          "swTitle": "Haki za Kijamii",
-          "simplified": "You have the right to housing, clean water, food, education, and healthcare (including emergency medical treatment).",
-          "swSimplified": "Una haki ya makazi, maji safi, chakula, elimu, na huduma za afya (pamoja na matibabu ya dharura).",
-          "tags": ["healthcare", "water", "housing"]
-        },
-        {
-          "article": "Article 49",
-          "swArticle": "Ibara ya 49",
-          "title": "Arrested Persons",
-          "swTitle": "Watu Waliokamatwa",
-          "simplified": "If arrested, you have the right to remain silent, talk to a lawyer, and be brought to court within 24 hours.",
-          "swSimplified": "Ukikamatwa, una haki ya kukaa kimya, kuzungumza na wakili, na kufikishwa mahakamani ndani ya saa 24.",
-          "tags": ["police", "arrest", "lawyer"]
-        }
+        { "article": "Art 19", "title": "Basis", "simplified": "Rights protect your dignity.", "swSimplified": "Msingi wa haki.", "tags": ["foundation"] },
+        { "article": "Art 21", "title": "Duty", "simplified": "State must fulfill rights.", "swSimplified": "Wajibu wa serikali.", "tags": ["state"] },
+        { "article": "Art 24", "title": "Limits", "simplified": "Rights limited only by law.", "swSimplified": "Mipaka ya haki.", "tags": ["law"] },
+        { "article": "Art 26", "title": "Life", "simplified": "Right to life.", "swSimplified": "Haki ya kuishi.", "tags": ["life"] },
+        { "article": "Art 27", "title": "Equality", "simplified": "No discrimination.", "swSimplified": "Sote ni sawa.", "tags": ["gender"] },
+        { "article": "Art 28", "title": "Dignity", "simplified": "Human dignity.", "swSimplified": "Utu.", "tags": ["respect"] },
+        { "article": "Art 29", "title": "Freedom & Security", "simplified": "Freedom from torture and arbitrary arrest.", "swSimplified": "Uhuru wa usalama.", "tags": ["police"] },
+        { "article": "Art 30", "title": "Slavery", "simplified": "No person is held in slavery.", "swSimplified": "Hakuna utumwa.", "tags": ["forced labor"] },
+        { "article": "Art 31", "title": "Privacy", "simplified": "Right to privacy.", "swSimplified": "Faragha.", "tags": ["search"] },
+        { "article": "Art 32", "title": "Religion", "simplified": "Freedom of conscience and belief.", "swSimplified": "Uhuru wa dini.", "tags": ["faith"] },
+        { "article": "Art 33", "title": "Speech", "simplified": "Freedom of expression.", "swSimplified": "Kusema.", "tags": ["media"] },
+        { "article": "Art 34", "title": "Media", "simplified": "Media freedom is guaranteed by the State.", "swSimplified": "Uhuru wa habari.", "tags": ["news"] },
+        { "article": "Art 35", "title": "Info", "simplified": "Access to gov data.", "swSimplified": "Habari.", "tags": ["data"] },
+        { "article": "Art 36", "title": "Association", "simplified": "Right to form and join groups.", "swSimplified": "Kujiunga na vyama.", "tags": ["clubs"] },
+        { "article": "Art 37", "title": "Protest", "simplified": "Peaceful assembly.", "swSimplified": "Maandamano.", "tags": ["peace"] },
+        { "article": "Art 38", "title": "Politics", "simplified": "Right to vote.", "swSimplified": "Piga kura.", "tags": ["iebc"] },
+        { "article": "Art 39", "title": "Movement", "simplified": "Move and live anywhere in Kenya.", "swSimplified": "Kusafiri kokote.", "tags": ["travel"] },
+        { "article": "Art 40", "title": "Property", "simplified": "Acquire and own land and property.", "swSimplified": "Kumiliki mali.", "tags": ["land"] },
+        { "article": "Art 41", "title": "Labor", "simplified": "Fair labor practices and trade unions.", "swSimplified": "Haki za kazi.", "tags": ["jobs"] },
+        { "article": "Art 42", "title": "Environment", "simplified": "Clean and healthy environment.", "swSimplified": "Mazingira safi.", "tags": ["nature"] },
+        { "article": "Art 43", "title": "Social", "simplified": "Health, housing, food, water, education.", "swSimplified": "Afya.", "tags": ["basics"] },
+        { "article": "Art 44", "title": "Language", "simplified": "Use your language and culture.", "swSimplified": "Lugha na utamaduni.", "tags": ["heritage"] },
+        { "article": "Art 45", "title": "Family", "simplified": "Family is the fundamental unit of society.", "swSimplified": "Familia na ndoa.", "tags": ["home"] },
+        { "article": "Art 46", "title": "Consumer", "simplified": "Protection from poor goods and services.", "swSimplified": "Haki za wanunuzi.", "tags": ["shopping"] },
+        { "article": "Art 47", "title": "Fair Administration", "simplified": "Efficient and lawful government service.", "swSimplified": "Huduma bora za dola.", "tags": ["gov"] },
+        { "article": "Art 48", "title": "Access to Justice", "simplified": "Access to justice for all.", "swSimplified": "Kufika mahakamani.", "tags": ["court"] },
+        { "article": "Art 49", "title": "Arrested Persons", "simplified": "Right to remain silent and see a lawyer.", "swSimplified": "Haki za aliyekamatwa.", "tags": ["police"] },
+        { "article": "Art 50", "title": "Fair Hearing", "simplified": "Fair and public trial.", "swSimplified": "Kusikilizwa kwa haki.", "tags": ["lawyer"] },
+        { "article": "Art 51", "title": "Detained Persons", "simplified": "Rights while imprisoned.", "swSimplified": "Haki za wafungwa.", "tags": ["jail"] },
+        { "article": "Art 53", "title": "Children", "simplified": "Basic education and shelter for children.", "swSimplified": "Haki za watoto.", "tags": ["school"] },
+        { "article": "Art 54", "title": "Disability", "simplified": "Dignity and access for people with disabilities.", "swSimplified": "Haki za walemavu.", "tags": ["access"] },
+        { "article": "Art 55", "title": "Youth", "simplified": "Jobs and education for the youth.", "swSimplified": "Haki za vijana.", "tags": ["jobs"] },
+        { "article": "Art 56", "title": "Minorities", "simplified": "Participation of marginalized groups.", "swSimplified": "Haki za walio wachache.", "tags": ["marginalized"] },
+        { "article": "Art 57", "title": "Elderly", "simplified": "Care/Dignity.", "swSimplified": "Wazee.", "tags": ["care"] }
       ]
     },
     {
-      "id": "chapter5",
-      "title": "Land and Environment",
-      "swTitle": "Ardhi na Mazingira",
-      "number": "Chapter 5",
-      "swNumber": "Sura ya 5",
-      "description": "Land rights and environmental protection",
-      "swDescription": "Haki za ardhi na ulinzi wa mazingira",
-      "color": "blue",
+      "id": "chapter5", "title": "Land & Environment", "swTitle": "Ardhi na Mazingira", "color": "teal",
       "sections": [
-        {
-          "article": "Article 40",
-          "swArticle": "Ibara ya 40",
-          "title": "Property Rights",
-          "swTitle": "Haki za Mali",
-          "simplified": "You have the right to own property. The government cannot take it away arbitrarily.",
-          "swSimplified": "Una haki ya kumiliki mali. Serikali haiwezi kuichukua kiholela.",
-          "tags": ["property", "ownership"]
-        },
-        {
-          "article": "Article 60",
-          "swArticle": "Ibara ya 60",
-          "title": "Land Policy",
-          "swTitle": "Sera ya Ardhi",
-          "simplified": "Land should be used fairly and sustainably. No gender discrimination in land ownership.",
-          "swSimplified": "Ardhi inapaswa kutumiwa kwa haki na uendelevu. Hakuna ubaguzi wa kijinsia katika umiliki wa ardhi.",
-          "tags": ["land", "gender"]
-        }
+        { "article": "Art 60", "title": "Land", "simplified": "Equitable land use.", "swSimplified": "Haki ya ardhi.", "tags": ["land"] },
+        { "article": "Art 61", "title": "Classes", "simplified": "Public/Community/Private.", "swSimplified": "Aina za ardhi.", "tags": ["title"] },
+        { "article": "Art 69", "title": "Nature", "simplified": "Protect biodiversity.", "swSimplified": "Mazingira.", "tags": ["trees"] }
       ]
     },
     {
-      "id": "chapter6",
-      "title": "Leadership and Integrity",
-      "swTitle": "Uongozi na Uadilifu",
-      "number": "Chapter 6",
-      "swNumber": "Sura ya 6",
-      "description": "Standards for public officers",
-      "swDescription": "Viwango vya maafisa wa umma",
-      "color": "black",
+      "id": "chapter6", "title": "Integrity", "swTitle": "Uadilifu", "color": "black",
       "sections": [
-        {
-          "article": "Article 73",
-          "swArticle": "Ibara ya 73",
-          "title": "Responsibilities of leadership",
-          "swTitle": "Majukumu ya uongozi",
-          "simplified": "Leaders work for the people. They must be honest and accountable.",
-          "swSimplified": "Viongozi hufanya kazi kwa ajili ya wananchi. Lazima wawe waaminifu na wawajibikaji.",
-          "tags": ["leadership", "integrity"]
-        }
+        { "article": "Art 73", "title": "Service", "simplified": "Serve people, not self.", "swSimplified": "Kutumikia.", "tags": ["leaders"] },
+        { "article": "Art 75", "title": "Conduct", "simplified": "Role model behavior.", "swSimplified": "Maadili.", "tags": ["ethics"] }
       ]
     },
     {
-      "id": "chapter7",
-      "title": "Representation of the People",
-      "swTitle": "Uwakilishi wa Wananchi",
-      "number": "Chapter 7",
-      "swNumber": "Sura ya 7",
-      "description": "Elections and voting rights",
-      "swDescription": "Uchaguzi na haki za kupiga kura",
-      "color": "green",
+      "id": "chapter7", "title": "Elections", "swTitle": "Uchaguzi", "color": "orange",
       "sections": [
-        {
-          "article": "Article 81",
-          "swArticle": "Ibara ya 81",
-          "title": "Electoral System",
-          "swTitle": "Mfumo wa Uchaguzi",
-          "simplified": "Elections must be free, fair, secret, and transparent.",
-          "swSimplified": "Uchaguzi lazima uwe huru, wa haki, wa siri, na wa wazi.",
-          "tags": ["elections", "voting"]
-        },
-        {
-          "article": "Article 88",
-          "swArticle": "Ibara ya 88",
-          "title": "IEBC",
-          "swTitle": "Tume ya Uchaguzi (IEBC)",
-          "simplified": "The IEBC is independent and handles all elections.",
-          "swSimplified": "IEBC ni tume huru inayoshughulikia uchaguzi wote.",
-          "tags": ["IEBC", "elections"]
-        }
+        { "article": "Art 81", "title": "Voters", "simplified": "Free and fair.", "swSimplified": "Haki ya kura.", "tags": ["iebc"] },
+        { "article": "Art 88", "title": "IEBC", "simplified": "Election Commission.", "swSimplified": "Tume ya kura.", "tags": ["voting"] }
       ]
     },
     {
-      "id": "chapter8",
-      "title": "The Legislature",
-      "swTitle": "Bunge",
-      "number": "Chapter 8",
-      "swNumber": "Sura ya 8",
-      "description": "Parliament (National Assembly and Senate)",
-      "swDescription": "Bunge (Bunge la Taifa na Seneti)",
-      "color": "black",
+      "id": "chapter8", "title": "Legislature", "swTitle": "Bunge", "color": "blue",
       "sections": [
-        {
-          "article": "Article 94",
-          "swArticle": "Ibara ya 94",
-          "title": "Role of Parliament",
-          "swTitle": "Wajibu wa Bunge",
-          "simplified": "Parliament represents the people and makes laws.",
-          "swSimplified": "Bunge huwakilisha wananchi na kutungia sheria.",
-          "tags": ["parliament", "laws"]
-        },
-        {
-          "article": "Article 118",
-          "swArticle": "Ibara ya 118",
-          "title": "Public Participation",
-          "swTitle": "Ushiriki wa Umma",
-          "simplified": "Parliament MUST involve the public in law-making.",
-          "swSimplified": "Bunge LAZIMA lihusishe umma katika utungaji wa sheria.",
-          "tags": ["participation", "parliament"]
-        }
+        { "article": "Art 94", "title": "Bunge", "simplified": "Parliament makes laws.", "swSimplified": "Sheria za Bunge.", "tags": ["mps"] },
+        { "article": "Art 95", "title": "National Assembly", "simplified": "Represents people in constituencies and oversees national revenue.", "swSimplified": "Bunge la Taifa linalowakilisha majimbo.", "tags": ["mps", "spending"] },
+        { "article": "Art 96", "title": "Senate", "simplified": "Represents the counties and protects their interests.", "swSimplified": "Seneti ya kuwakilisha kaunti.", "tags": ["senate", "counties"] },
+        { "article": "Art 118", "title": "Public", "simplified": "Public participation.", "swSimplified": "Wananchi washiriki.", "tags": ["open"] },
+        { "article": "Art 119", "title": "Petitions", "simplified": "Right to petition Parliament to consider any matter within its authority.", "swSimplified": "Haki ya kutuma ombi bungeni.", "tags": ["petition", "requests"] }
       ]
     },
     {
-      "id": "chapter9",
-      "title": "The Executive",
-      "swTitle": "Serikali Kuu",
-      "number": "Chapter 9",
-      "swNumber": "Sura ya 9",
-      "description": "The President and Cabinet",
-      "swDescription": "Rais na Baraza la Mawaziri",
-      "color": "red",
+      "id": "chapter9", "title": "Executive", "swTitle": "Serikali Kuu", "color": "red",
       "sections": [
-        {
-          "article": "Article 131",
-          "swArticle": "Ibara ya 131",
-          "title": "Authority of the President",
-          "swTitle": "Mamlaka ya Rais",
-          "simplified": "The President must respect and safeguard the Constitution.",
-          "swSimplified": "Rais lazima aiheshimu na kuilinda Katiba.",
-          "tags": ["president", "executive"]
-        }
+        { "article": "Art 129", "title": "Power", "simplified": "Executive authority is exercised for the service of the people.", "swSimplified": "Mamlaka ya Rais.", "tags": ["president"] },
+        { "article": "Art 131", "title": "President", "simplified": "The President is the symbol of national unity and Head of State.", "swSimplified": "Kiongozi wa nchi.", "tags": ["executive"] },
+        { "article": "Art 142", "title": "Term Limits", "simplified": "The President shall hold office for a term of five years, max two terms.", "swSimplified": "Muda wa kipindi cha urais ni miaka mitano.", "tags": ["voting", "limit"] },
+        { "article": "Art 143", "title": "Immunity", "simplified": "President cannot be sued in court during their term of office.", "swSimplified": "Kinga ya kisheria kwa rais aliyeko kazini.", "tags": ["law", "immunity"] }
       ]
     },
     {
-      "id": "chapter10",
-      "title": "Judiciary",
-      "swTitle": "Idara ya Mahakama",
-      "number": "Chapter 10",
-      "swNumber": "Sura ya 10",
-      "description": "Courts and Judges",
-      "swDescription": "Mahakama na Majaji",
-      "color": "blue",
+      "id": "chapter10", "title": "Judiciary", "swTitle": "Mahakama", "color": "purple",
       "sections": [
-        {
-          "article": "Article 159",
-          "swArticle": "Ibara ya 159",
-          "title": "Judicial Authority",
-          "swTitle": "Mamlaka ya Mahakama",
-          "simplified": "Justice shall be done to all and shall not be delayed.",
-          "swSimplified": "Haki itatendewa kwa wote na haitacheleweshwa.",
-          "tags": ["courts", "justice"]
-        },
-        {
-          "article": "Article 160",
-          "swArticle": "Ibara ya 160",
-          "title": "Independence of Judiciary",
-          "swTitle": "Uhuru wa Mahakama",
-          "simplified": "Judges are completely independent.",
-          "swSimplified": "Majaji wako huru kabisa.",
-          "tags": ["independence", "judiciary"]
-        }
+        { "article": "Art 159", "title": "Courts", "simplified": "Justice shall be done to all and not delayed.", "swSimplified": "Haki.", "tags": ["trial"] },
+        { "article": "Art 163", "title": "Supreme", "simplified": "Highest court in Kenya, final arbiter of law.", "swSimplified": "Mahakama kuu ya nchi.", "tags": ["law"] },
+        { "article": "Art 165", "title": "High Court", "simplified": "Has the power to decide if any law is unconstitutional.", "swSimplified": "Mahakama Kuu yenye mamlaka ya kikatiba.", "tags": ["court", "appeals"] },
+        { "article": "Art 171", "title": "JSC", "simplified": "Judicial Service Commission manages judges and courts.", "swSimplified": "Tume ya huduma za mahakama.", "tags": ["judges", "oversight"] }
       ]
     },
     {
-      "id": "chapter11",
-      "title": "Devolved Government",
-      "swTitle": "Serikali ya Ugatuzi",
-      "number": "Chapter 11",
-      "swNumber": "Sura ya 11",
-      "description": "County Governments",
-      "swDescription": "Serikali za Kaunti",
-      "color": "green",
+      "id": "chapter11", "title": "Devolution", "swTitle": "Ugatuzi", "color": "green",
       "sections": [
-        {
-          "article": "Article 174",
-          "swArticle": "Ibara ya 174",
-          "title": "Objectives of Devolution",
-          "swTitle": "Malengo ya Ugatuzi",
-          "simplified": "Devolution brings services closer to you.",
-          "swSimplified": "Ugatuzi husogeza huduma karibu nawe.",
-          "tags": ["devolution", "counties"]
-        }
+        { "article": "Art 174", "title": "Devolve", "simplified": "Aims to promote democracy and accountable power.", "swSimplified": "Serikali ya mtaa.", "tags": ["counties"] },
+        { "article": "Art 179", "title": "County Executive", "simplified": "Led by the Governor and the deputy governor.", "swSimplified": "Uongozi wa kikaunti.", "tags": ["governor"] },
+        { "article": "Art 180", "title": "Governor", "simplified": "Elected directly by county voters for 5 years.", "swSimplified": "Gavana.", "tags": ["elections"] },
+        { "article": "Art 186", "title": "Powers", "simplified": "Division of functions between national and county governments.", "swSimplified": "Mgawanyo wa mamlaka.", "tags": ["money", "roles"] }
       ]
     },
     {
-      "id": "chapter12",
-      "title": "Public Finance",
-      "swTitle": "Fedha za Umma",
-      "number": "Chapter 12",
-      "swNumber": "Sura ya 12",
-      "description": "Taxes and Budgets",
-      "swDescription": "Kodi na Bajeti",
-      "color": "red",
+      "id": "chapter12", "title": "Finance", "swTitle": "Fedha", "color": "gold",
       "sections": [
-        {
-          "article": "Article 201",
-          "swArticle": "Ibara ya 201",
-          "title": "Public Finance Principles",
-          "swTitle": "Kanuni za Fedha za Umma",
-          "simplified": "Public finance must be transparent and the public must be involved.",
-          "swSimplified": "Fedha za umma lazima ziwe wazi na umma lazima ushikishwe.",
-          "tags": ["finance", "transparency"]
-        }
+        { "article": "Art 201", "title": "Taxes", "simplified": "Burden of taxation shared fairly across generations.", "swSimplified": "Fedha za umma.", "tags": ["budget"] },
+        { "article": "Art 203", "title": "Revenue Sharing", "simplified": "At least 15% of national revenue must go to counties.", "swSimplified": "Gawio la fedha kwa kaunti.", "tags": ["money", "spending"] },
+        { "article": "Art 212", "title": "Borrowing", "simplified": "County government may borrow only if the national government guarantees it.", "swSimplified": "Mikopo ya kaunti.", "tags": ["debt", "loans"] }
       ]
     },
     {
-      "id": "chapter13",
-      "title": "The Public Service",
-      "swTitle": "Utumishi wa Umma",
-      "number": "Chapter 13",
-      "swNumber": "Sura ya 13",
-      "description": "Government institutions",
-      "swDescription": "Taasisi za serikali",
-      "color": "black",
+      "id": "chapter13", "title": "Public Service", "swTitle": "Utumishi", "color": "black",
       "sections": [
-        {
-          "article": "Article 232",
-          "swArticle": "Ibara ya 232",
-          "title": "Values of Public Service",
-          "swTitle": "Maadili ya Utumishi wa Umma",
-          "simplified": "Public service must be ethical and efficient.",
-          "swSimplified": "Utumishi wa umma lazima uwe wa kimaadili na wenye ufanisi.",
-          "tags": ["service", "ethics"]
-        }
+        { "article": "Art 232", "title": "Jobs", "simplified": "Civic ethics.", "swSimplified": "Kazi ya serikali.", "tags": ["service"] }
       ]
     },
     {
-      "id": "chapter14",
-      "title": "National Security",
-      "swTitle": "Usalama wa Taifa",
-      "number": "Chapter 14",
-      "swNumber": "Sura ya 14",
-      "description": "Defence and Police",
-      "swDescription": "Ulinzi na Polisi",
-      "color": "blue",
+      "id": "chapter14", "title": "Security", "swTitle": "Usalama", "color": "blue",
       "sections": [
-        {
-          "article": "Article 244",
-          "swArticle": "Ibara ya 244",
-          "title": "National Police Service",
-          "swTitle": "Huduma ya Kitaifa ya Polisi",
-          "simplified": "Police must protect life and respect human rights.",
-          "swSimplified": "Polisi lazima walinde maisha na kuheshimu haki za binadamu.",
-          "tags": ["police", "security"]
-        }
+        { "article": "Art 244", "title": "Police", "simplified": "Protect life.", "swSimplified": "Askari polisi.", "tags": ["safety"] }
       ]
     },
     {
-      "id": "chapter15",
-      "title": "Independent Commissions",
-      "swTitle": "Tume Huru",
-      "number": "Chapter 15",
-      "swNumber": "Sura ya 15",
-      "description": "Oversight bodies",
-      "swDescription": "Taasisi za uangalizi",
-      "color": "black",
+      "id": "chapter15", "title": "Commissions", "swTitle": "Tume", "color": "teal",
       "sections": [
-        {
-          "article": "Article 248",
-          "swArticle": "Ibara ya 248",
-          "title": "Commissions",
-          "swTitle": "Tume na Ofisi Huru",
-          "simplified": "Establishes bodies to protect your rights from government overreach.",
-          "swSimplified": "Inaunda taasisi za kulinda haki zako dhidi ya matumizi mabaya ya mamlaka ya serikali.",
-          "tags": ["oversight", "independence"]
-        }
+        { "article": "Art 248", "title": "IEBC/ETC", "simplified": "Independent oversight.", "swSimplified": "Tume huru.", "tags": ["oversight"] }
       ]
     },
     {
-      "id": "chapter16",
-      "title": "Amendment of Constitution",
-      "swTitle": "Marekebisho ya Katiba",
-      "number": "Chapter 16",
-      "swNumber": "Sura ya 16",
-      "description": "How to change the law",
-      "swDescription": "Jinsi ya kubadilisha sheria",
-      "color": "green",
+      "id": "chapter16", "title": "Amendment", "swTitle": "Mabadiliko", "color": "purple",
       "sections": [
-        {
-          "article": "Article 255",
-          "swArticle": "Ibara ya 255",
-          "title": "Popular Initiative",
-          "swTitle": "Mpango wa Wananchi",
-          "simplified": "Big changes require a referendum by the people.",
-          "swSimplified": "Mabadiliko makubwa yanahitaji kura ya maoni kutoka kwa wananchi.",
-          "tags": ["referendum", "change"]
-        }
+        { "article": "Art 255", "title": "Amend", "simplified": "Changing the law.", "swSimplified": "Referendum.", "tags": ["vote"] }
       ]
     },
     {
-      "id": "chapter17",
-      "title": "General Provisions",
-      "swTitle": "Masharti ya Jumla",
-      "number": "Chapter 17",
-      "swNumber": "Sura ya 17",
-      "description": "Interpretation of laws",
-      "swDescription": "Ufafanuzi wa sheria",
-      "color": "black",
+      "id": "chapter17", "title": "General", "swTitle": "Masharti", "color": "black",
       "sections": [
-        {
-          "article": "Article 259",
-          "swArticle": "Ibara ya 259",
-          "title": "Interpretation",
-          "swTitle": "Ufafanuzi",
-          "simplified": "The Constitution must be interpreted to protect people and rights.",
-          "swSimplified": "Katiba lazima ifafanuliwe kwa njia ya kulinda wananchi na haki zao.",
-          "tags": ["interpretation", "law"]
-        }
+        { "article": "Art 258", "title": "Rules", "simplified": "General provisions.", "swSimplified": "Ufafanuzi.", "tags": ["law"] }
       ]
     },
     {
-      "id": "chapter18",
-      "title": "Transitional Provisions",
-      "swTitle": "Masharti ya Mpito",
-      "number": "Chapter 18",
-      "swNumber": "Sura ya 18",
-      "description": "Transition to the 2010 Constitution",
-      "swDescription": "Mpito kuelekea Katiba ya 2010",
-      "color": "black",
+      "id": "chapter18", "title": "Transition", "swTitle": "Mpito", "color": "black",
       "sections": [
-        {
-          "article": "Article 262",
-          "swArticle": "Ibara ya 262",
-          "title": "Transition",
-          "swTitle": "Masharti ya Mpito",
-          "simplified": "Handles how the country safely transitioned in 2010.",
-          "swSimplified": "Inashughulikia jinsi nchi ilivyovuka kwa usalama mwaka wa 2010.",
-          "tags": ["transition", "history"]
-        }
+        { "article": "Art 261", "title": "History", "simplified": "Transition 2010.", "swSimplified": "Mpito 2010.", "tags": ["history"] }
       ]
     }
   ]

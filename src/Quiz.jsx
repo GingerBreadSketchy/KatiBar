@@ -249,7 +249,7 @@ const BADGES = [
   { threshold: 0, Icon: Sprout, label: 'Rights Learner', swLabel: 'Mwanafunzi wa Haki', desc: 'Every journey starts here. Review the explanations and try again.', swDesc: 'Kila safari huanzia hapa. Pitia maelezo na ujaribu tena.' },
 ]
 
-function Quiz({ constitution, isSwahili }) {
+function Quiz({ isSwahili }) {
   const [step, setStep] = useState(0)          // current question index
   const [selected, setSelected] = useState(null)
   const [showFeedback, setShowFeedback] = useState(false)
@@ -408,7 +408,7 @@ function Quiz({ constitution, isSwahili }) {
           className="p-5 rounded-xl mb-6 relative overflow-hidden"
           style={{ background: 'rgba(212,160,23,0.08)', borderLeft: '4px solid #D4A017' }}
         >
-          <div className="absolute top-0 right-0 -mt-2 -mr-2 text-6xl text-gold-muted opacity-20 pointer-events-none">"</div>
+          <div className="absolute top-0 right-0 -mt-2 -mr-2 text-6xl text-gold-muted opacity-20 pointer-events-none">&ldquo;</div>
           <span className="label text-gold text-ink-4 block mb-2 tracking-widest" style={{ color: '#D4A017' }}>{isSwahili ? 'HALI' : 'SCENARIO'}</span>
           <p className="text-ink-1 text-base leading-relaxed italic relative z-10">{isSwahili ? q.swScenario : q.scenario}</p>
         </div>

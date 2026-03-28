@@ -1,0 +1,18 @@
+{
+  "generatedAt": "2026-03-28T09:09:27.218Z",
+  "chapterCount": 18,
+  "articleCount": 264,
+  "maxArticleNumber": 264,
+  "missingArticleNumbers": [],
+  "explainerCoverage": {
+    "total": 264,
+    "seededFromLegacy": 80,
+    "draftGenerated": 184
+  },
+  "exampleCoverage": {
+    "total": 264,
+    "scenarioBank": 264,
+    "seededFromLegacy": 0,
+    "generatedArticleSpecific": 0
+  }
+}

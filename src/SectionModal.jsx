@@ -79,7 +79,7 @@ function SectionModal({ section, onClose, isSwahili }) {
               </summary>
               <div className="mt-2 pl-4 border-l-2 border-subtle ml-3 mb-2">
                 <p className="headline text-ink-3 text-sm leading-relaxed italic bg-surface-2 p-3 rounded-lg border border-faint shadow-inner">
-                  "{section.originalText}"
+                  {section.originalText}
                 </p>
               </div>
             </details>
@@ -94,6 +94,13 @@ function SectionModal({ section, onClose, isSwahili }) {
             <p className="text-ink-1 leading-relaxed text-base">
               {isSwahili ? (section.swSimplified || section.simplified) : section.simplified}
             </p>
+            {section.explainerReviewStatus === 'draft' && (
+              <p className="text-ink-4 text-sm mt-3 leading-relaxed">
+                {isSwahili
+                  ? 'Haya ni maelezo ya mwanzo yaliyotengenezwa ili kurahisisha kuelewa ibara hii. Tumia maandishi rasmi hapa chini kama rejeleo kuu la kisheria.'
+                  : 'This is a first-pass draft explainer to make the Article easier to understand. Use the official constitutional text below as the legal source of truth.'}
+              </p>
+            )}
           </div>
 
           {/* Real-life examples */}
@@ -111,6 +118,29 @@ function SectionModal({ section, onClose, isSwahili }) {
                   </li>
                 ))}
               </ul>
+              {section.exampleSources?.length > 0 && (
+                <div className="mt-3 text-xs text-ink-4 leading-relaxed">
+                  <p>
+                    {isSwahili
+                      ? 'Mifano hii imeandikwa kwa lugha rahisi kutokana na matatizo halisi yaliyoripotiwa au maelezo ya taasisi za Kenya.'
+                      : 'These examples are written in simple English from real Kenyan complaint patterns and public rights guidance.'}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {section.exampleSources.map((source) => (
+                      <a
+                        key={source.id || source.url}
+                        href={source.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-blue-400 hover:text-white transition-colors"
+                      >
+                        <ExternalLink className="w-3 h-3" />
+                        <span>{source.organization}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
@@ -173,6 +203,20 @@ function SectionModal({ section, onClose, isSwahili }) {
               {section.tags.map(tag => (
                 <span key={tag} className="tag-pill bg-transparent border border-faint">#{tag}</span>
               ))}
+            </div>
+          )}
+
+          {section.officialUrl && (
+            <div className="bg-surface-2 border border-subtle rounded-lg p-3">
+              <a
+                href={section.officialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-white transition-colors"
+              >
+                <ExternalLink className="w-4 h-4" />
+                {isSwahili ? 'Fungua chanzo rasmi cha Kenya Law' : 'Open official Kenya Law source'}
+              </a>
             </div>
           )}
 

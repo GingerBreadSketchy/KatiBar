@@ -1,49 +1,42 @@
 import { useState } from 'react'
 import SectionModal from './SectionModal'
-import { ShieldCheck, Flag, Map, Scale, Pickaxe, Landmark, Users, ArrowRight, BookOpen, HandHeart, Mountain } from 'lucide-react'
+import { 
+  ShieldCheck, Scale, Landmark, Users, ArrowRight, BookOpen, HandHeart, Mountain, 
+  IdCard, Gavel, Building2, Network, Wallet, Briefcase, ShieldAlert, CheckCircle2, History, PenTool, Globe
+} from 'lucide-react'
 
 // Using Lucide Icons for Chapter Meta
 const CHAPTER_META = {
-  green: {
-    accent: '#3ecfa0',
-    bar:    '#006A4E',
-    chip:   'chip-forest',
-    panel:  'panel-forest',
-    icon: ShieldCheck,
-  },
-  red: {
-    accent: '#f47285',
-    bar:    '#C8102E',
-    chip:   'chip-crimson',
-    panel:  'panel-crimson',
-    icon: Flag,
-  },
-  blue: {
-    accent: '#7db8ff',
-    bar:    '#3b82f6',
-    chip:   'chip-blue',
-    panel:  'panel-blue',
-    icon: Map,
-  },
-  black: {
-    accent: '#888',
-    bar:    '#444',
-    chip:   'chip-neutral',
-    panel:  '',
-    icon: Landmark,
-  },
+  green:  { accent: '#3ecfa0', bar: '#006A4E', chip: 'chip-forest' },
+  red:    { accent: '#f47285', bar: '#C8102E', chip: 'chip-crimson' },
+  blue:   { accent: '#7db8ff', bar: '#3b82f6', chip: 'chip-blue' },
+  gold:   { accent: '#facc15', bar: '#a16207', chip: 'chip-gold' },
+  purple: { accent: '#c084fc', bar: '#7e22ce', chip: 'chip-purple' },
+  teal:   { accent: '#2dd4bf', bar: '#0f766e', chip: 'chip-teal' },
+  orange: { accent: '#fb923c', bar: '#c2410c', chip: 'chip-orange' },
+  black:  { accent: '#a1a1aa', bar: '#3f3f46', chip: 'chip-neutral' },
 }
 
-// Map chapter ID to specific semantic icon if preferred, falling back to color meta
+// Map chapter ID to specific semantic icon for unique identification
 const SEMANTIC_CHAPTER_ICONS = {
-  chapter1: ShieldCheck, // Bill of Rights
-  chapter2: Flag,        // Citizenship
-  chapter3: Mountain,    // Land and Environment
-  chapter4: Scale,       // Governance
-  chapter5: Pickaxe,     // Devolution
-  chapter6: Landmark,    // Finance
-  chapter7: Users,       // Vulnerable
-  chapter8: HandHeart,   // Leadership/Ethics
+  chapter1: ShieldCheck, // Sovereignty
+  chapter2: Globe,       // The Republic
+  chapter3: IdCard,      // Citizenship
+  chapter4: HandHeart,   // Bill of Rights
+  chapter5: Mountain,    // Land & Environment
+  chapter6: Landmark,    // Leadership & Integrity
+  chapter7: Users,       // Representation
+  chapter8: Gavel,       // Legislature
+  chapter9: Building2,   // Executive
+  chapter10: Scale,      // Judiciary
+  chapter11: Network,    // Devolved Government
+  chapter12: Wallet,     // Public Finance
+  chapter13: Briefcase,   // Public Service
+  chapter14: ShieldAlert, // National Security
+  chapter15: CheckCircle2,// Commissions
+  chapter16: PenTool,     // Amendment
+  chapter17: BookOpen,    // General
+  chapter18: History,     // Transitional
 }
 
 function ConstitutionExplorer({ constitution, selectedSection, onSelectSection, isSwahili }) {
@@ -87,7 +80,7 @@ function ConstitutionExplorer({ constitution, selectedSection, onSelectSection, 
       >
         {constitution.chapters.map((chapter) => {
           const meta = CHAPTER_META[chapter.color] || CHAPTER_META.green
-          const IconComponent = SEMANTIC_CHAPTER_ICONS[chapter.id] || meta.icon
+          const IconComponent = SEMANTIC_CHAPTER_ICONS[chapter.id] || meta.icon || BookOpen
           const isActive = expandedChapter === chapter.id
           
           return (
@@ -134,7 +127,7 @@ function ConstitutionExplorer({ constitution, selectedSection, onSelectSection, 
       <div className="space-y-4 md:max-w-4xl md:mx-auto">
         {constitution.chapters.map((chapter, idx) => {
           const meta = CHAPTER_META[chapter.color] || CHAPTER_META.green
-          const IconComponent = SEMANTIC_CHAPTER_ICONS[chapter.id] || meta.icon
+          const IconComponent = SEMANTIC_CHAPTER_ICONS[chapter.id] || meta.icon || BookOpen
           const isOpen = expandedChapter === chapter.id
 
           return (

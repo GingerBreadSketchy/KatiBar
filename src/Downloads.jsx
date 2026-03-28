@@ -101,11 +101,11 @@ function Downloads({ isSwahili }) {
                 </p>
                 <div className="divider opacity-20 my-4" />
                 <div className="flex flex-col gap-3">
-                  <a href="https://www.klrc.go.ke/index.php/constitution-of-kenya" target="_blank" className="flex items-center justify-between group text-forest-bright font-semibold hover:text-white transition-colors">
+                  <a href="https://www.klrc.go.ke/index.php/constitution-of-kenya" target="_blank" rel="noreferrer" className="flex items-center justify-between group text-forest-bright font-semibold hover:text-white transition-colors">
                     <span>{isSwahili ? 'Tume ya Kurekebisha Sheria' : 'Law Reform Commission'}</span>
                     <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </a>
-                  <a href="https://www.judiciary.go.ke/about-the-judiciary/" target="_blank" className="flex items-center justify-between group text-forest-bright font-semibold hover:text-white transition-colors">
+                  <a href="https://www.judiciary.go.ke/about-the-judiciary/" target="_blank" rel="noreferrer" className="flex items-center justify-between group text-forest-bright font-semibold hover:text-white transition-colors">
                     <span>{isSwahili ? 'Historia ya Idara ya Mahakama' : 'Judiciary History'}</span>
                     <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </a>
@@ -114,7 +114,7 @@ function Downloads({ isSwahili }) {
             </div>
 
             <div className="mt-8 p-4 bg-white/5 rounded-xl border border-white/10 italic text-xs text-ink-4">
-              "Uwezo kuu wa taifa upo kwa wananchi." — Ibara ya 1
+              &ldquo;Uwezo kuu wa taifa upo kwa wananchi.&rdquo; - Ibara ya 1
             </div>
           </div>
         </div>
@@ -134,7 +134,8 @@ function Downloads({ isSwahili }) {
             <a 
               key={res.title} 
               href={res.link} 
-              target="_blank" 
+              target="_blank"
+              rel="noreferrer"
               className="glass-card p-6 border-transparent hover:border-blue-500/30 transition-all hover:-translate-y-1 block group"
             >
               <h5 className="font-bold text-ink-1 mb-2 group-hover:text-blue-400 transition-colors">{res.title}</h5>

@@ -1,0 +1,841 @@
+{
+  "metadata": {
+    "name": "Kenyan civic scenario bank",
+    "purpose": "Simple everyday examples for constitutional explainers",
+    "generatedFor": "KatiBar",
+    "version": "2026-03-28"
+  },
+  "sources": [
+    {
+      "id": "kenya-law-constitution",
+      "title": "Constitution of Kenya, 2010",
+      "organization": "Kenya Law",
+      "url": "https://new.kenyalaw.org/akn/ke/act/2010/constitution/eng@2010-09-03",
+      "kind": "official-text"
+    },
+    {
+      "id": "katiba-citizenship",
+      "title": "What Constitution provides on aspects of citizenship",
+      "organization": "Katiba Institute",
+      "url": "https://katibainstitute.org/what-constitution-provides-on-aspects-of-citizenship/",
+      "kind": "plain-language-guide"
+    },
+    {
+      "id": "katiba-access-info",
+      "title": "Understanding the Access to Information law",
+      "organization": "Katiba Institute",
+      "url": "https://katibainstitute.org/katiba-understanding-the-access-to-information-law/",
+      "kind": "plain-language-guide"
+    },
+    {
+      "id": "katiba-fair-admin",
+      "title": "The Fair Administrative Action Guide Launch",
+      "organization": "Katiba Institute",
+      "url": "https://katibainstitute.org/the-fair-administrative-action-guide-launch/",
+      "kind": "plain-language-guide"
+    },
+    {
+      "id": "katiba-human-rights",
+      "title": "Demystifying Human Rights",
+      "organization": "Katiba Institute",
+      "url": "https://katibainstitute.org/demystifying-human-rights-are-you-a-human-rights-defender/",
+      "kind": "rights-education"
+    },
+    {
+      "id": "caj-name-correction",
+      "title": "Teachers Service Commission Corrects Personal Information",
+      "organization": "Commission on Administrative Justice",
+      "url": "https://www.ombudsman.go.ke/index.php/teachers-service-commission-corrects-personal-information",
+      "kind": "public-complaint-case"
+    },
+    {
+      "id": "ipoa-complaints",
+      "title": "Ways To Raise Complaints On Policing",
+      "organization": "Independent Policing Oversight Authority",
+      "url": "https://www.ipoa.go.ke/",
+      "kind": "complaints-guidance"
+    }
+  ],
+  "entries": [
+    {
+      "id": "citizenship-registration",
+      "articleNumbers": [15],
+      "sourceIds": ["kenya-law-constitution", "katiba-citizenship"],
+      "examples": [
+        "If you are married to a Kenyan and have met the time set by law, you can apply to become a Kenyan citizen.",
+        "If you have lived in Kenya lawfully for many years, this Article helps explain when you may apply for citizenship."
+      ],
+      "swExamples": [
+        "Ikiwa umeolewa au umeoa Mkenya na umetimiza muda unaotakiwa na sheria, unaweza kuomba kuwa raia wa Kenya.",
+        "Ikiwa umeishi Kenya kihalali kwa miaka mingi, ibara hii husaidia kueleza wakati unaweza kuomba uraia."
+      ]
+    },
+    {
+      "id": "citizenship-revocation",
+      "articleNumbers": [17],
+      "sourceIds": ["kenya-law-constitution", "katiba-citizenship"],
+      "examples": [
+        "If someone became a citizen by using lies or fake papers, this Article helps explain when the government may take that citizenship away.",
+        "If the government wants to cancel citizenship that was given by registration, this Article helps explain when that can happen."
+      ],
+      "swExamples": [
+        "Ikiwa mtu alipata uraia kwa kusema uongo au kutumia stakabadhi bandia, ibara hii husaidia kueleza serikali inaweza kuondoa uraia huo lini.",
+        "Ikiwa serikali inataka kufuta uraia uliotolewa kwa usajili, ibara hii husaidia kueleza wakati hilo linaweza kutokea."
+      ]
+    },
+    {
+      "id": "citizenship-laws",
+      "articleNumbers": [18],
+      "sourceIds": ["kenya-law-constitution", "katiba-citizenship"],
+      "examples": [
+        "If a family wants to know which law explains citizenship forms, registration, and other steps, this Article helps point them to those rules.",
+        "If someone is applying for citizenship and wants to know which law controls the process, this Article helps explain that."
+      ],
+      "swExamples": [
+        "Ikiwa familia inataka kujua sheria inayoeleza fomu za uraia, usajili, na hatua nyingine, ibara hii husaidia kuonyesha sheria hizo.",
+        "Ikiwa mtu anaomba uraia na anataka kujua sheria inayosimamia mchakato huo, ibara hii husaidia kueleza hilo."
+      ]
+    },
+    {
+      "id": "privacy-and-records",
+      "articleNumbers": [31],
+      "sourceIds": ["caj-name-correction", "katiba-fair-admin"],
+      "examples": [
+        "If a public office keeps wrong personal details about you, this Article helps explain why your private information should be handled properly.",
+        "If someone shares your private records, messages, or phone details without a good reason, this Article helps explain why that is wrong."
+      ],
+      "swExamples": [
+        "Ikiwa ofisi ya umma ina taarifa zako binafsi zisizo sahihi, ibara hii husaidia kueleza kwa nini taarifa zako zinapaswa kushughulikiwa vizuri.",
+        "Ikiwa mtu anashiriki rekodi zako binafsi, ujumbe wako, au taarifa za simu yako bila sababu nzuri, ibara hii husaidia kueleza kwa nini hilo ni kosa."
+      ]
+    },
+    {
+      "id": "fair-administrative-action",
+      "articleNumbers": [47],
+      "sourceIds": ["caj-name-correction", "katiba-fair-admin"],
+      "examples": [
+        "If a government office writes your name wrongly in its records and refuses to fix it, this Article helps explain why the office should act fairly.",
+        "If a public office delays, ignores you, or makes a decision without giving you a fair chance, this Article helps explain why that is a problem."
+      ],
+      "swExamples": [
+        "Ikiwa ofisi ya serikali imeandika jina lako vibaya katika rekodi zake na inakataa kulirekebisha, ibara hii husaidia kueleza kwa nini ofisi hiyo inapaswa kutenda kwa haki.",
+        "Ikiwa ofisi ya umma inachelewesha, inakupuuza, au inafanya uamuzi bila kukupa nafasi ya haki, ibara hii husaidia kueleza kwa nini hilo ni tatizo."
+      ]
+    },
+    {
+      "id": "access-to-information",
+      "articleNumbers": [35],
+      "sourceIds": ["katiba-access-info", "caj-name-correction"],
+      "examples": [
+        "If you ask a public office for information about your records, money, or a service and they refuse to answer, this Article helps explain your right to ask.",
+        "If parents want to know how public money for a school was used, this Article helps explain why they can ask for that information."
+      ],
+      "swExamples": [
+        "Ikiwa unaomba ofisi ya umma ikupe taarifa kuhusu rekodi zako, fedha, au huduma na wanakataa kujibu, ibara hii husaidia kueleza haki yako ya kuuliza.",
+        "Ikiwa wazazi wanataka kujua fedha za umma za shule zilitumika vipi, ibara hii husaidia kueleza kwa nini wanaweza kuomba taarifa hiyo."
+      ]
+    },
+    {
+      "id": "health-water-housing-education",
+      "articleNumbers": [43],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If a family cannot get clean water, food, basic health care, or a place to live safely, this Article helps explain why those needs matter.",
+        "If a child misses school because the family cannot afford basic support, this Article helps explain the promise the Constitution makes."
+      ],
+      "swExamples": [
+        "Ikiwa familia haiwezi kupata maji safi, chakula, huduma ya afya ya msingi, au mahali pa kuishi salama, ibara hii husaidia kueleza kwa nini mahitaji hayo ni muhimu.",
+        "Ikiwa mtoto anakosa shule kwa sababu familia haina msaada wa msingi, ibara hii husaidia kueleza ahadi ambayo Katiba inatoa."
+      ]
+    },
+    {
+      "id": "arrest-rights",
+      "articleNumbers": [49],
+      "sourceIds": ["ipoa-complaints"],
+      "examples": [
+        "If police arrest you and do not tell you why, this Article helps explain what they must tell you.",
+        "If police arrest you and deny you a chance to call family or a lawyer, this Article helps explain why that is a problem."
+      ],
+      "swExamples": [
+        "Ikiwa polisi wanakukamata na hawakwambii sababu, ibara hii husaidia kueleza wanapaswa kukuambia nini.",
+        "Ikiwa polisi wanakukamata na wanakunyima nafasi ya kupiga simu kwa familia au wakili, ibara hii husaidia kueleza kwa nini hilo ni tatizo."
+      ]
+    },
+    {
+      "id": "fair-hearing",
+      "articleNumbers": [50],
+      "sourceIds": ["ipoa-complaints", "katiba-fair-admin"],
+      "examples": [
+        "If your case goes to court, this Article helps explain why you should be heard fairly before a decision is made.",
+        "If a person is blamed, punished, or judged before they explain their side, this Article helps explain why that is wrong."
+      ],
+      "swExamples": [
+        "Ikiwa kesi yako inaenda mahakamani, ibara hii husaidia kueleza kwa nini unapaswa kusikilizwa kwa haki kabla ya uamuzi kufanywa.",
+        "Ikiwa mtu analaumiwa, anaadhibiwa, au anahukumiwa kabla ya kueleza upande wake, ibara hii husaidia kueleza kwa nini hilo ni kosa."
+      ]
+    },
+    {
+      "id": "children-rights",
+      "articleNumbers": [53],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If a child is neglected, abused, or kept out of school, this Article helps explain the protection that child should get.",
+        "If parents, teachers, or leaders make decisions that harm a child instead of helping them, this Article helps explain that the child's best interests should come first."
+      ],
+      "swExamples": [
+        "Ikiwa mtoto anatelekezwa, anadhulumiwa, au anaachwa nje ya shule, ibara hii husaidia kueleza ulinzi anaopaswa kupata.",
+        "Ikiwa wazazi, walimu, au viongozi wanafanya maamuzi yanayomdhuru mtoto badala ya kumsaidia, ibara hii husaidia kueleza kuwa maslahi ya mtoto yanapaswa kuja kwanza."
+      ]
+    },
+    {
+      "id": "disability-rights",
+      "articleNumbers": [54],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If a school, office, or matatu stage is hard to use because there is no support for a person with a disability, this Article helps explain why access matters.",
+        "If a child or adult with a disability is left out of services, learning, or public life, this Article helps explain the equal treatment they should get."
+      ],
+      "swExamples": [
+        "Ikiwa shule, ofisi, au kituo cha matatu ni kigumu kutumia kwa sababu hakuna msaada kwa mtu mwenye ulemavu, ibara hii husaidia kueleza kwa nini upatikanaji ni muhimu.",
+        "Ikiwa mtoto au mtu mzima mwenye ulemavu anaachwa nje ya huduma, masomo, au maisha ya umma, ibara hii husaidia kueleza usawa anaopaswa kupata."
+      ]
+    },
+    {
+      "id": "rights-purpose",
+      "articleNumbers": [19],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If someone asks why rights matter in everyday life, this Article helps explain that rights are there to protect every person.",
+        "If a leader treats rights like a small favour instead of something important, this Article helps explain why rights must be taken seriously."
+      ],
+      "swExamples": [
+        "Ikiwa mtu anauliza kwa nini haki ni muhimu katika maisha ya kila siku, ibara hii husaidia kueleza kuwa haki zipo kulinda kila mtu.",
+        "Ikiwa kiongozi anachukulia haki kama fadhila ndogo badala ya jambo muhimu, ibara hii husaidia kueleza kwa nini haki zinapaswa kuchukuliwa kwa uzito."
+      ]
+    },
+    {
+      "id": "bill-of-rights-application",
+      "articleNumbers": [20],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If a person says rights only help rich people or people in court, this Article helps explain that rights are for everyone.",
+        "If a child, prisoner, worker, or patient needs protection, this Article helps explain that the Bill of Rights still matters."
+      ],
+      "swExamples": [
+        "Ikiwa mtu anasema haki zinasaidia watu matajiri au watu wa mahakamani pekee, ibara hii husaidia kueleza kuwa haki ni za kila mtu.",
+        "Ikiwa mtoto, mfungwa, mfanyakazi, au mgonjwa anahitaji ulinzi, ibara hii husaidia kueleza kuwa Mswada wa Haki bado ni muhimu."
+      ]
+    },
+    {
+      "id": "rights-implementation",
+      "articleNumbers": [21],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If a public office knows people are suffering but does nothing, this Article helps explain that the State must work to protect rights.",
+        "If leaders promise services but never act, this Article helps explain that rights need real action, not only words."
+      ],
+      "swExamples": [
+        "Ikiwa ofisi ya umma inajua watu wanateseka lakini haifanyi kitu, ibara hii husaidia kueleza kuwa serikali lazima ifanye kazi kulinda haki.",
+        "Ikiwa viongozi wanaahidi huduma lakini hawachukui hatua, ibara hii husaidia kueleza kuwa haki zinahitaji vitendo vya kweli, si maneno pekee."
+      ]
+    },
+    {
+      "id": "rights-enforcement",
+      "articleNumbers": [22],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If your right is broken and you need help from a court, this Article helps explain that you can go to court.",
+        "If a parent, friend, or group wants to stand up for a person whose rights are being broken, this Article helps explain that they can help."
+      ],
+      "swExamples": [
+        "Ikiwa haki yako imevunjwa na unahitaji msaada wa mahakama, ibara hii husaidia kueleza kuwa unaweza kwenda mahakamani.",
+        "Ikiwa mzazi, rafiki, au kikundi kinataka kumsaidia mtu ambaye haki zake zinavunjwa, ibara hii husaidia kueleza kuwa wanaweza kusaidia."
+      ]
+    },
+    {
+      "id": "courts-uphold-rights",
+      "articleNumbers": [23],
+      "sourceIds": ["kenya-law-constitution", "katiba-fair-admin"],
+      "examples": [
+        "If a court finds that your rights were broken, this Article helps explain that the court can give orders to help fix the problem.",
+        "If leaders ignore rights, this Article helps explain that courts can step in and protect people."
+      ],
+      "swExamples": [
+        "Ikiwa mahakama inapata kuwa haki zako zilivunjwa, ibara hii husaidia kueleza kuwa mahakama inaweza kutoa maagizo ya kusaidia kurekebisha tatizo.",
+        "Ikiwa viongozi wanapuuza haki, ibara hii husaidia kueleza kuwa mahakama zinaweza kuingilia kati na kulinda watu."
+      ]
+    },
+    {
+      "id": "limitation-of-rights",
+      "articleNumbers": [24],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If the government wants to limit a right, this Article helps explain that it must have a good reason and cannot just do so anyhow.",
+        "If leaders use safety or order as an excuse to treat people unfairly, this Article helps explain that limits must still be fair."
+      ],
+      "swExamples": [
+        "Ikiwa serikali inataka kupunguza haki fulani, ibara hii husaidia kueleza kuwa lazima iwe na sababu nzuri na haiwezi kufanya hivyo ovyo.",
+        "Ikiwa viongozi wanatumia usalama au utulivu kama kisingizio cha kutendea watu vibaya, ibara hii husaidia kueleza kuwa mipaka hiyo lazima bado iwe ya haki."
+      ]
+    },
+    {
+      "id": "equality-and-non-discrimination",
+      "articleNumbers": [27],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If a school, job, or office treats you badly because of tribe, sex, disability, religion, or some other personal reason, this Article helps explain why that is wrong.",
+        "If two people need the same service but one is pushed away unfairly, this Article helps explain that everyone should be treated equally."
+      ],
+      "swExamples": [
+        "Ikiwa shule, kazi, au ofisi inakutendea vibaya kwa sababu ya kabila, jinsia, ulemavu, dini, au sababu nyingine ya kibinafsi, ibara hii husaidia kueleza kwa nini hilo ni kosa.",
+        "Ikiwa watu wawili wanahitaji huduma ile ile lakini mmoja anafukuzwa bila haki, ibara hii husaidia kueleza kuwa kila mtu anapaswa kutendewa kwa usawa."
+      ]
+    },
+    {
+      "id": "human-dignity",
+      "articleNumbers": [28],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If a person is insulted, shamed, or treated like they do not matter, this Article helps explain that every person deserves respect.",
+        "If a public officer or employer humiliates someone, this Article helps explain why human dignity matters."
+      ],
+      "swExamples": [
+        "Ikiwa mtu anatukanwa, anaaibishwa, au anatendewa kana kwamba hana thamani, ibara hii husaidia kueleza kuwa kila mtu anastahili heshima.",
+        "Ikiwa afisa wa umma au mwajiri anamfedhehesha mtu, ibara hii husaidia kueleza kwa nini hadhi ya kibinadamu ni muhimu."
+      ]
+    },
+    {
+      "id": "freedom-and-security",
+      "articleNumbers": [29],
+      "sourceIds": ["kenya-law-constitution", "ipoa-complaints"],
+      "examples": [
+        "If someone is beaten, threatened, or harmed by police, criminals, or any other person, this Article helps explain that people should be safe.",
+        "If a person is taken away, tortured, or treated violently, this Article helps explain why that is against the Constitution."
+      ],
+      "swExamples": [
+        "Ikiwa mtu anapigwa, anatishwa, au anaumizwa na polisi, wahalifu, au mtu mwingine yeyote, ibara hii husaidia kueleza kuwa watu wanapaswa kuwa salama.",
+        "Ikiwa mtu anachukuliwa, anateswa, au anatendewa kwa ukatili, ibara hii husaidia kueleza kwa nini hilo ni kinyume cha Katiba."
+      ]
+    },
+    {
+      "id": "forced-labour",
+      "articleNumbers": [30],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If someone is forced to work and cannot leave freely, this Article helps explain why that is wrong.",
+        "If a child, worker, or helper is made to work through fear, threats, or control, this Article helps explain that such forced work is not allowed."
+      ],
+      "swExamples": [
+        "Ikiwa mtu analazimishwa kufanya kazi na hawezi kuondoka kwa hiari, ibara hii husaidia kueleza kwa nini hilo ni kosa.",
+        "Ikiwa mtoto, mfanyakazi, au msaidizi analazimishwa kufanya kazi kwa hofu, vitisho, au udhibiti, ibara hii husaidia kueleza kuwa kazi hiyo ya kulazimishwa hairuhusiwi."
+      ]
+    },
+    {
+      "id": "religion-belief-opinion",
+      "articleNumbers": [32],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If a student or worker is punished for their religion or belief, this Article helps explain why that is wrong.",
+        "If a person chooses to pray, not pray, or believe differently from others, this Article helps explain that they still have rights."
+      ],
+      "swExamples": [
+        "Ikiwa mwanafunzi au mfanyakazi anaadhibiwa kwa sababu ya dini au imani yake, ibara hii husaidia kueleza kwa nini hilo ni kosa.",
+        "Ikiwa mtu anachagua kusali, kutosali, au kuamini tofauti na wengine, ibara hii husaidia kueleza kuwa bado ana haki."
+      ]
+    },
+    {
+      "id": "freedom-of-expression",
+      "articleNumbers": [33],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If you speak about a public problem like bad roads or corruption, this Article helps explain your freedom to speak.",
+        "If a student, journalist, or ordinary citizen is silenced unfairly for sharing an opinion, this Article helps explain why that matters."
+      ],
+      "swExamples": [
+        "Ikiwa unasema kuhusu tatizo la umma kama barabara mbovu au ufisadi, ibara hii husaidia kueleza uhuru wako wa kusema.",
+        "Ikiwa mwanafunzi, mwanahabari, au mwananchi wa kawaida ananyamazishwa bila haki kwa kutoa maoni, ibara hii husaidia kueleza kwa nini hilo ni muhimu."
+      ]
+    },
+    {
+      "id": "freedom-of-media",
+      "articleNumbers": [34],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If radio, TV, or online media are threatened for reporting the truth, this Article helps explain why the media should be free.",
+        "If leaders want news people to praise them only and hide public problems, this Article helps explain why media freedom matters."
+      ],
+      "swExamples": [
+        "Ikiwa redio, televisheni, au vyombo vya habari vya mtandaoni vinatishwa kwa kuripoti ukweli, ibara hii husaidia kueleza kwa nini vyombo vya habari vinapaswa kuwa huru.",
+        "Ikiwa viongozi wanataka wanahabari wawasifie tu na wafiche matatizo ya umma, ibara hii husaidia kueleza kwa nini uhuru wa vyombo vya habari ni muhimu."
+      ]
+    },
+    {
+      "id": "freedom-of-association",
+      "articleNumbers": [36],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If workers, parents, or neighbours want to form a group to solve a problem, this Article helps explain that they can join together.",
+        "If someone is punished for joining a lawful group, union, or association, this Article helps explain why that is wrong."
+      ],
+      "swExamples": [
+        "Ikiwa wafanyakazi, wazazi, au majirani wanataka kuunda kikundi cha kutatua tatizo, ibara hii husaidia kueleza kuwa wanaweza kuungana.",
+        "Ikiwa mtu anaadhibiwa kwa kujiunga na kikundi halali, chama cha wafanyakazi, au ushirika, ibara hii husaidia kueleza kwa nini hilo ni kosa."
+      ]
+    },
+    {
+      "id": "political-rights",
+      "articleNumbers": [38],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If you want to vote, support a party, or stand for a seat, this Article helps explain your political rights.",
+        "If someone is blocked from political participation without a lawful reason, this Article helps explain why that is a problem."
+      ],
+      "swExamples": [
+        "Ikiwa unataka kupiga kura, kuunga mkono chama, au kugombea nafasi, ibara hii husaidia kueleza haki zako za kisiasa.",
+        "Ikiwa mtu anazuiwa kushiriki kisiasa bila sababu ya kisheria, ibara hii husaidia kueleza kwa nini hilo ni tatizo."
+      ]
+    },
+    {
+      "id": "movement-and-residence",
+      "articleNumbers": [39],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If you want to move to another town, county, or part of Kenya, this Article helps explain your freedom to move and live there.",
+        "If someone is chased away from a place just because of who they are, this Article helps explain why that is wrong."
+      ],
+      "swExamples": [
+        "Ikiwa unataka kuhamia mji mwingine, kaunti nyingine, au sehemu nyingine ya Kenya, ibara hii husaidia kueleza uhuru wako wa kusafiri na kuishi huko.",
+        "Ikiwa mtu anafukuzwa kutoka mahali fulani kwa sababu ya yeye ni nani, ibara hii husaidia kueleza kwa nini hilo ni kosa."
+      ]
+    },
+    {
+      "id": "environment-rights",
+      "articleNumbers": [42],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If a factory, dump site, or dirty drainage makes your area unhealthy, this Article helps explain why a clean environment matters.",
+        "If children are growing up around smoke, dirty water, or dangerous waste, this Article helps explain why people can complain."
+      ],
+      "swExamples": [
+        "Ikiwa kiwanda, dampo, au mtaro mchafu unaifanya eneo lako kuwa hatari kiafya, ibara hii husaidia kueleza kwa nini mazingira safi ni muhimu.",
+        "Ikiwa watoto wanakua karibu na moshi, maji machafu, au taka hatari, ibara hii husaidia kueleza kwa nini watu wanaweza kulalamika."
+      ]
+    },
+    {
+      "id": "language-and-culture",
+      "articleNumbers": [44],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If a community wants to keep its language, songs, dress, or traditions, this Article helps explain why that matters.",
+        "If people laugh at a child's language or culture and try to shame them, this Article helps explain why culture should be respected."
+      ],
+      "swExamples": [
+        "Ikiwa jamii inataka kulinda lugha yake, nyimbo, mavazi, au mila zake, ibara hii husaidia kueleza kwa nini hilo ni muhimu.",
+        "Ikiwa watu wanacheka lugha au utamaduni wa mtoto na kujaribu kumwaibisha, ibara hii husaidia kueleza kwa nini utamaduni unapaswa kuheshimiwa."
+      ]
+    },
+    {
+      "id": "family-rights",
+      "articleNumbers": [45],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If a man and woman want to marry freely and start a family, this Article helps explain that family is important under the Constitution.",
+        "If family life is being controlled unfairly or people are denied basic respect in marriage, this Article helps explain why that matters."
+      ],
+      "swExamples": [
+        "Ikiwa mwanamume na mwanamke wanataka kuoana kwa hiari na kuanzisha familia, ibara hii husaidia kueleza kuwa familia ni muhimu chini ya Katiba.",
+        "Ikiwa maisha ya familia yanadhibitiwa bila haki au watu wananyimwa heshima ya msingi katika ndoa, ibara hii husaidia kueleza kwa nini hilo ni muhimu."
+      ]
+    },
+    {
+      "id": "consumer-rights",
+      "articleNumbers": [46],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If you buy food, medicine, or another product that is unsafe, this Article helps explain why sellers should protect consumers.",
+        "If a company lies about what it is selling or cheats buyers, this Article helps explain why consumers have rights."
+      ],
+      "swExamples": [
+        "Ikiwa unanunua chakula, dawa, au bidhaa nyingine ambayo si salama, ibara hii husaidia kueleza kwa nini wauzaji wanapaswa kulinda watumiaji.",
+        "Ikiwa kampuni inasema uongo kuhusu kile inachouza au inawadanganya wanunuzi, ibara hii husaidia kueleza kwa nini watumiaji wana haki."
+      ]
+    },
+    {
+      "id": "access-to-justice",
+      "articleNumbers": [48],
+      "sourceIds": ["kenya-law-constitution", "katiba-fair-admin"],
+      "examples": [
+        "If a person cannot get help from a court because the process is too hard or too expensive, this Article helps explain why justice should be reachable.",
+        "If someone has a real complaint but cannot get a fair hearing because of barriers, this Article helps explain why access to justice matters."
+      ],
+      "swExamples": [
+        "Ikiwa mtu hawezi kupata msaada wa mahakama kwa sababu mchakato ni mgumu sana au wa gharama kubwa sana, ibara hii husaidia kueleza kwa nini haki inapaswa kufikika.",
+        "Ikiwa mtu ana malalamiko ya kweli lakini hawezi kupata usikilizaji wa haki kwa sababu ya vikwazo, ibara hii husaidia kueleza kwa nini upatikanaji wa haki ni muhimu."
+      ]
+    },
+    {
+      "id": "detained-persons-rights",
+      "articleNumbers": [51],
+      "sourceIds": ["kenya-law-constitution", "ipoa-complaints"],
+      "examples": [
+        "If a person is in a cell, prison, or other custody place, this Article helps explain that they still have rights.",
+        "If someone in custody is denied basic dignity, health care, or contact with family in an unfair way, this Article helps explain why that is wrong."
+      ],
+      "swExamples": [
+        "Ikiwa mtu yuko ndani ya selo, gerezani, au mahali pengine pa kuwekwa, ibara hii husaidia kueleza kuwa bado ana haki.",
+        "Ikiwa mtu aliyezuiliwa ananyimwa hadhi ya msingi, huduma ya afya, au mawasiliano na familia kwa njia isiyo ya haki, ibara hii husaidia kueleza kwa nini hilo ni kosa."
+      ]
+    },
+    {
+      "id": "bill-of-rights-interpretation",
+      "articleNumbers": [52],
+      "sourceIds": ["kenya-law-constitution"],
+      "examples": [
+        "If people are not sure what a word in this part of the Constitution means, this Article helps explain how to read it.",
+        "If a court or lawyer is arguing about the meaning of a rights word, this Article helps explain where to start."
+      ],
+      "swExamples": [
+        "Ikiwa watu hawana uhakika neno katika sehemu hii ya Katiba linamaanisha nini, ibara hii husaidia kueleza jinsi ya kulisoma.",
+        "Ikiwa mahakama au wakili anabishana kuhusu maana ya neno la haki, ibara hii husaidia kueleza pa kuanzia."
+      ]
+    },
+    {
+      "id": "youth-rights",
+      "articleNumbers": [55],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If young people are left out of education, jobs, or chances to grow, this Article helps explain why youth should be supported.",
+        "If leaders ignore the needs of young people, this Article helps explain that youth deserve real opportunities."
+      ],
+      "swExamples": [
+        "Ikiwa vijana wanaachwa nje ya elimu, kazi, au nafasi za kukua, ibara hii husaidia kueleza kwa nini vijana wanapaswa kusaidiwa.",
+        "Ikiwa viongozi wanapuuza mahitaji ya vijana, ibara hii husaidia kueleza kuwa vijana wanastahili nafasi za kweli."
+      ]
+    },
+    {
+      "id": "minorities-and-marginalised",
+      "articleNumbers": [56],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If a small community is always left out of schools, roads, clinics, or leadership, this Article helps explain why that is unfair.",
+        "If a marginalised group is ignored again and again, this Article helps explain that they deserve a fair share of opportunities and services."
+      ],
+      "swExamples": [
+        "Ikiwa jamii ndogo inaachwa nje mara kwa mara katika shule, barabara, kliniki, au uongozi, ibara hii husaidia kueleza kwa nini hilo si haki.",
+        "Ikiwa kundi lililotengwa linapuuzwa tena na tena, ibara hii husaidia kueleza kuwa linastahili sehemu ya haki ya nafasi na huduma."
+      ]
+    },
+    {
+      "id": "older-members",
+      "articleNumbers": [57],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If an older person is neglected, abused, or treated like they no longer matter, this Article helps explain that older people still have rights.",
+        "If grandparents need care, respect, and a chance to live with dignity, this Article helps explain why that matters."
+      ],
+      "swExamples": [
+        "Ikiwa mtu mzee anatelekezwa, anadhulumiwa, au anatendewa kana kwamba hana umuhimu tena, ibara hii husaidia kueleza kuwa wazee bado wana haki.",
+        "Ikiwa babu au nyanya wanahitaji huduma, heshima, na nafasi ya kuishi kwa hadhi, ibara hii husaidia kueleza kwa nini hilo ni muhimu."
+      ]
+    },
+    {
+      "id": "state-of-emergency",
+      "articleNumbers": [58],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If there is a big national crisis, this Article helps explain that leaders still must follow rules when using emergency powers.",
+        "If the government says there is an emergency and wants extra power, this Article helps explain that people still need protection."
+      ],
+      "swExamples": [
+        "Ikiwa kuna janga kubwa la kitaifa, ibara hii husaidia kueleza kuwa viongozi bado lazima wafuate sheria wanapotumia mamlaka ya dharura.",
+        "Ikiwa serikali inasema kuna hali ya dharura na inataka mamlaka zaidi, ibara hii husaidia kueleza kuwa watu bado wanahitaji ulinzi."
+      ]
+    },
+    {
+      "id": "human-rights-commission",
+      "articleNumbers": [59],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If people need a public body to speak up about rights and unfair treatment, this Article helps explain why that commission exists.",
+        "If rights problems keep happening and citizens need a place to complain or seek support, this Article helps explain the role of the commission."
+      ],
+      "swExamples": [
+        "Ikiwa watu wanahitaji taasisi ya umma kusimama kuhusu haki na matendo yasiyo ya haki, ibara hii husaidia kueleza kwa nini tume hiyo ipo.",
+        "Ikiwa matatizo ya haki yanaendelea kutokea na wananchi wanahitaji mahali pa kulalamika au kutafuta msaada, ibara hii husaidia kueleza jukumu la tume hiyo."
+      ]
+    },
+    {
+      "id": "land-and-environment",
+      "articleNumbers": [60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72],
+      "sourceIds": ["kenya-law-constitution"],
+      "examples": [
+        "If there is a fight over family land, public land, community land, or how land is being used, this Article helps explain that part of the rules.",
+        "If people are pushed off land unfairly or a project is damaging the environment, this Article helps show what should happen."
+      ],
+      "swExamples": [
+        "Ikiwa kuna mgogoro kuhusu ardhi ya familia, ardhi ya umma, ardhi ya jamii, au namna ardhi inavyotumiwa, ibara hizi husaidia kueleza sheria.",
+        "Ikiwa watu wanaondolewa kwenye ardhi bila haki au mazingira yanaharibiwa na mradi fulani, ibara hizi husaidia kueleza kinachopaswa kufanywa."
+      ]
+    },
+    {
+      "id": "leadership-and-integrity",
+      "articleNumbers": [73, 74, 75, 76, 77, 78, 79, 80],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If a leader uses public office to enrich themselves, lie, or abuse power, this Article helps show the standard leaders should follow.",
+        "If citizens want leaders to serve honestly and avoid conflicts of interest, this Article helps explain that rule."
+      ],
+      "swExamples": [
+        "Ikiwa kiongozi anatumia ofisi ya umma kujitajirisha, kusema uongo, au kutumia vibaya mamlaka, ibara hizi husaidia kueleza viwango ambavyo viongozi wanapaswa kufuata.",
+        "Ikiwa wananchi wanataka viongozi watumikie kwa uaminifu na waepuke mgongano wa maslahi, ibara hizi husaidia kueleza sheria hizo."
+      ]
+    },
+    {
+      "id": "elections-and-political-parties",
+      "articleNumbers": [81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92],
+      "sourceIds": ["kenya-law-constitution"],
+      "examples": [
+        "If you want to register as a voter, vote fairly, or understand how elections should be run, this Article helps explain that part of the rules.",
+        "If there is cheating, unfair boundaries, or trouble with parties and candidates, this Article helps show what a clean election should look like."
+      ],
+      "swExamples": [
+        "Ikiwa unataka kujiandikisha kama mpiga kura, kupiga kura kwa haki, au kuelewa jinsi uchaguzi unapaswa kuendeshwa, ibara hizi husaidia kueleza sheria.",
+        "Ikiwa kuna udanganyifu, mipaka isiyo ya haki, au matatizo kuhusu vyama na wagombea, ibara hizi husaidia kueleza uchaguzi safi unapaswa kufananaje."
+      ]
+    },
+    {
+      "id": "parliament-and-representation",
+      "articleNumbers": [93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108],
+      "sourceIds": ["kenya-law-constitution"],
+      "examples": [
+        "If you want to know who sits in Parliament, what the National Assembly and Senate do, or when a member can lose a seat, this Article helps explain that part.",
+        "If citizens want Parliament to represent people properly and answer to the public, this Article helps explain the structure."
+      ],
+      "swExamples": [
+        "Ikiwa unataka kujua ni nani huketi Bungeni, Bunge la Taifa na Seneti hufanya nini, au mbunge anaweza kupoteza kiti lini, ibara hizi husaidia kueleza hilo.",
+        "Ikiwa wananchi wanataka Bunge liwakilishe watu vizuri na libaki kuwajibika kwa umma, ibara hizi husaidia kueleza muundo wa msingi."
+      ]
+    },
+    {
+      "id": "law-making-in-parliament",
+      "articleNumbers": [109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123],
+      "sourceIds": ["kenya-law-constitution"],
+      "examples": [
+        "If people want to know how a Bill becomes law, how the President is involved, or how the public can speak to Parliament, this Article helps explain that process.",
+        "If a new law affects counties, money, or ordinary citizens, this Article helps show how Parliament should handle it."
+      ],
+      "swExamples": [
+        "Ikiwa watu wanataka kujua Muswada unakuwaje sheria, Rais anahusika vipi, au umma unaweza kusema nini kwa Bunge, ibara hizi husaidia kueleza mchakato.",
+        "Ikiwa sheria mpya inaathiri kaunti, fedha, au wananchi wa kawaida, ibara hizi husaidia kueleza jinsi Bunge linapaswa kuishughulikia."
+      ]
+    },
+    {
+      "id": "parliament-committees-and-privileges",
+      "articleNumbers": [124, 125, 126, 127, 128],
+      "sourceIds": ["kenya-law-constitution"],
+      "examples": [
+        "If Parliament needs committees, witnesses, or rules to do its work well, this Article helps explain that setup.",
+        "If citizens want to understand why Parliament has special powers and offices to do its job, this Article helps explain it."
+      ],
+      "swExamples": [
+        "Ikiwa Bunge linahitaji kamati, mashahidi, au sheria za kufanya kazi yake vizuri, ibara hizi husaidia kueleza mpangilio huo.",
+        "Ikiwa wananchi wanataka kuelewa kwa nini Bunge lina mamlaka na ofisi maalum za kutekeleza kazi yake, ibara hizi husaidia kueleza hilo."
+      ]
+    },
+    {
+      "id": "executive-and-presidency",
+      "articleNumbers": [129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151],
+      "sourceIds": ["kenya-law-constitution"],
+      "examples": [
+        "If citizens want to know what the President and Deputy President can do, how they are chosen, or how they can leave office, this Article helps explain that part.",
+        "If people are asking whether presidential power has limits, this Article helps show that the top office still follows rules."
+      ],
+      "swExamples": [
+        "Ikiwa wananchi wanataka kujua Rais na Naibu Rais wanaweza kufanya nini, wanachaguliwaje, au wanawezaje kuondoka ofisini, ibara hizi husaidia kueleza hilo.",
+        "Ikiwa watu wanauliza kama mamlaka ya urais yana mipaka, ibara hizi husaidia kueleza kuwa ofisi ya juu bado hufuata sheria."
+      ]
+    },
+    {
+      "id": "cabinet-and-national-legal-offices",
+      "articleNumbers": [152, 153, 154, 155, 156, 157, 158],
+      "sourceIds": ["kenya-law-constitution"],
+      "examples": [
+        "If you want to know who helps run the national government, who gives legal advice to the State, and who decides on criminal prosecutions, this Article helps explain that part.",
+        "If public officers at the top fail to act responsibly, this Article helps explain the office or duty involved."
+      ],
+      "swExamples": [
+        "Ikiwa unataka kujua ni nani husaidia kuendesha serikali ya kitaifa, ni nani huipa serikali ushauri wa kisheria, na ni nani huamua mashtaka ya jinai, ibara hizi husaidia kueleza hilo.",
+        "Ikiwa maafisa wa juu wa umma wanashindwa kutenda kwa uwajibikaji, ibara hizi husaidia kueleza ofisi na majukumu yanayohusika."
+      ]
+    },
+    {
+      "id": "judiciary-and-courts",
+      "articleNumbers": [159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173],
+      "sourceIds": ["kenya-law-constitution"],
+      "examples": [
+        "If you want to know how courts are arranged, why judges should be independent, or who helps manage the Judiciary, this Article helps explain that part.",
+        "If a case is serious and people ask which court should hear it or how judges are protected from pressure, this Article helps explain that rule."
+      ],
+      "swExamples": [
+        "Ikiwa unataka kujua mahakama zimepangwaje, kwa nini majaji wanapaswa kuwa huru, au ni nani husaidia kusimamia Idara ya Mahakama, ibara hizi husaidia kueleza hilo.",
+        "Ikiwa kesi ni nzito na watu wanauliza ni mahakama gani inapaswa kuisikiliza au jinsi majaji wanavyolindwa dhidi ya shinikizo, ibara hizi husaidia kueleza sheria hizo."
+      ]
+    },
+    {
+      "id": "devolution-and-counties",
+      "articleNumbers": [174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200],
+      "sourceIds": ["kenya-law-constitution"],
+      "examples": [
+        "If people want to know what county governments do, who runs them, and how county assemblies and governors should work, this Article helps explain that part.",
+        "If a county service is failing, county and national leaders are arguing, or citizens want to join county decisions, this Article helps show who should do what."
+      ],
+      "swExamples": [
+        "Ikiwa watu wanataka kujua serikali za kaunti hufanya nini, ni nani huziongoza, na jinsi mabunge ya kaunti na magavana wanapaswa kufanya kazi, ibara hizi husaidia kueleza hilo.",
+        "Ikiwa huduma ya kaunti inafeli, viongozi wa kaunti na wa kitaifa wanabishana, au wananchi wanataka kushiriki katika maamuzi ya kaunti, ibara hizi husaidia kueleza nani anapaswa kufanya nini."
+      ]
+    },
+    {
+      "id": "public-finance",
+      "articleNumbers": [201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228],
+      "sourceIds": ["kenya-law-constitution", "katiba-access-info"],
+      "examples": [
+        "If citizens want to know how taxes, budgets, loans, and public money should be handled, this Article helps explain that part of the rules.",
+        "If people are asking where county money went, whether public buying was fair, or who checks government spending, this Article helps explain that part."
+      ],
+      "swExamples": [
+        "Ikiwa wananchi wanataka kujua kodi, bajeti, mikopo, na fedha za umma zinapaswa kushughulikiwaje, ibara hizi husaidia kueleza sheria.",
+        "Ikiwa watu wanauliza fedha za kaunti zilienda wapi, ununuzi wa umma ulikuwa wa haki, au ni nani huchunguza matumizi ya serikali, ibara hizi husaidia kueleza hilo."
+      ]
+    },
+    {
+      "id": "foundations-of-the-state",
+      "articleNumbers": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+      "sourceIds": ["kenya-law-constitution"],
+      "examples": [
+        "If people want to know who really holds power in Kenya, what kind of country Kenya is, and the values leaders should follow, this Article helps explain that part.",
+        "If there is a question about Kenya's territory, languages, culture, symbols, religion, or access to services, this Article gives one part of the national rules."
+      ],
+      "swExamples": [
+        "Ikiwa watu wanataka kujua ni nani hasa ana mamlaka nchini Kenya, Kenya ni nchi ya aina gani, na maadili gani viongozi wanapaswa kufuata, ibara hizi husaidia kueleza hilo.",
+        "Ikiwa kuna swali kuhusu mipaka ya Kenya, lugha, utamaduni, alama za taifa, dini, au upatikanaji wa huduma, ibara hizi hutoa sheria za msingi za taifa."
+      ]
+    },
+    {
+      "id": "citizenship-core",
+      "articleNumbers": [12, 13, 14, 16],
+      "sourceIds": ["kenya-law-constitution", "katiba-citizenship"],
+      "examples": [
+        "If a person wants to know the basic rights of Kenyan citizens, how citizenship is kept, or when someone is a citizen by birth, this Article helps explain that part.",
+        "If a family is dealing with passports, birth status, or dual citizenship, this Article helps explain one of the starting rules."
+      ],
+      "swExamples": [
+        "Ikiwa mtu anataka kujua haki za msingi za raia wa Kenya, jinsi uraia unavyohifadhiwa, au mtu anakuwa raia kwa kuzaliwa lini, ibara hizi husaidia kueleza hilo.",
+        "Ikiwa familia inashughulikia pasipoti, hali ya kuzaliwa, au uraia wa nchi mbili, ibara hizi husaidia kueleza sheria za kuanzia."
+      ]
+    },
+    {
+      "id": "non-derogable-and-life",
+      "articleNumbers": [25, 26],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If leaders try to torture someone, deny them a fair trial, or ignore the value of life, this Article helps explain one of the rights that must stay protected.",
+        "If a person is in danger, facing violence, or being treated cruelly, this Article helps show why some protections are too important to remove."
+      ],
+      "swExamples": [
+        "Ikiwa viongozi wanajaribu kumtesa mtu, kumnyima kesi ya haki, au kupuuza thamani ya maisha, ibara hizi husaidia kueleza haki ambazo lazima zilindwe kwa nguvu.",
+        "Ikiwa mtu yuko hatarini, anakabiliwa na vurugu, au anatendewa kwa ukatili, ibara hizi husaidia kueleza kwa nini baadhi ya ulinzi ni muhimu sana kuondolewa."
+      ]
+    },
+    {
+      "id": "assembly-property-work",
+      "articleNumbers": [37, 40, 41],
+      "sourceIds": ["kenya-law-constitution", "katiba-human-rights"],
+      "examples": [
+        "If people want to protest peacefully, protect their property, or stand up for fair treatment at work, this Article helps explain one of those rights.",
+        "If police stop a peaceful protest, someone tries to grab land unfairly, or workers are underpaid, this Article helps show what citizens can point to."
+      ],
+      "swExamples": [
+        "Ikiwa watu wanataka kuandamana kwa amani, kulinda mali yao, au kusimamia haki kazini, ibara hizi husaidia kueleza haki hizo.",
+        "Ikiwa polisi wanasimamisha maandamano ya amani, mtu anajaribu kunyakua ardhi bila haki, au wafanyakazi wanalipwa vibaya, ibara hizi husaidia kueleza wananchi wanaweza kurejea wapi."
+      ]
+    },
+    {
+      "id": "independent-finance-offices",
+      "articleNumbers": [229, 230, 231],
+      "sourceIds": ["kenya-law-constitution"],
+      "examples": [
+        "If people want to know who checks government accounts, who sets pay for State officers, and who manages the country's money system, this Article helps explain that part.",
+        "If citizens are asking who audits public spending or why salary and money rules need independent oversight, this Article helps explain it."
+      ],
+      "swExamples": [
+        "Ikiwa watu wanataka kujua ni nani hukagua hesabu za serikali, ni nani huweka mishahara ya maafisa wa serikali, na ni nani husimamia mfumo wa fedha wa nchi, ibara hizi husaidia kueleza hilo.",
+        "Ikiwa wananchi wanauliza ni nani hukagua matumizi ya umma au kwa nini mishahara na sheria za fedha zinahitaji usimamizi huru, ibara hizi husaidia kueleza hilo."
+      ]
+    },
+    {
+      "id": "public-service",
+      "articleNumbers": [232, 233, 234, 235, 236, 237],
+      "sourceIds": ["kenya-law-constitution", "caj-name-correction"],
+      "examples": [
+        "If citizens want public officers to serve fairly, professionally, and without abuse, this Article helps explain one rule of public service.",
+        "If a teacher, county worker, or public officer is treated unfairly at work or public service is failing people, this Article helps explain the body or standard involved."
+      ],
+      "swExamples": [
+        "Ikiwa wananchi wanataka maafisa wa umma watumikie kwa haki, weledi, na bila matumizi mabaya ya mamlaka, ibara hizi husaidia kueleza sheria za utumishi wa umma.",
+        "Ikiwa mwalimu, mfanyakazi wa kaunti, au afisa wa umma anatendewa vibaya kazini au utumishi wa umma unawaangusha watu, ibara hizi husaidia kueleza taasisi na viwango vinavyohusika."
+      ]
+    },
+    {
+      "id": "national-security",
+      "articleNumbers": [238, 239, 240, 241, 242, 243, 244, 245, 246, 247],
+      "sourceIds": ["kenya-law-constitution", "ipoa-complaints"],
+      "examples": [
+        "If citizens want to know how police, intelligence, and defence forces should protect the country and still follow the law, this Article helps explain that part.",
+        "If security officers misuse power or people want to know who commands the police and who watches over them, this Article helps explain that rule."
+      ],
+      "swExamples": [
+        "Ikiwa wananchi wanataka kujua polisi, ujasusi, na jeshi wanapaswa kuilinda nchi vipi huku wakifuata sheria, ibara hizi husaidia kueleza hilo.",
+        "Ikiwa maafisa wa usalama wanatumia vibaya mamlaka au watu wanataka kujua ni nani huamuru polisi na ni nani huwatazama, ibara hizi husaidia kueleza sheria."
+      ]
+    },
+    {
+      "id": "commissions-and-offices",
+      "articleNumbers": [248, 249, 250, 251, 252, 253, 254],
+      "sourceIds": ["kenya-law-constitution"],
+      "examples": [
+        "If people want to know why commissions and independent offices exist, how they are formed, and how they report to the public, this Article helps explain that part.",
+        "If an independent office needs to act without political pressure, this Article helps explain the protection and powers it should have."
+      ],
+      "swExamples": [
+        "Ikiwa watu wanataka kujua kwa nini tume na ofisi huru zipo, zinaundwaje, na zinaripotije kwa umma, ibara hizi husaidia kueleza hilo.",
+        "Ikiwa ofisi huru inahitaji kufanya kazi bila shinikizo la kisiasa, ibara hizi husaidia kueleza ulinzi na mamlaka ambayo taasisi hizo zinapaswa kuwa nayo."
+      ]
+    },
+    {
+      "id": "constitutional-amendment-and-general",
+      "articleNumbers": [255, 256, 257, 258, 259, 260],
+      "sourceIds": ["kenya-law-constitution"],
+      "examples": [
+        "If people want to change the Constitution, defend it in court, or understand how its words should be read, this Article helps explain that part.",
+        "If citizens are asking whether Parliament alone can change the Constitution or whether ordinary people can help start change, this Article helps explain the process."
+      ],
+      "swExamples": [
+        "Ikiwa watu wanataka kubadilisha Katiba, kuitetea mahakamani, au kuelewa jinsi maneno yake yanapaswa kusomwa, ibara hizi husaidia kueleza hilo.",
+        "Ikiwa wananchi wanauliza kama Bunge pekee linaweza kubadilisha Katiba au kama watu wa kawaida wanaweza kusaidia kuanzisha mabadiliko, ibara hizi husaidia kueleza mchakato."
+      ]
+    },
+    {
+      "id": "transition-and-effective-date",
+      "articleNumbers": [261, 262, 263, 264],
+      "sourceIds": ["kenya-law-constitution"],
+      "examples": [
+        "If people want to know how Kenya moved from the old Constitution to the new one, this Article helps explain that part of the transition.",
+        "If citizens are asking when this Constitution started working and what old rules were replaced, this Article helps explain that."
+      ],
+      "swExamples": [
+        "Ikiwa watu wanataka kujua Kenya ilihamaje kutoka Katiba ya zamani kwenda ile mpya, ibara hizi husaidia kueleza mabadiliko hayo.",
+        "Ikiwa wananchi wanauliza Katiba hii ilianza kufanya kazi lini na ni sheria zipi za zamani ziliondolewa, ibara hizi husaidia kueleza hilo."
+      ]
+    }
+  ]
+}

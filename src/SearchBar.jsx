@@ -1,16 +1,13 @@
-import { useState, useRef, useEffect } from 'react'
+import { useRef } from 'react'
 
-function SearchBar({ onSearch, onClear, placeholder }) {
-  const [value, setValue] = useState('')
+function SearchBar({ value, onSearch, onClear, placeholder }) {
   const inputRef = useRef(null)
 
   const handleChange = (e) => {
-    setValue(e.target.value)
     onSearch(e.target.value)
   }
 
   const handleClear = () => {
-    setValue('')
     onClear()
     inputRef.current?.focus()
   }

@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react'
 import { ShieldAlert, HeartPulse, Home, Briefcase, Baby, Megaphone, Wallet, Accessibility, Search as SearchIcon, Check, X } from 'lucide-react'
 import QuickScenarioCard from './QuickScenarioCard'
+import { sectionMatchesTopic } from './constitutionTopics'
 
 const SCENARIOS = [
-  { id: 'police',     icon: ShieldAlert,   title: 'Police Stop',     swTitle: 'Kusimamishwa na Polisi', query: 'police arrest freedom',   color: '#C8102E' },
-  { id: 'healthcare', icon: HeartPulse,    title: 'Healthcare',      swTitle: 'Huduma za Afya',          query: 'healthcare',               color: '#006A4E' },
-  { id: 'land',       icon: Home,          title: 'Land & Housing',  swTitle: 'Ardhi na Makazi',        query: 'land',                     color: '#3b82f6' },
-  { id: 'employment', icon: Briefcase,     title: 'Work & Pay',      swTitle: 'Kazi na Malipo',         query: 'employment',               color: '#D4A017' },
-  { id: 'children',   icon: Baby,          title: 'Children',        swTitle: 'Haki za Watoto',         query: 'children',                 color: '#006A4E' },
-  { id: 'expression', icon: Megaphone,     title: 'Free Speech',     swTitle: 'Uhuru wa Kujieleza',      query: 'expression',               color: '#C8102E' },
-  { id: 'property',   icon: Wallet,        title: 'Property',        swTitle: 'Mali na Fedha',          query: 'property money',           color: '#3b82f6' },
-  { id: 'disability', icon: Accessibility, title: 'Disability',      swTitle: 'Ulemavu',                query: 'disability',               color: '#D4A017' },
+  { id: 'police',     icon: ShieldAlert,   title: 'Police Stop',     swTitle: 'Kusimamishwa na Polisi', query: 'police arrest freedom',   color: '#C8102E', primaryPatterns: ['police', 'arrest', 'detained', 'custody', 'search', 'privacy'], secondaryPatterns: ['fair hearing', 'lawyer', 'security of the person', 'criminal'] },
+  { id: 'healthcare', icon: HeartPulse,    title: 'Healthcare',      swTitle: 'Huduma za Afya',          query: 'healthcare',               color: '#006A4E', primaryPatterns: ['health', 'medical', 'treatment', 'hospital', 'emergency treatment', 'patient', 'sanitation', 'clean water'], secondaryPatterns: ['economic and social rights', 'food', 'water', 'housing'] },
+  { id: 'land',       icon: Home,          title: 'Land & Housing',  swTitle: 'Ardhi na Makazi',        query: 'land',                     color: '#3b82f6', primaryPatterns: ['land', 'property', 'environment', 'public land', 'private land', 'community land'], secondaryPatterns: ['housing', 'evict', 'tenure', 'settlement'] },
+  { id: 'employment', icon: Briefcase,     title: 'Work & Pay',      swTitle: 'Kazi na Malipo',         query: 'employment',               color: '#D4A017', primaryPatterns: ['labour', 'worker', 'employment', 'fair remuneration', 'working conditions', 'trade union'], secondaryPatterns: ['wages', 'leave', 'salary', 'job'] },
+  { id: 'children',   icon: Baby,          title: 'Children',        swTitle: 'Haki za Watoto',         query: 'children',                 color: '#006A4E', primaryPatterns: ['children', 'child', 'basic education', 'child helpline'], secondaryPatterns: ['family', 'education', 'welfare', 'care'] },
+  { id: 'expression', icon: Megaphone,     title: 'Free Speech',     swTitle: 'Uhuru wa Kujieleza',      query: 'expression',               color: '#C8102E', primaryPatterns: ['expression', 'media', 'information', 'assembly', 'demonstration', 'petition'], secondaryPatterns: ['speech', 'protest', 'association', 'political rights'] },
+  { id: 'property',   icon: Wallet,        title: 'Property',        swTitle: 'Mali na Fedha',          query: 'property money',           color: '#3b82f6', primaryPatterns: ['property', 'land', 'inheritance', 'money', 'public finance'], secondaryPatterns: ['tax', 'revenue', 'compensation', 'ownership'] },
+  { id: 'disability', icon: Accessibility, title: 'Disability',      swTitle: 'Ulemavu',                query: 'disability',               color: '#D4A017', primaryPatterns: ['disability', 'persons with disabilities', 'access', 'braille', 'sign language'], secondaryPatterns: ['education', 'dignity', 'equality', 'accommodation'] },
 ]
 
 function RightsFinder({ constitution, onSectionSelect, isSwahili }) {
@@ -19,22 +20,12 @@ function RightsFinder({ constitution, onSectionSelect, isSwahili }) {
 
   useEffect(() => {
     if (!selected) { setResults([]); return }
-    const keywords = selected.query.toLowerCase().split(' ')
     const matches = []
     constitution.chapters.forEach(chapter => {
       chapter.sections.forEach(section => {
-        const titleL = section.title.toLowerCase()
-        const simpleL = section.simplified.toLowerCase()
-        const tagsL = section.tags.map(t => t.toLowerCase())
-        const exL = section.examples ? section.examples.map(e => e.toLowerCase()) : []
-        
-        const hit = keywords.some(k => 
-          titleL.includes(k) ||
-          simpleL.includes(k) ||
-          tagsL.some(t => t.includes(k)) ||
-          exL.some(e => e.includes(k))
-        )
-        if (hit) matches.push({ ...section, chapterTitle: chapter.title, chapterId: chapter.id, chapterColor: chapter.color })
+        if (sectionMatchesTopic(section, selected)) {
+          matches.push({ ...section, chapterTitle: chapter.title, chapterId: chapter.id, chapterColor: chapter.color })
+        }
       })
     })
     // Deduplicate matches just in case

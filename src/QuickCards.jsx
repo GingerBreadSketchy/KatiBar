@@ -1,18 +1,18 @@
-import QuickScenarioCard from './QuickScenarioCard'
 import { ShieldAlert, HeartPulse, Home, Briefcase, Baby, Megaphone, Scale, PhoneCall, Building2, ChevronRight, Phone, Gavel, Accessibility, ShieldCheck, Map, Download } from 'lucide-react'
 import { jsPDF } from 'jspdf'
 import html2canvas from 'html2canvas'
+import { sectionMatchesTopic } from './constitutionTopics'
 
 const TOPICS = [
-  { id: 'police',     icon: ShieldAlert, title: 'If You Are Stopped by Police', swTitle: 'Ukisimamishwa na Polisi', query: 'police arrest freedom',  color: '#C8102E', chipClass: 'chip-crimson', desc: 'Know your rights during arrest & detention', swDesc: 'Jua haki zako wakati wa kukamatwa na kuwekwa ndani' },
-  { id: 'healthcare', icon: HeartPulse,  title: 'Healthcare Rights',             swTitle: 'Haki za Afya',             query: 'healthcare',              color: '#006A4E', chipClass: 'chip-forest',  desc: 'Your right to medical treatment', swDesc: 'Haki yako ya kupata matibabu' },
-  { id: 'land',       icon: Home,        title: 'Land & Property Rights',        swTitle: 'Ardhi na Mali',            query: 'land',                    color: '#3b82f6', chipClass: 'chip-blue',    desc: 'Ownership, inheritance, and tenure', swDesc: 'Umiliki, urithi, na umiliki wa ardhi' },
-  { id: 'employment', icon: Briefcase,   title: 'Worker Rights',                  swTitle: 'Haki za Wafanyakazi',       query: 'employment',              color: '#D4A017', chipClass: 'chip-gold',    desc: 'Fair wages, leave & working conditions', swDesc: 'Mishahara ya haki, likizo na mazingira ya kazi' },
-  { id: 'children',   icon: Baby,        title: 'Children\'s Rights',             swTitle: 'Haki za Watoto',          query: 'children',                color: '#006A4E', chipClass: 'chip-forest',  desc: 'Protection, education & welfare', swDesc: 'Ulinzi, elimu na ustawi' },
-  { id: 'expression', icon: Megaphone,   title: 'Freedom of Speech',            swTitle: 'Uhuru wa Kuzungumza',       query: 'expression',              color: '#C8102E', chipClass: 'chip-crimson', desc: 'Speak, protest & access information', swDesc: 'Kuzungumza, kuandamana na kupata habari' },
+  { id: 'police',     icon: ShieldAlert, title: 'If You Are Stopped by Police', swTitle: 'Ukisimamishwa na Polisi', query: 'police arrest freedom',  color: '#C8102E', chipClass: 'chip-crimson', desc: 'Know your rights during arrest & detention', swDesc: 'Jua haki zako wakati wa kukamatwa na kuwekwa ndani', primaryPatterns: ['police', 'arrest', 'detained', 'custody', 'search', 'privacy'], secondaryPatterns: ['fair hearing', 'lawyer', 'security of the person', 'criminal'] },
+  { id: 'healthcare', icon: HeartPulse,  title: 'Healthcare Rights',             swTitle: 'Haki za Afya',             query: 'healthcare',              color: '#006A4E', chipClass: 'chip-forest',  desc: 'Your right to medical treatment', swDesc: 'Haki yako ya kupata matibabu', primaryPatterns: ['health', 'medical', 'treatment', 'hospital', 'emergency treatment', 'patient', 'sanitation', 'clean water'], secondaryPatterns: ['economic and social rights', 'food', 'water', 'housing'] },
+  { id: 'land',       icon: Home,        title: 'Land & Property Rights',        swTitle: 'Ardhi na Mali',            query: 'land',                    color: '#3b82f6', chipClass: 'chip-blue',    desc: 'Ownership, inheritance, and tenure', swDesc: 'Umiliki, urithi, na umiliki wa ardhi', primaryPatterns: ['land', 'property', 'environment', 'public land', 'private land', 'community land'], secondaryPatterns: ['housing', 'evict', 'tenure', 'settlement'] },
+  { id: 'employment', icon: Briefcase,   title: 'Worker Rights',                  swTitle: 'Haki za Wafanyakazi',       query: 'employment',              color: '#D4A017', chipClass: 'chip-gold',    desc: 'Fair wages, leave & working conditions', swDesc: 'Mishahara ya haki, likizo na mazingira ya kazi', primaryPatterns: ['labour', 'worker', 'employment', 'fair remuneration', 'working conditions', 'trade union'], secondaryPatterns: ['wages', 'leave', 'salary', 'job'] },
+  { id: 'children',   icon: Baby,        title: 'Children\'s Rights',             swTitle: 'Haki za Watoto',          query: 'children',                color: '#006A4E', chipClass: 'chip-forest',  desc: 'Protection, education & welfare', swDesc: 'Ulinzi, elimu na ustawi', primaryPatterns: ['children', 'child', 'basic education', 'child helpline'], secondaryPatterns: ['family', 'education', 'welfare', 'care'] },
+  { id: 'expression', icon: Megaphone,   title: 'Freedom of Speech',            swTitle: 'Uhuru wa Kuzungumza',       query: 'expression',              color: '#C8102E', chipClass: 'chip-crimson', desc: 'Speak, protest & access information', swDesc: 'Kuzungumza, kuandamana na kupata habari', primaryPatterns: ['expression', 'media', 'information', 'assembly', 'demonstration', 'petition'], secondaryPatterns: ['speech', 'protest', 'association', 'political rights'] },
 ]
 
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 
 function QuickCards({ constitution, onTopicClick, isSwahili }) {
   const allSections = useMemo(() => {
@@ -34,24 +34,7 @@ function QuickCards({ constitution, onTopicClick, isSwahili }) {
   const topicMatches = useMemo(() => {
     const matchesMap = {}
     TOPICS.forEach(topic => {
-      const keywords = topic.query.toLowerCase().split(' ')
-      matchesMap[topic.id] = allSections.filter(section => {
-        const titleL = section.title.toLowerCase()
-        const simpleL = section.simplified.toLowerCase()
-        const tagsL = section.tags.map(t => t.toLowerCase())
-        const exL = section.examples ? section.examples.map(e => e.toLowerCase()) : []
-        const swTitleL = (section.swTitle || "").toLowerCase()
-        const swSimpleL = (section.swSimplified || "").toLowerCase()
-        
-        return keywords.some(k => 
-          titleL.includes(k) ||
-          simpleL.includes(k) ||
-          swTitleL.includes(k) ||
-          swSimpleL.includes(k) ||
-          tagsL.some(t => t.includes(k)) ||
-          exL.some(e => e.includes(k))
-        )
-      })
+      matchesMap[topic.id] = allSections.filter(section => sectionMatchesTopic(section, topic))
     })
     return matchesMap
   }, [allSections])
@@ -94,7 +77,10 @@ function QuickCards({ constitution, onTopicClick, isSwahili }) {
             <button
               key={topic.id}
               id={`card-${topic.id}`}
-              onClick={() => onTopicClick(topic.query)}
+              onClick={() => onTopicClick({
+                query: isSwahili ? topic.swTitle : topic.title,
+                results: matches,
+              })}
               className={`bento-card text-left group animate-fade-up flex flex-col ${idx === 0 ? 'sm:col-span-2 lg:col-span-1' : ''}`}
               style={{
                 animationDelay: `${idx * 60}ms`,

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import { Target } from 'lucide-react'
-import constitutionData from './data/constitution.json'
+import constitutionData from './data/constitution.app.json'
 import Header from './Header'
 import SearchBar from './SearchBar'
 import ConstitutionExplorer from './ConstitutionExplorer'
@@ -13,6 +13,25 @@ import SectionModal from './SectionModal'
 import Downloads from './Downloads'
 import './App.css'
 import './index.css'
+
+function dedupeConstitution(constitution) {
+  return {
+    ...constitution,
+    chapters: (constitution.chapters || []).map(chapter => {
+      const seen = new Set()
+      const sections = []
+
+      for (const section of chapter.sections || []) {
+        const key = section.articleNumber ?? section.article ?? section.title
+        if (seen.has(key)) continue
+        seen.add(key)
+        sections.push(section)
+      }
+
+      return { ...chapter, sections }
+    }),
+  }
+}
 
 // ── Stats derived from JSON ───────────────────────────────────────────────────
 function computeStats(constitution) {
@@ -37,6 +56,7 @@ function searchConstitution(constitution, query) {
       const swArticleL = (section.swArticle || "").toLowerCase()
       const simpleL = section.simplified.toLowerCase()
       const swSimpleL = (section.swSimplified || "").toLowerCase()
+      const originalL = (section.originalText || "").toLowerCase()
       const tagsL = section.tags.join(' ').toLowerCase()
       
       const isMatch = keywords.some(k => 
@@ -46,6 +66,7 @@ function searchConstitution(constitution, query) {
         swArticleL.includes(k) ||
         simpleL.includes(k) ||
         swSimpleL.includes(k) ||
+        originalL.includes(k) ||
         tagsL.includes(k)
       )
 
@@ -166,7 +187,7 @@ function SearchResults({ results, query, onSelect, onClear, isSwahili }) {
       <div className="flex items-center justify-between mb-4">
         <div>
           <h2 className="headline text-ink-1 text-xl font-semibold">
-            {results.length} {isSwahili ? 'matokeo ya' : 'results for'} "{query}"
+            {results.length} {isSwahili ? 'matokeo ya' : 'results for'} &ldquo;{query}&rdquo;
           </h2>
           <p className="text-ink-4 text-sm mt-0.5">{isSwahili ? 'Inalingana katika sura zote' : 'Matching articles across all chapters'}</p>
         </div>
@@ -216,7 +237,7 @@ function SearchResults({ results, query, onSelect, onClear, isSwahili }) {
 
 // ── App Root ──────────────────────────────────────────────────────────────────
 function App() {
-  const [constitution] = useState(constitutionData)
+  const [constitution] = useState(() => dedupeConstitution(constitutionData))
   const [isSwahili, setIsSwahili] = useState(false)
   
   const [searchQuery, setSearchQuery] = useState('')
@@ -231,7 +252,16 @@ function App() {
   const stats = useMemo(() => computeStats(constitution), [constitution])
 
   // Search
-  const handleSearch = useCallback((query) => {
+  const handleSearch = useCallback((input) => {
+    if (typeof input === 'object' && input !== null) {
+      const topicQuery = String(input.query || '').trim()
+      setSearchQuery(topicQuery)
+      setSearchResults(Array.isArray(input.results) ? input.results : [])
+      setIsSearching(Boolean(topicQuery))
+      return
+    }
+
+    const query = String(input || '')
     setSearchQuery(query)
     if (query.trim()) {
       setIsSearching(true)
@@ -277,6 +307,7 @@ function App() {
         role="search"
       >
         <SearchBar
+          value={searchQuery}
           onSearch={handleSearch}
           onClear={handleClearSearch}
           placeholder={isSwahili ? "Tafuta haki zako... (mfano 'ardhi', 'afya', 'polisi')" : "Search your rights… (e.g. 'land', 'healthcare', 'police', 'water')"}
