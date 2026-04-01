@@ -320,6 +320,10 @@
   .bento-card:hover {
     transform: translateY(-4px) scale(1.01);
   }
+  .bento-card:focus-visible {
+    border-color: rgba(200,16,46,0.38);
+    box-shadow: 0 0 0 3px rgba(200,16,46,0.14), 0 18px 40px rgba(0,0,0,0.28);
+  }
 
   /* Progress bar */
   .progress-bar {
@@ -347,11 +351,12 @@
     font-size: 1rem;
     transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
-  .search-input::placeholder { color: #555; }
+  .search-input::placeholder { color: #6c6c6c; }
   .search-input:focus {
-    outline: none;
     background: rgba(255,255,255,0.06);
     border-color: rgba(200,16,46,0.4);
+  }
+  .search-input:focus-visible {
     box-shadow: 0 0 0 3px rgba(200,16,46,0.08);
   }
 
@@ -395,7 +400,7 @@
     font-family: 'Inter', sans-serif;
     cursor: pointer;
     border: none;
-    transition: all 0.25s ease;
+    transition: background 0.25s ease, color 0.25s ease, outline-color 0.25s ease, transform 0.25s ease;
     color: #666;
     background: transparent;
   }
@@ -435,7 +440,8 @@
   .text-ink-1     { color: #f0f0f0; }
   .text-ink-2     { color: #c0c0c0; }
   .text-ink-3     { color: #888888; }
-  .text-ink-4     { color: #555555; }
+  .text-ink-4     { color: #6f6f6f; }
+  .text-ink-5     { color: #4f4f4f; }
 
   .bg-amoled   { background: #000000; }
   .bg-surface-1 { background: #0a0a0a; }
@@ -524,4 +530,17 @@
 ::selection {
   background: rgba(200,16,46,0.35);
   color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

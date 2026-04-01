@@ -37,6 +37,7 @@ function SearchBar({ value, onSearch, onClear, placeholder, disabled = false }) 
       <input
         ref={inputRef}
         id="rights-search"
+        name="rights-search"
         type="search"
         className={`search-input ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`}
         value={value}
@@ -45,13 +46,15 @@ function SearchBar({ value, onSearch, onClear, placeholder, disabled = false }) 
         placeholder={placeholder || 'Search for your rights…'}
         aria-label="Search the constitution"
         autoComplete="off"
-        spellCheck="false"
+        spellCheck={false}
+        enterKeyHint="search"
         disabled={disabled}
       />
 
       {/* Clear button */}
       {value && (
         <button
+          type="button"
           onClick={handleClear}
           className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-4 hover:text-ink-1 transition-colors"
           aria-label="Clear search"

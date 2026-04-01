@@ -16,12 +16,10 @@ function QuickScenarioCard({ result, onClick, isSwahili }) {
   const accent = accentMap[result.chapterColor] || accentMap.green
 
   return (
-    <article
+    <button
+      type="button"
       onClick={onClick}
-      role="button"
-      tabIndex={0}
-      onKeyDown={e => e.key === 'Enter' && onClick()}
-      className="bento-card group cursor-pointer"
+      className="bento-card group cursor-pointer text-left w-full"
       style={{
         '--accent-bar': accent.bar,
         borderLeft: `3px solid ${accent.bar}`,
@@ -61,7 +59,7 @@ function QuickScenarioCard({ result, onClick, isSwahili }) {
         <span className="text-ink-4 text-xs font-medium">{isSwahili ? 'Gusa ili kusoma zaidi' : 'Tap to read more'}</span>
         <ChevronRight className="w-4 h-4 text-ink-4 group-hover:text-ink-2 group-hover:translate-x-1 transition-all duration-200" />
       </div>
-    </article>
+    </button>
   )
 }
 

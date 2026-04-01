@@ -3,6 +3,7 @@ import {
   ShieldCheck, Scale, Landmark, Users, ArrowRight, BookOpen, HandHeart, Mountain, 
   IdCard, Gavel, Building2, Network, Wallet, Briefcase, ShieldAlert, CheckCircle2, History, PenTool, Globe
 } from 'lucide-react'
+import { getPreferredScrollBehavior } from './uiAccessibility'
 
 // Using Lucide Icons for Chapter Meta
 const CHAPTER_META = {
@@ -103,9 +104,9 @@ function ConstitutionExplorer({ constitution, onSelectSection, onExpandChapter, 
                 toggleChapter(chapter.id);
                 // Standard scrollIntoView now works perfectly with scroll-mt-24 in CSS
                 setTimeout(() => {
-                  document.getElementById(`chapter-${chapter.id}`)?.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'start' 
+                  document.getElementById(`chapter-${chapter.id}`)?.scrollIntoView({
+                    behavior: getPreferredScrollBehavior(),
+                    block: 'start'
                   });
                 }, 100);
               }}
@@ -219,13 +220,11 @@ function ConstitutionExplorer({ constitution, onSelectSection, onExpandChapter, 
                     className="grid gap-3 sm:grid-cols-2 pt-2 pb-4"
                   >
                     {chapter.sections.map((section, sIdx) => (
-                      <article
+                      <button
                         key={sIdx}
+                        type="button"
                         onClick={() => handleSectionClick(section, chapter)}
-                        role="button"
-                        tabIndex={0}
-                        onKeyDown={e => e.key === 'Enter' && handleSectionClick(section, chapter)}
-                        className="bento-card group hover:bg-surface-3 transition-colors duration-300"
+                        className="bento-card group hover:bg-surface-3 transition-colors duration-300 text-left w-full"
                         style={{ borderLeft: `3px solid ${meta.bar}` }}
                         aria-label={`${isSwahili ? (section.swArticle || section.article) : section.article} — ${isSwahili ? (section.swTitle || section.title) : section.title}`}
                       >
@@ -251,7 +250,7 @@ function ConstitutionExplorer({ constitution, onSelectSection, onExpandChapter, 
                             <span key={tag} className="tag-pill text-xs px-2 py-0.5 border border-transparent group-hover:border-subtle/50 transition-colors">#{tag}</span>
                           ))}
                         </div>
-                      </article>
+                      </button>
                     ))}
                   </div>
                 </div>

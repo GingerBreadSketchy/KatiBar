@@ -13,6 +13,7 @@ import Header from './Header'
 import SearchBar from './SearchBar'
 import ConstitutionExplorer from './ConstitutionExplorer'
 import SectionModal from './SectionModal'
+import { getPreferredScrollBehavior } from './uiAccessibility'
 import './App.css'
 import './index.css'
 
@@ -199,9 +200,9 @@ function Hero({ stats, onTabChange, isSwahili }) {
         <div
           className={`flex flex-wrap md:justify-center gap-3 mb-10 transition-all duration-700 delay-300 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
         >
-          <button 
-            id="hero-explore-btn" 
-            onClick={() => document.getElementById('main-content')?.scrollIntoView({ behavior: 'smooth' })} 
+          <button
+            id="hero-explore-btn"
+            onClick={() => document.getElementById('main-content')?.scrollIntoView({ behavior: getPreferredScrollBehavior() })}
             className="btn-primary"
           >
             {isSwahili ? 'Gundua Haki Zako' : 'Explore Your Rights'}
@@ -244,7 +245,7 @@ function Hero({ stats, onTabChange, isSwahili }) {
 // ── Search Results Panel ──────────────────────────────────────────────────────
 function SearchResults({ results, query, onSelect, onClear, isLoading, isSwahili }) {
   return (
-    <div className="ds-container pb-8 animate-fade-up">
+    <div className="ds-container pb-8 animate-fade-up" aria-live="polite" aria-busy={isLoading}>
       <div className="flex items-center justify-between mb-4">
         <div>
           <h2 className="headline text-ink-1 text-xl font-semibold">
@@ -266,13 +267,11 @@ function SearchResults({ results, query, onSelect, onClear, isLoading, isSwahili
       ) : results.length > 0 ? (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {results.map((r, idx) => (
-            <article
+            <button
               key={idx}
+              type="button"
               onClick={() => onSelect(r)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={e => e.key === 'Enter' && onSelect(r)}
-              className="bento-card group cursor-pointer"
+              className="bento-card group cursor-pointer text-left w-full"
               aria-label={`${isSwahili ? (r.swArticle || r.article) : r.article} — ${isSwahili ? (r.swTitle || r.title) : r.title}`}
             >
               <div className="flex items-start justify-between mb-2 gap-2">
@@ -288,7 +287,7 @@ function SearchResults({ results, query, onSelect, onClear, isLoading, isSwahili
               <div className="flex flex-wrap gap-1 mt-3">
                 {r.tags.slice(0, 3).map(t => <span key={t} className="tag-pill">#{t}</span>)}
               </div>
-            </article>
+            </button>
           ))}
         </div>
       ) : (
@@ -600,10 +599,10 @@ function App() {
       {/* ── Footer ──────────────────────────────────── */}
       <footer className="border-t border-subtle py-10 mt-10">
         <div className="ds-container">
-          <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-8">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(320px,460px)_minmax(0,1fr)] lg:items-center">
             
             {/* Left side: Brand */}
-            <div className="flex flex-col items-center md:items-start text-center md:text-left gap-1">
+            <div className="w-full flex flex-col items-center lg:items-start text-center lg:text-left gap-1 lg:justify-self-start">
               <span className="headline text-forest-bright text-2xl font-bold tracking-tight" style={{ textShadow: '0 0 15px rgba(0, 106, 78, 0.8)' }}>
                 KatiBar
               </span>
@@ -611,48 +610,50 @@ function App() {
             </div>
 
             {/* Center side: Support Buttons */}
-            <div className="flex flex-wrap items-center justify-center gap-4 flex-1">
-              <a 
-                href="https://gingerpay.vercel.app/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="btn-primary group !bg-[#006A4E] flex items-center gap-2.5 px-6 py-2.5 font-bold transition-all hover:scale-105 active:scale-95"
-                style={{ 
-                  boxShadow: '0 0 15px rgba(0, 106, 78, 0.4)',
-                  animation: 'pulse-glow-bg 2.5s infinite ease-in-out'
-                }}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-white group-hover:scale-110 transition-transform">
-                  <rect x="2" y="6" width="20" height="12" rx="2" />
-                  <circle cx="12" cy="12" r="2" />
-                  <path d="M6 12h.01M18 12h.01" />
-                </svg>
-                {isSwahili ? 'Changia kwa M-Pesa' : 'Donate via M-Pesa'}
-              </a>
+            <div className="w-full max-w-2xl mx-auto lg:max-w-none lg:justify-self-center">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 items-stretch">
+                <a 
+                  href="https://gingerpay.vercel.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="btn-primary group !bg-[#006A4E] w-full min-h-[54px] justify-center text-center gap-2.5 px-6 py-3 font-bold transition-all hover:scale-105 active:scale-95"
+                  style={{ 
+                    boxShadow: '0 0 15px rgba(0, 106, 78, 0.4)',
+                    animation: 'pulse-glow-bg 2.5s infinite ease-in-out'
+                  }}
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-white group-hover:scale-110 transition-transform">
+                    <rect x="2" y="6" width="20" height="12" rx="2" />
+                    <circle cx="12" cy="12" r="2" />
+                    <path d="M6 12h.01M18 12h.01" />
+                  </svg>
+                  {isSwahili ? 'Changia kwa M-Pesa' : 'Donate via M-Pesa'}
+                </a>
 
-              <a 
-                href="mailto:gingersketchy@gmail.com" 
-                className="btn-secondary flex items-center gap-2.5 px-6 py-2.5 font-bold border-blue-500/50 text-blue-400 hover:bg-blue-500/10 hover:border-blue-500 transition-all hover:scale-105 active:scale-95"
-                style={{ 
-                  boxShadow: '0 0 15px rgba(59, 130, 246, 0.2)',
-                  textShadow: '0 0 8px rgba(59, 130, 246, 0.5)'
-                }}
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10z" />
-                  <polyline points="22,7 12,14 2,7" />
-                </svg>
-                {isSwahili ? 'Wasiliana na Dev' : 'Contact Dev'}
-              </a>
+                <a 
+                  href="mailto:gingersketchy@gmail.com" 
+                  className="btn-secondary w-full min-h-[54px] justify-center text-center gap-2.5 px-6 py-3 font-bold border-blue-500/50 text-blue-400 hover:bg-blue-500/10 hover:border-blue-500 transition-all hover:scale-105 active:scale-95"
+                  style={{ 
+                    boxShadow: '0 0 15px rgba(59, 130, 246, 0.2)',
+                    textShadow: '0 0 8px rgba(59, 130, 246, 0.5)'
+                  }}
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22 17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10z" />
+                    <polyline points="22,7 12,14 2,7" />
+                  </svg>
+                  {isSwahili ? 'Wasiliana na Dev' : 'Contact Dev'}
+                </a>
+              </div>
             </div>
 
             {/* Right side: Credits and Warning */}
-            <div className="flex flex-col items-center md:items-end text-center md:text-right gap-3">
-              <p className="text-xs font-semibold animate-pulse text-crimson-bright tracking-wide mb-1" style={{ textShadow: '0 0 10px rgba(200,16,46,0.6)' }}>
+            <div className="w-full flex flex-col items-center lg:items-end text-center lg:text-right gap-3 lg:justify-self-end">
+              <p className="max-w-sm text-xs font-semibold animate-pulse text-crimson-bright tracking-wide mb-1" style={{ textShadow: '0 0 10px rgba(200,16,46,0.6)' }}>
                 {isSwahili ? 'Kwa madhumuni ya elimu tu • Sio ushauri wa kisheria' : 'Educational purposes only • Not legal advice'}
               </p>
               
-              <div className="flex flex-wrap items-center justify-center gap-1.5 text-sm font-medium text-ink-3">
+              <div className="flex flex-wrap items-center justify-center lg:justify-end gap-1.5 text-sm font-medium text-ink-3">
                 <span>© {new Date().getFullYear()}</span>
                 <span className="text-ink-5 mx-1 text-xs">•</span>
                 <span>{isSwahili ? 'Imeundwa na' : 'Created by'}</span>

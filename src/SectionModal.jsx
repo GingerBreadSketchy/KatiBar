@@ -10,22 +10,62 @@ import {
   Sparkles,
   WandSparkles,
 } from 'lucide-react'
+import { getFocusableElements } from './uiAccessibility'
 
 function SectionModal({ section, onClose, isSwahili, isLoadingDetails = false }) {
   const panelRef = useRef(null)
 
   // Trap focus & handle escape
   useEffect(() => {
+    const panel = panelRef.current
+    const previousActiveElement = document.activeElement instanceof HTMLElement
+      ? document.activeElement
+      : null
+    const originalOverflow = document.body.style.overflow
+
+    const focusableElements = getFocusableElements(panel)
+    ;(focusableElements[0] || panel)?.focus()
+
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') onClose()
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        onClose()
+        return
+      }
+
+      if (e.key !== 'Tab' || !panel) {
+        return
+      }
+
+      const elements = getFocusableElements(panel)
+      if (elements.length === 0) {
+        e.preventDefault()
+        panel.focus()
+        return
+      }
+
+      const firstElement = elements[0]
+      const lastElement = elements[elements.length - 1]
+
+      if (e.shiftKey && document.activeElement === firstElement) {
+        e.preventDefault()
+        lastElement.focus()
+      } else if (!e.shiftKey && document.activeElement === lastElement) {
+        e.preventDefault()
+        firstElement.focus()
+      }
     }
+
     document.addEventListener('keydown', handleKeyDown)
-    // Prevent body scroll
     document.body.style.overflow = 'hidden'
-    panelRef.current?.focus()
+
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
-      document.body.style.overflow = ''
+      document.body.style.overflow = originalOverflow
+
+      if (previousActiveElement?.isConnected) {
+        previousActiveElement.focus()
+      }
     }
   }, [onClose])
 
@@ -76,6 +116,7 @@ function SectionModal({ section, onClose, isSwahili, isLoadingDetails = false })
         className="modal-panel"
         onClick={e => e.stopPropagation()}
         tabIndex={-1}
+        aria-busy={isLoadingDetails}
         style={{ borderTop: `3px solid ${accent.bar}` }}
       >
         {/* ── Modal Header ──── */}
@@ -95,6 +136,7 @@ function SectionModal({ section, onClose, isSwahili, isLoadingDetails = false })
             </h2>
           </div>
           <button
+            type="button"
             onClick={onClose}
             className="btn-ghost p-2 mt-1 flex-shrink-0"
             aria-label={isSwahili ? "Funga" : "Close"}
@@ -322,10 +364,10 @@ function SectionModal({ section, onClose, isSwahili, isLoadingDetails = false })
 
           {/* Actions row */}
           <div className="flex flex-wrap gap-3 pt-4 border-t border-faint">
-            <button onClick={onClose} className="btn-primary flex-1 sm:flex-none justify-center group text-base">
+            <button type="button" onClick={onClose} className="btn-primary flex-1 sm:flex-none justify-center group text-base">
               {isSwahili ? 'Nimeelewa' : 'Got it'}
             </button>
-            <button className="btn-secondary text-base" onClick={onClose}>
+            <button type="button" className="btn-secondary text-base" onClick={onClose}>
               {isSwahili ? 'Funga' : 'Close'}
             </button>
           </div>
